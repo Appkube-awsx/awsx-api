@@ -28,7 +28,7 @@ func NewRoutes() (r *Routes) {
 
 	r.Routes = []Route{
 
-		// swagger:route GET /grafana-ds
+		// swagger:route GET /grafana-dashboard
 		// ---
 		// Endpoint to get the grafana dashboards with panels and datasources
 		//
@@ -41,13 +41,32 @@ func NewRoutes() (r *Routes) {
 		//      500: internalError
 		//      200: statusInfo
 		{
-			"GetDs",
+			"GrafanaDashboard",
 			"GET",
-			"/grafana-ds",
-			handlers.GetDs,
+			"/grafana-dashboard",
+			handlers.GrafanaDashboardHandler,
 			true,
 		},
-		// swagger:route GET /grafana-ds-query
+		// swagger:route GET /grafana-dashboard
+		// ---
+		// Endpoint to get the grafana dashboards with panels and datasources
+		//
+		//     Produces:
+		//     - application/json
+		//
+		//     Schemes: http, https
+		//
+		// responses:
+		//      500: internalError
+		//      200: statusInfo
+		{
+			"GrafanaDashboardByUID",
+			"GET",
+			"/grafana-dashboard/uid",
+			handlers.GetGrafanaDashbordByUidHandler,
+			true,
+		},
+		// swagger:route GET /grafana-dashboard/query
 		// ---
 		// Endpoint to get the grafana dashboards by dashboard query
 		//
@@ -60,13 +79,13 @@ func NewRoutes() (r *Routes) {
 		//      500: internalError
 		//      200: statusInfo
 		{
-			"GetDs",
+			"GrafanaDashboardByQuery",
 			"GET",
-			"/grafana-ds-query",
+			"/grafana-dashboard/query",
 			handlers.GrafanaQueryHandler,
 			true,
 		},
-		// swagger:route GET /grafana-ds/query-range
+		// swagger:route GET /grafana-dashboard/query-range
 		// ---
 		// Endpoint to get the grafana dashboards by query range
 		//
@@ -79,9 +98,9 @@ func NewRoutes() (r *Routes) {
 		//      500: internalError
 		//      200: statusInfo
 		{
-			"GetDs",
+			"GrafanaDashboardByQueryRange",
 			"GET",
-			"/grafana-ds/query-range",
+			"/grafana-dashboard/query-range",
 			handlers.GrafanaQueryRangeHandler,
 			true,
 		},
