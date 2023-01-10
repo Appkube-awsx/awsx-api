@@ -28,9 +28,9 @@ func NewRoutes() (r *Routes) {
 
 	r.Routes = []Route{
 
-		// swagger:route GET /grafana-dashboard
+		// swagger:route GET /grafana/dashboard
 		// ---
-		// Endpoint to get the grafana dashboards with panels and datasources
+		// Endpoint to get list of grafana dashboards with panels and datasources
 		//
 		//     Produces:
 		//     - application/json
@@ -43,13 +43,13 @@ func NewRoutes() (r *Routes) {
 		{
 			"GrafanaDashboard",
 			"GET",
-			"/grafana-dashboard",
+			"/grafana/dashboard",
 			handlers.GrafanaDashboardHandler,
 			true,
 		},
-		// swagger:route GET /grafana-dashboard
+		// swagger:route GET /grafana/dashboard/uid
 		// ---
-		// Endpoint to get the grafana dashboards with panels and datasources
+		// Endpoint to get the grafana dashboard by uid
 		//
 		//     Produces:
 		//     - application/json
@@ -62,13 +62,13 @@ func NewRoutes() (r *Routes) {
 		{
 			"GrafanaDashboardByUID",
 			"GET",
-			"/grafana-dashboard/uid",
+			"/grafana/dashboard/uid",
 			handlers.GetGrafanaDashbordByUidHandler,
 			true,
 		},
-		// swagger:route GET /grafana-dashboard/query
+		// swagger:route GET /grafana/query
 		// ---
-		// Endpoint to get the grafana dashboards by dashboard query
+		// Endpoint to get the grafana details by query
 		//
 		//     Produces:
 		//     - application/json
@@ -79,15 +79,15 @@ func NewRoutes() (r *Routes) {
 		//      500: internalError
 		//      200: statusInfo
 		{
-			"GrafanaDashboardByQuery",
+			"GrafanaQuery",
 			"GET",
-			"/grafana-dashboard/query",
+			"/grafana/query",
 			handlers.GrafanaQueryHandler,
 			true,
 		},
-		// swagger:route GET /grafana-dashboard/query-range
+		// swagger:route GET /grafana/query-range
 		// ---
-		// Endpoint to get the grafana dashboards by query range
+		// Endpoint to get the grafana details by query range
 		//
 		//     Produces:
 		//     - application/json
@@ -98,9 +98,9 @@ func NewRoutes() (r *Routes) {
 		//      500: internalError
 		//      200: statusInfo
 		{
-			"GrafanaDashboardByQueryRange",
+			"GrafanaQueryRange",
 			"GET",
-			"/grafana-dashboard/query-range",
+			"/grafana/query-range",
 			handlers.GrafanaQueryRangeHandler,
 			true,
 		},

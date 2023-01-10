@@ -40,14 +40,19 @@ func GetGrafanaDashbordByUidHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	br, _, err := grafanaSdkClient.GetDashboardByUID(req.Context(), uid)
+	br, brProp, err := grafanaSdkClient.GetDashboardByUID(req.Context(), uid)
 	if err != nil {
 		log.Error("Error in getting dashboard with UID: ", err)
 		return
 	}
+	grafBoard := &models.GrafanaDashboard{
+		Board:           &br,
+		BoardProperties: &brProp,
+	}
+	json.NewEncoder(w).Encode(grafBoard)
 
-	json.NewEncoder(w).Encode(br)
 	log.Info("GetGrafanaDashbordByUidHandler completed")
+
 }
 
 func GrafanaDashboardHandler(w http.ResponseWriter, r *http.Request) {

@@ -10,6 +10,10 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
+type GrafanaDashboard struct {
+	Board           *sdk.Board
+	BoardProperties *sdk.BoardProperties
+}
 type GrafanaBoard struct {
 	URI          string                 `json:"uri,omitempty"`
 	Title        string                 `json:"title,omitempty"`
