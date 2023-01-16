@@ -28,80 +28,25 @@ func NewRoutes() (r *Routes) {
 
 	r.Routes = []Route{
 
-		// swagger:route GET /grafana/dashboard
+		// swagger:route POST /awsx/appconfig
 		// ---
-		// Endpoint to get list of grafana dashboards with panels and datasources
+		// Produces aws appconfig resource count
 		//
-		//     Produces:
-		//     - application/json
+		// 		Produces:
+		//		- application/json
 		//
-		//     Schemes: http, https
+		//		Schemes: http, https
 		//
 		// responses:
-		//      500: internalError
-		//      200: statusInfo
+		//    400: badRequestError
+		//    503: serviceUnavailableError
+		//		500: internalError
+		//		200: metricsStatsResponse
 		{
-			"GrafanaDashboard",
-			"GET",
-			"/grafana/dashboard",
-			handlers.GrafanaDashboardHandler,
-			true,
-		},
-		// swagger:route GET /grafana/dashboard/uid
-		// ---
-		// Endpoint to get the grafana dashboard by uid
-		//
-		//     Produces:
-		//     - application/json
-		//
-		//     Schemes: http, https
-		//
-		// responses:
-		//      500: internalError
-		//      200: statusInfo
-		{
-			"GrafanaDashboardByUID",
-			"GET",
-			"/grafana/dashboard/uid",
-			handlers.GetGrafanaDashbordByUidHandler,
-			true,
-		},
-		// swagger:route GET /grafana/query
-		// ---
-		// Endpoint to get the grafana details by query
-		//
-		//     Produces:
-		//     - application/json
-		//
-		//     Schemes: http, https
-		//
-		// responses:
-		//      500: internalError
-		//      200: statusInfo
-		{
-			"GrafanaQuery",
-			"GET",
-			"/grafana/query",
-			handlers.GrafanaQueryHandler,
-			true,
-		},
-		// swagger:route GET /grafana/query-range
-		// ---
-		// Endpoint to get the grafana details by query range
-		//
-		//     Produces:
-		//     - application/json
-		//
-		//     Schemes: http, https
-		//
-		// responses:
-		//      500: internalError
-		//      200: statusInfo
-		{
-			"GrafanaQueryRange",
-			"GET",
-			"/grafana/query-range",
-			handlers.GrafanaQueryRangeHandler,
+			"AwsxAppconfig",
+			"POST",
+			"/awsx/appconfig",
+			handlers.GetAppconfigHandler,
 			true,
 		},
 	}

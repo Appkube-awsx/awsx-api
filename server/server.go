@@ -75,7 +75,7 @@ func NewServer() *Server {
 	// create the server definition that will handle both console and api server traffic
 	httpServer := &http.Server{
 		// Addr:         fmt.Sprintf("%v:%v", conf.Server.Address, conf.Server.Port),
-		Addr: fmt.Sprintf("%v:%v", "localhost", "10000"),
+		Addr: fmt.Sprintf("%v:%v", "localhost", "7000"),
 		// TLSConfig:    tlsConfig,
 		ReadTimeout:  30 * time.Second,
 		WriteTimeout: 30 * time.Second,
@@ -136,8 +136,10 @@ func (s *Server) Stop() {
 func corsAllowed(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Access-Control-Allow-Credentials", "true")
 		w.Header().Set("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
 		next.ServeHTTP(w, r)
+
 	})
 }
 
