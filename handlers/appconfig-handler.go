@@ -6,7 +6,7 @@ import (
 	"awsx-api/util"
 	"encoding/json"
 	"fmt"
-	"github.com/Appkube-awsx/appconfig/cmd"
+	"github.com/Appkube-awsx/awsx-cloudelements/cmd"
 	"io/ioutil"
 	"net/http"
 )

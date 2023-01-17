@@ -3,13 +3,13 @@ module awsx-api
 go 1.19
 
 require (
-	github.com/Appkube-awsx/appconfig v1.0.1
 	github.com/gorilla/mux v1.8.0
 	github.com/rs/zerolog v1.28.0
 )
 
 require (
-	github.com/aws/aws-sdk-go v1.44.178 // indirect
+	github.com/Appkube-awsx/awsx-cloudelements v1.0.1 // indirect
+	github.com/aws/aws-sdk-go v1.44.180 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/inconshreveable/mousetrap v1.0.1 // indirect
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
