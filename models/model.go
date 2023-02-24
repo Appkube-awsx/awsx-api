@@ -5,4 +5,5 @@ type AwsCredential struct {
 	AccessKey           string `json:"accessKey,omitempty"`
 	SecretKey           string `json:"secretKey,omitempty"`
 	CrossAccountRoleArn string `json:"crossAccountRoleArn,omitempty"`
+	ExternalId          string `json:"externalId,omitempty"`
 }

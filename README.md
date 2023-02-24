@@ -1,7 +1,9 @@
 - awsx-api
 - project architecture
 - api-endpoint ( curl commad)
-
+- build/run/debug/test in postman
+- how to add a handler
+- 
 
 
 # awsx-api
