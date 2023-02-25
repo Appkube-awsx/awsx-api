@@ -26,10 +26,17 @@ type Server struct {
 	WebHistoryMode             string `yaml:"web_history_mode,omitempty"`
 	WebSchema                  string `yaml:"web_schema,omitempty"`
 	WhiteListUrls              string `yaml:"white_list_urls,omitempty"`
+	VaultUrl                   string `yaml:"vault_url,omitempty"`
+}
+
+// Vault configuration
+type Vault struct {
+	Url string `yaml:"url,omitempty"`
 }
 
 type Config struct {
 	Server Server `yaml:",omitempty"`
+	Vault  Vault  `yaml:",omitempty"`
 }
 
 func LoadFromFile(filename string) (conf *Config, err error) {
@@ -68,6 +75,7 @@ func NewConfig() (c *Config) {
 			WebHistoryMode:             "browser",
 			WebSchema:                  "",
 		},
+		Vault: Vault{},
 	}
 
 	return

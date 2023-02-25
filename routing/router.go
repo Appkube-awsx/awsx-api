@@ -46,7 +46,28 @@ func NewRoutes() (r *Routes) {
 			"AwsxAppconfig",
 			"POST",
 			"/awsx/appconfig",
-			handlers.GetAppconfigHandler,
+			handlers.GetAppconfigByAccessId,
+			true,
+		},
+		// swagger:route GET /awsx/appconfig
+		// ---
+		// Produces aws appconfig resource summary
+		//
+		// 		Produces:
+		//		- application/json
+		//
+		//		Schemes: http, https
+		//
+		// responses:
+		//    400: badRequestError
+		//    503: serviceUnavailableError
+		//		500: internalError
+		//		200: metricsStatsResponse
+		{
+			"AwsxAppconfig",
+			"GET",
+			"/awsx/appconfig",
+			handlers.GetAppconfig,
 			true,
 		},
 	}

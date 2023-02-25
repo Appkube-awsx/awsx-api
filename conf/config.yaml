@@ -4,3 +4,5 @@ server:
   static_content_root_directory: /home/userTests/awsx-api-static-files
   cors_allow_all: true
   white_list_urls: http://localhost:3002
+vault:
+  url: http://localhost:5057/api/credential/account-id

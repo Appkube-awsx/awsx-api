@@ -7,3 +7,10 @@ type AwsCredential struct {
 	CrossAccountRoleArn string `json:"crossAccountRoleArn,omitempty"`
 	ExternalId          string `json:"externalId,omitempty"`
 }
+
+type AccessCredential struct {
+	Id            int64         `json:"id,omitempty"`
+	CloudType     string        `json:"cloudType,omitempty"`
+	AccountId     string        `json:"accountId,omitempty"`
+	AccessDetails AwsCredential `json:"accessDetails,omitempty"`
+}
