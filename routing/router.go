@@ -70,6 +70,27 @@ func NewRoutes() (r *Routes) {
 			handlers.GetAppconfig,
 			true,
 		},
+		// swagger:route POST /awsx/cloud-elements
+		// ---
+		// Create cloud-element data in CMDB for a given account id
+		//
+		// 		Produces:
+		//		- application/json
+		//
+		//		Schemes: http, https
+		//
+		// responses:
+		//    400: badRequestError
+		//    503: serviceUnavailableError
+		//		500: internalError
+		//		200: metricsStatsResponse
+		{
+			"AwsxCloudElement",
+			"POST",
+			"/awsx/cloud-elements",
+			handlers.CreateCloudElements,
+			true,
+		},
 	}
 
 	return
