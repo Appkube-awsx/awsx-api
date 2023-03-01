@@ -1,0 +1,98 @@
+{
+	"info": {
+		"_postman_id": "ec1a5dd3-6649-429e-9ae6-b0b2781ac66d",
+		"name": "Awsx-API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11946453"
+	},
+	"item": [
+		{
+			"name": "get-appconfig",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7000/awsx/appconfig?accountId=657907747545",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"awsx",
+						"appconfig"
+					],
+					"query": [
+						{
+							"key": "accountId",
+							"value": "657907747545"
+						},
+						{
+							"key": "vaultUrl",
+							"value": "xyz",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "cloud-elements",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7000/awsx/cloud-elements?accountId=657907747545",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"awsx",
+						"cloud-elements"
+					],
+					"query": [
+						{
+							"key": "accountId",
+							"value": "657907747545"
+						},
+						{
+							"key": "vaultUrl",
+							"value": "xyz",
+							"disabled": true
+						},
+						{
+							"key": "elementKey",
+							"value": "RESOURCE-IDF",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
