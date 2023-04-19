@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"awsx-api/authentication"
 	"awsx-api/config"
 	"awsx-api/log"
 	"awsx-api/models"
@@ -37,37 +38,12 @@ func GetAppconfigByAccessId(w http.ResponseWriter, r *http.Request) {
 func GetAppconfig(w http.ResponseWriter, r *http.Request) {
 	log.Info("Starting GetAppconfig api")
 
-	accountId := r.URL.Query().Get("accountId")
-	if accountId == "" {
-		log.Error("AccountId not provided")
-		http.Error(w, fmt.Sprintf("AccountId not provided"), http.StatusBadRequest)
-		return
-	}
+	raw, done := authentication.Auth(w, r)
 
-	vaultUrl := r.URL.Query().Get("vaultUrl")
-	if vaultUrl == "" {
-		log.Infof("Calling default vault API: ", vaultUrl)
-		vaultUrl = config.Get().Vault.Url
-	}
-	vaultUrl = vaultUrl + "?accountNo=" + accountId
-	respBody, statusCode, err := util.HandleHttpRequest("GET", vaultUrl, "", nil)
-	if err != nil {
-		util.Error("Http request failed: ", err)
-		http.Error(w, fmt.Sprintf("%s", err), statusCode)
+	if done {
 		return
 	}
-	var raw models.AccessCredential
-	err = json.Unmarshal(respBody, &raw)
-	if err != nil {
-		util.CommonError(err)
-		http.Error(w, fmt.Sprintf("%s", err), http.StatusBadRequest)
-		return
-	}
-	if raw.AccessDetails.Region == "" && raw.AccessDetails.AccessKey == "" && raw.AccessDetails.SecretKey == "" && raw.AccessDetails.CrossAccountRoleArn == "" && raw.AccessDetails.ExternalId == "" {
-		fmt.Println("AWS credentials like account accesskey, secretkey, region and crossAccountRoleArn not provided")
-		http.Error(w, fmt.Sprintf("AWS credentials like account accesskey, secretkey, region and crossAccountRoleArn not provided"), http.StatusBadRequest)
-		return
-	}
+	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(cmd.GetConfig(raw.AccessDetails.Region, raw.AccessDetails.CrossAccountRoleArn, raw.AccessDetails.AccessKey, raw.AccessDetails.SecretKey, raw.AccessDetails.ExternalId))
 
 	log.Info("GetAppconfig completed")

@@ -8,6 +8,11 @@ import (
 
 func HandleHttpRequest(httpMethod string, url string, apiKey string, payload io.Reader) ([]byte, int, error) {
 	client := &http.Client{}
+
+	fmt.Println("httpMethod", httpMethod)
+	fmt.Println("url", url)
+	fmt.Println("payload", payload)
+
 	httpRequest, err := http.NewRequest(httpMethod, url, payload)
 	if err != nil {
 		Error("Cannot create a http requests. Requested method: "+httpMethod, err)

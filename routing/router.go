@@ -70,6 +70,20 @@ func NewRoutes() (r *Routes) {
 			handlers.GetAppconfig,
 			true,
 		},
+		{
+			"AwsxLambda",
+			"GET",
+			"/awsx/lambda",
+			handlers.GetLambdas,
+			true,
+		},
+		{
+			"AwsxLambda",
+			"GET",
+			"/awsx/lambda/number",
+			handlers.GetNumberOfLambdas,
+			true,
+		},
 		// swagger:route POST /awsx/cloud-elements
 		// ---
 		// Create cloud-element data in CMDB for a given account id
