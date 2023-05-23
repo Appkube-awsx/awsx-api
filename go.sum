@@ -1,5 +1,5 @@
-github.com/Appkube-awsx/awsx-cloudelements v1.0.6 h1:s+ejhU752BI6CNdOQDtWM/PM8d2y5BgttnCcM0c7yZQ=
-github.com/Appkube-awsx/awsx-cloudelements v1.0.6/go.mod h1:0TDb4ZcAXbxAupXvXuJc/qUpZ5U1iiZsF2e0Dj9Hd48=
+github.com/Appkube-awsx/awsx-cloudelements v1.0.8 h1:XUtUAdvvzU5jouHerTPfQi6zQI191NFpU/Yz627Sfq0=
+github.com/Appkube-awsx/awsx-cloudelements v1.0.8/go.mod h1:0TDb4ZcAXbxAupXvXuJc/qUpZ5U1iiZsF2e0Dj9Hd48=
 github.com/Appkube-awsx/awsx-lambda v1.0.3 h1:dSlsHIASrrc4bxGpaqDNQMjqdzNY6VaWR3wZfF5xMzM=
 github.com/Appkube-awsx/awsx-lambda v1.0.3/go.mod h1:zNSLIwGPwQMdLuTp+Sq8nQ8MTBvjXM+NtG34uHS/cgo=
 github.com/aws/aws-sdk-go v1.44.213 h1:WahquyWs7cQdz0vpDVWyWETEemgSoORx0PbWL9oz2WA=

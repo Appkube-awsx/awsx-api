@@ -28,27 +28,6 @@ func NewRoutes() (r *Routes) {
 
 	r.Routes = []Route{
 
-		// swagger:route POST /awsx/appconfig
-		// ---
-		// Produces aws appconfig resource count
-		//
-		// 		Produces:
-		//		- application/json
-		//
-		//		Schemes: http, https
-		//
-		// responses:
-		//    400: badRequestError
-		//    503: serviceUnavailableError
-		//		500: internalError
-		//		200: metricsStatsResponse
-		{
-			"AwsxAppconfig",
-			"POST",
-			"/awsx/appconfig",
-			handlers.GetAppconfigByAccessId,
-			true,
-		},
 		// swagger:route GET /awsx/appconfig
 		// ---
 		// Produces aws appconfig resource summary
@@ -82,27 +61,6 @@ func NewRoutes() (r *Routes) {
 			"GET",
 			"/awsx/lambda/number",
 			handlers.GetNumberOfLambdas,
-			true,
-		},
-		// swagger:route POST /awsx/cloud-elements
-		// ---
-		// Create cloud-element data in CMDB for a given account id
-		//
-		// 		Produces:
-		//		- application/json
-		//
-		//		Schemes: http, https
-		//
-		// responses:
-		//    400: badRequestError
-		//    503: serviceUnavailableError
-		//		500: internalError
-		//		200: metricsStatsResponse
-		{
-			"AwsxCloudElement",
-			"POST",
-			"/awsx/cloud-elements",
-			handlers.CreateCloudElements,
 			true,
 		},
 	}

@@ -1,6 +1,7 @@
 - awsx-api
 - project architecture
 - api-endpoint ( curl commad)
+- start server
 - build/run/debug/test in postman
 - how to add a handler
 - 
@@ -19,6 +20,7 @@ awsx-api is a golang based REST api server that exposes GET, POST, DELETE and PU
         To get started we have to create a web server which can handle HTTP requests. 
         To do this we have a file called main.go.
         The main function in main.go kiks off the server.
+            go run .\main.go start
     
     2. Configuration
         * config.yaml: config.yaml is the main configuration file which contain all the server configuration like IP address, port etc.
@@ -50,4 +52,6 @@ awsx-api is a golang based REST api server that exposes GET, POST, DELETE and PU
         * log.go: A custom log.go created for awsx-api.
 
 # api-endpoint 
-       
+
+# start server
+    go run .\main.go start

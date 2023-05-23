@@ -5,7 +5,7 @@ server:
   cors_allow_all: true
   white_list_urls: http://localhost:3002
 vault:
-  url: http://34.199.12.114:5057/api/credential/account-id
+  url: http://34.199.12.114:6057/api/credential/account-id
 cloudelement:
   url: http://localhost:5057/api/cloud-element
   element_key: CLOUD-ELEMENT
