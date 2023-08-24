@@ -3,7 +3,7 @@ module awsx-api
 go 1.19
 
 require (
-	github.com/Appkube-awsx/awsx-cloudelements v1.0.8
+	github.com/Appkube-awsx/awsx-cloudelements v1.0.9
 	github.com/Appkube-awsx/awsx-lambda v1.0.3
 	github.com/aws/aws-sdk-go v1.44.213
 	github.com/gorilla/mux v1.8.0

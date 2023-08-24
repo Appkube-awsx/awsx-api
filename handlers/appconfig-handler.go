@@ -29,7 +29,14 @@ func GetAppconfig(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		result, err := cmd.GetCloudConfigSummary(region, vaultUrl, accountId)
+		vaultToken := r.URL.Query().Get("vaultToken")
+		if vaultToken == "" {
+			log.Error("Vault token not provided")
+			http.Error(w, fmt.Sprintf("Vault token not provided"), http.StatusBadRequest)
+			return
+		}
+
+		result, err := cmd.GetCloudConfigSummary(region, vaultUrl, vaultToken, accountId)
 		if err != nil {
 			log.Error("Exception in getting cloud config summary: %v", err)
 			http.Error(w, fmt.Sprintf("Exception in getting cloud config summary"), http.StatusInternalServerError)
