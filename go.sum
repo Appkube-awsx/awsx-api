@@ -2,8 +2,14 @@ github.com/Appkube-awsx/awsx-cloudelements v1.0.8 h1:XUtUAdvvzU5jouHerTPfQi6zQI1
 github.com/Appkube-awsx/awsx-cloudelements v1.0.8/go.mod h1:0TDb4ZcAXbxAupXvXuJc/qUpZ5U1iiZsF2e0Dj9Hd48=
 github.com/Appkube-awsx/awsx-cloudelements v1.0.9 h1:P5xfzfu3m19OqajqCjUDOySl9h8xrOQa2IgyFr4KRMo=
 github.com/Appkube-awsx/awsx-cloudelements v1.0.9/go.mod h1:0TDb4ZcAXbxAupXvXuJc/qUpZ5U1iiZsF2e0Dj9Hd48=
+github.com/Appkube-awsx/awsx-common v1.0.9 h1:QTlRmNbCm6l5eJARhh6UYcvFiIh7NC4WIfG8n0gD3Uc=
+github.com/Appkube-awsx/awsx-common v1.0.9/go.mod h1:c/C5LfwJK1gfvhfmQT/KN2mJNG4+cyDHV5heLTVX6wc=
 github.com/Appkube-awsx/awsx-lambda v1.0.3 h1:dSlsHIASrrc4bxGpaqDNQMjqdzNY6VaWR3wZfF5xMzM=
 github.com/Appkube-awsx/awsx-lambda v1.0.3/go.mod h1:zNSLIwGPwQMdLuTp+Sq8nQ8MTBvjXM+NtG34uHS/cgo=
+github.com/Appkube-awsx/awsx-lambda v1.0.6 h1:en6XofX0tMv302IKg32R6OKfQP7XcKz27IW+ukXNKu0=
+github.com/Appkube-awsx/awsx-lambda v1.0.6/go.mod h1:5XsqhvJhbvhL1BGdeALbS+a5MJSZrAFmQMMvur2+QNw=
+github.com/Appkube-awsx/awsx-lambda v1.0.7 h1:iiVQ+yY+BPnPIEBmKjhKOSgt5J+4wMMlufankVEjqW8=
+github.com/Appkube-awsx/awsx-lambda v1.0.7/go.mod h1:5XsqhvJhbvhL1BGdeALbS+a5MJSZrAFmQMMvur2+QNw=
 github.com/aws/aws-sdk-go v1.44.213 h1:WahquyWs7cQdz0vpDVWyWETEemgSoORx0PbWL9oz2WA=
 github.com/aws/aws-sdk-go v1.44.213/go.mod h1:aVsgQcEevwlmQ7qHE9I3h+dtQgpqhFB+i8Phjh7fkwI=
 github.com/coreos/go-systemd/v22 v22.3.3-0.20220203105225-a9a7ef127534/go.mod h1:Y58oyj3AT4RCenI/lSvhwexgC+NSVTIJ3seZv2GcEnc=

@@ -4,7 +4,7 @@ go 1.19
 
 require (
 	github.com/Appkube-awsx/awsx-cloudelements v1.0.9
-	github.com/Appkube-awsx/awsx-lambda v1.0.3
+	github.com/Appkube-awsx/awsx-lambda v1.0.7
 	github.com/aws/aws-sdk-go v1.44.213
 	github.com/gorilla/mux v1.8.0
 	github.com/rs/zerolog v1.29.0
@@ -12,6 +12,7 @@ require (
 )
 
 require (
+	github.com/Appkube-awsx/awsx-common v1.0.9 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
