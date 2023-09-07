@@ -4,7 +4,7 @@ import (
 	"awsx-api/log"
 	"encoding/json"
 	"fmt"
-	"github.com/Appkube-awsx/awsx-cloudelements/cmd"
+	"github.com/Appkube-awsx/awsx-cloudelements/controller"
 	"net/http"
 )
 
@@ -36,7 +36,7 @@ func GetAppconfig(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		result, err := cmd.GetCloudConfigSummary(region, vaultUrl, vaultToken, accountId)
+		result, err := controller.GetDiscoveredResourceByAccountNo(vaultUrl, vaultToken, accountId, region)
 		if err != nil {
 			log.Error("Exception in getting cloud config summary: %v", err)
 			http.Error(w, fmt.Sprintf("Exception in getting cloud config summary"), http.StatusInternalServerError)
@@ -67,7 +67,7 @@ func GetAppconfig(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, fmt.Sprintf("ExternalId not provided"), http.StatusBadRequest)
 			return
 		}
-		result, err := cmd.GetConfig(region, crossAccountRoleArn, accessKey, secretKey, externalId)
+		result, err := controller.GetDiscoveredResourceByUserCreds(region, accessKey, secretKey, crossAccountRoleArn, externalId)
 		if err != nil {
 			log.Error("Exception in getting cloud config summary: %v", err)
 			http.Error(w, fmt.Sprintf("Exception in getting cloud config summary"), http.StatusInternalServerError)
