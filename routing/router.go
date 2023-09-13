@@ -63,6 +63,13 @@ func NewRoutes() (r *Routes) {
 			handlers.GetNumberOfLambdas,
 			true,
 		},
+		{
+			"AwsxEks",
+			"GET",
+			"/awsx/eks",
+			handlers.GetEks,
+			true,
+		},
 	}
 
 	return
