@@ -4,81 +4,46 @@ import (
 	"awsx-api/log"
 	"encoding/json"
 	"fmt"
-	"github.com/Appkube-awsx/awsx-lambda/authenticater"
+	"github.com/Appkube-awsx/awsx-common/authenticate"
 	"github.com/Appkube-awsx/awsx-lambda/controllers"
 	"net/http"
 )
 
 func GetLambdas(w http.ResponseWriter, r *http.Request) {
-	log.Info("Starting aws lambda api")
-
-	region := r.URL.Query().Get("zone")
-	if region == "" {
-		log.Error("Zone(Region) not provided")
-		http.Error(w, fmt.Sprintf("Zone(Region) not provided"), http.StatusBadRequest)
-		return
-	}
+	log.Info("Starting /awsx/lambda api")
 	w.Header().Set("Content-Type", "application/json")
 
+	region := r.URL.Query().Get("zone")
 	vaultUrl := r.URL.Query().Get("vaultUrl")
-
 	if vaultUrl != "" {
 		accountId := r.URL.Query().Get("accountId")
-		if accountId == "" {
-			log.Error("AccountId not provided")
-			http.Error(w, fmt.Sprintf("AccountId not provided"), http.StatusBadRequest)
-			return
-		}
-
 		vaultToken := r.URL.Query().Get("vaultToken")
-		if vaultToken == "" {
-			log.Error("Vault token not provided")
-			http.Error(w, fmt.Sprintf("Vault token not provided"), http.StatusBadRequest)
+		authFlag, clientAuth, err := authenticate.AuthenticateData(vaultUrl, vaultToken, accountId, region, "", "", "", "")
+		if err != nil || !authFlag {
+			log.Error(err.Error())
+			http.Error(w, fmt.Sprintf("Exception: "+err.Error()), http.StatusInternalServerError)
 			return
-		}
-		authFlag, clientAuth := authenticater.ApiAuth(vaultUrl, vaultToken, accountId, region, "", "", "", "")
-
-		if !authFlag {
-			http.Error(w, fmt.Sprintf("Exception in getting aws lambda by vault url"), http.StatusInternalServerError)
 		}
 		result := controllers.AllLambdaListController(*clientAuth)
 		json.NewEncoder(w).Encode(result)
 
 	} else {
 		accessKey := r.URL.Query().Get("accessKey")
-		if accessKey == "" {
-			log.Error("AccessKey not provided")
-			http.Error(w, fmt.Sprintf("AccessKey not provided"), http.StatusBadRequest)
-			return
-		}
 		secretKey := r.URL.Query().Get("secretKey")
-		if secretKey == "" {
-			log.Error("SecretKey not provided")
-			http.Error(w, fmt.Sprintf("SecretKey not provided"), http.StatusBadRequest)
-			return
-		}
 		crossAccountRoleArn := r.URL.Query().Get("crossAccountRoleArn")
-		if crossAccountRoleArn == "" {
-			log.Error("CrossAccountRoleArn not provided")
-			http.Error(w, fmt.Sprintf("CrossAccountRoleArn not provided"), http.StatusBadRequest)
-			return
-		}
 		externalId := r.URL.Query().Get("externalId")
-		if externalId == "" {
-			log.Error("ExternalId not provided")
-			http.Error(w, fmt.Sprintf("ExternalId not provided"), http.StatusBadRequest)
-			return
-		}
-		authFlag, clientAuth := authenticater.ApiAuth("", "", "", region, accessKey, secretKey, crossAccountRoleArn, externalId)
+		authFlag, clientAuth, err := authenticate.AuthenticateData("", "", "", region, accessKey, secretKey, crossAccountRoleArn, externalId)
 
-		if !authFlag {
-			http.Error(w, fmt.Sprintf("Exception in getting aws lambda with access/secret key"), http.StatusInternalServerError)
+		if err != nil || !authFlag {
+			log.Error(err.Error())
+			http.Error(w, fmt.Sprintf("Exception: "+err.Error()), http.StatusInternalServerError)
+			return
 		}
 		result := controllers.AllLambdaListController(*clientAuth)
 		json.NewEncoder(w).Encode(result)
 	}
 
-	log.Info("Get lambdas completed")
+	log.Info("/awsx/lambda completed")
 }
 
 func GetNumberOfLambdas(w http.ResponseWriter, r *http.Request) {
