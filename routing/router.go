@@ -70,6 +70,13 @@ func NewRoutes() (r *Routes) {
 			handlers.GetEks,
 			true,
 		},
+		{
+			"AwsxEcs",
+			"GET",
+			"/awsx/ecs",
+			handlers.GetEcs,
+			true,
+		},
 	}
 
 	return
