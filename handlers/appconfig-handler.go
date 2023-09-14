@@ -25,7 +25,7 @@ func GetAppconfig(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, fmt.Sprintf("Exception: "+err.Error()), http.StatusInternalServerError)
 			return
 		}
-		result, respErr := controller.GetDiscoveredResourceByClientAuth(clientAuth)
+		result, respErr := controller.GetDiscoveredResource(clientAuth)
 		if respErr != nil {
 			log.Error(respErr.Error())
 			http.Error(w, fmt.Sprintf("Exception: "+respErr.Error()), http.StatusInternalServerError)
@@ -43,7 +43,7 @@ func GetAppconfig(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, fmt.Sprintf("Exception: "+err.Error()), http.StatusInternalServerError)
 			return
 		}
-		result, respErr := controller.GetDiscoveredResourceByClientAuth(clientAuth)
+		result, respErr := controller.GetDiscoveredResource(clientAuth)
 		if respErr != nil {
 			log.Error(respErr.Error())
 			http.Error(w, fmt.Sprintf("Exception: "+respErr.Error()), http.StatusInternalServerError)
