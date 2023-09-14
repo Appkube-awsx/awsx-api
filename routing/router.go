@@ -77,6 +77,13 @@ func NewRoutes() (r *Routes) {
 			handlers.GetEcs,
 			true,
 		},
+		{
+			"AwsxVpc",
+			"GET",
+			"/awsx/vpc",
+			handlers.GetVpc,
+			true,
+		},
 	}
 
 	return

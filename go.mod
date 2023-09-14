@@ -7,6 +7,7 @@ require (
 	github.com/Appkube-awsx/awsx-ecs v1.0.1
 	github.com/Appkube-awsx/awsx-eks v1.0.2
 	github.com/Appkube-awsx/awsx-lambda v1.0.7
+	github.com/Appkube-awsx/awsx-vpc v1.0.5
 	github.com/aws/aws-sdk-go v1.44.246
 	github.com/gorilla/mux v1.8.0
 	github.com/rs/zerolog v1.29.0
