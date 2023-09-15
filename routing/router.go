@@ -84,6 +84,13 @@ func NewRoutes() (r *Routes) {
 			handlers.GetVpc,
 			true,
 		},
+		{
+			"AwsxRds",
+			"GET",
+			"/awsx/rds",
+			handlers.GetRds,
+			true,
+		},
 	}
 
 	return

@@ -40,6 +40,8 @@ github.com/Appkube-awsx/awsx-lambda v1.0.6 h1:en6XofX0tMv302IKg32R6OKfQP7XcKz27I
 github.com/Appkube-awsx/awsx-lambda v1.0.6/go.mod h1:5XsqhvJhbvhL1BGdeALbS+a5MJSZrAFmQMMvur2+QNw=
 github.com/Appkube-awsx/awsx-lambda v1.0.7 h1:iiVQ+yY+BPnPIEBmKjhKOSgt5J+4wMMlufankVEjqW8=
 github.com/Appkube-awsx/awsx-lambda v1.0.7/go.mod h1:5XsqhvJhbvhL1BGdeALbS+a5MJSZrAFmQMMvur2+QNw=
+github.com/Appkube-awsx/awsx-rds v0.0.0-20230915121119-7ef02e973122 h1:HZAE67Bv3y488VNSBXEmq3+zZj4jCb0jjdEG2g6nrjs=
+github.com/Appkube-awsx/awsx-rds v0.0.0-20230915121119-7ef02e973122/go.mod h1:RVEABeWMDU5KDrVIylyFBeHpeRA/E/jOFU6St2GJ+s0=
 github.com/Appkube-awsx/awsx-vpc v1.0.2 h1:wD7a27R8ebqwdmY9gCJzTYT1ExxnamDasP/Hoe5s36k=
 github.com/Appkube-awsx/awsx-vpc v1.0.2/go.mod h1:aMEg6E695dxxV+LBzqkxhvo6WHf5xP8lOwVXagmluN8=
 github.com/Appkube-awsx/awsx-vpc v1.0.3 h1:8LVy8CcFnizPHN9YplNYib+tn0Hy9BK+M9jHf5n51BI=
@@ -52,6 +54,8 @@ github.com/aws/aws-sdk-go v1.44.213 h1:WahquyWs7cQdz0vpDVWyWETEemgSoORx0PbWL9oz2
 github.com/aws/aws-sdk-go v1.44.213/go.mod h1:aVsgQcEevwlmQ7qHE9I3h+dtQgpqhFB+i8Phjh7fkwI=
 github.com/aws/aws-sdk-go v1.44.246 h1:iLxPX6JU0bxAci9R6/bp8rX0kL871ByCTx0MZlQWv1U=
 github.com/aws/aws-sdk-go v1.44.246/go.mod h1:aVsgQcEevwlmQ7qHE9I3h+dtQgpqhFB+i8Phjh7fkwI=
+github.com/aws/aws-sdk-go v1.45.9 h1:ks4nMaagM/0jeOFUxWxx9C009vkrdgm3lgcnciet1YU=
+github.com/aws/aws-sdk-go v1.45.9/go.mod h1:aVsgQcEevwlmQ7qHE9I3h+dtQgpqhFB+i8Phjh7fkwI=
 github.com/coreos/go-systemd/v22 v22.3.3-0.20220203105225-a9a7ef127534/go.mod h1:Y58oyj3AT4RCenI/lSvhwexgC+NSVTIJ3seZv2GcEnc=
 github.com/cpuguy83/go-md2man/v2 v2.0.2/go.mod h1:tgQtvFlXSQOSOSIRvRPT7W67SCa46tRHOmNcaadrF8o=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
