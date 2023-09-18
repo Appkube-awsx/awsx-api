@@ -4,14 +4,13 @@ import (
 	"awsx-api/log"
 	"encoding/json"
 	"fmt"
-	"net/http"
-
 	"github.com/Appkube-awsx/awsx-common/authenticate"
-	"github.com/Appkube-awsx/awsx-rds/controller"
+	"github.com/Appkube-awsx/awsx-ec2/controller"
+	"net/http"
 )
 
-func GetRds(w http.ResponseWriter, r *http.Request) {
-	log.Info("Starting /awsx/rds api")
+func GetEc2(w http.ResponseWriter, r *http.Request) {
+	log.Info("Starting /awsx/ec2 api")
 	w.Header().Set("Content-Type", "application/json")
 
 	region := r.URL.Query().Get("zone")
@@ -26,7 +25,7 @@ func GetRds(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, fmt.Sprintf("Exception: "+err.Error()), http.StatusInternalServerError)
 			return
 		}
-		result, respErr := controller.GetRds(clientAuth)
+		result, respErr := controller.GetEc2Instances(clientAuth)
 		if respErr != nil {
 			log.Error(respErr.Error())
 			http.Error(w, fmt.Sprintf("Exception: "+respErr.Error()), http.StatusInternalServerError)
@@ -44,7 +43,7 @@ func GetRds(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, fmt.Sprintf("Exception: "+err.Error()), http.StatusInternalServerError)
 			return
 		}
-		result, respErr := controller.GetRds(clientAuth)
+		result, respErr := controller.GetEc2Instances(clientAuth)
 		if respErr != nil {
 			log.Error(respErr.Error())
 			http.Error(w, fmt.Sprintf("Exception: "+respErr.Error()), http.StatusInternalServerError)
@@ -53,6 +52,6 @@ func GetRds(w http.ResponseWriter, r *http.Request) {
 		json.NewEncoder(w).Encode(result)
 	}
 
-	log.Info("/awsx/rds completed")
+	log.Info("/awsx/ec2 completed")
 
 }

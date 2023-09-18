@@ -91,6 +91,13 @@ func NewRoutes() (r *Routes) {
 			handlers.GetRds,
 			true,
 		},
+		{
+			"AwsxEc2",
+			"GET",
+			"/awsx/ec2",
+			handlers.GetEc2,
+			true,
+		},
 	}
 
 	return
