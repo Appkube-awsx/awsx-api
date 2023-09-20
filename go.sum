@@ -26,6 +26,8 @@ github.com/Appkube-awsx/awsx-common v1.1.6 h1:/nDJSkX6TG5MDTk4GMbErPBuzzBdoC7/02
 github.com/Appkube-awsx/awsx-common v1.1.6/go.mod h1:ZNNCZD2KYBNaNIpnV8UUrwlIb6nAcCkaEbOpHab/HyQ=
 github.com/Appkube-awsx/awsx-common v1.1.7 h1:l+nbDTNQDqsAXVpJqdFlbzwnpu2M985Sy4eDdt+7EiU=
 github.com/Appkube-awsx/awsx-common v1.1.7/go.mod h1:ZNNCZD2KYBNaNIpnV8UUrwlIb6nAcCkaEbOpHab/HyQ=
+github.com/Appkube-awsx/awsx-common v1.1.9 h1:+O0/WujYlGQEP5ZRnF03qKgYvkCp/Ys1kRn5twoLr+Q=
+github.com/Appkube-awsx/awsx-common v1.1.9/go.mod h1:ZNNCZD2KYBNaNIpnV8UUrwlIb6nAcCkaEbOpHab/HyQ=
 github.com/Appkube-awsx/awsx-ec2 v1.0.0 h1:J2A/ALsBBSqsmDlcyz8ptcaIappTD7vWPrGq+CyjITM=
 github.com/Appkube-awsx/awsx-ec2 v1.0.0/go.mod h1:ZfgQohBm2P/tuqL8tDTn6Y5rmlV2SmdMoErZVZgqwWM=
 github.com/Appkube-awsx/awsx-ecs v1.0.0 h1:MoOmR+gNLEFssJGMVT7lklHOqFVQm+FhatUWL86VizU=
@@ -46,6 +48,14 @@ github.com/Appkube-awsx/awsx-rds v0.0.0-20230915121119-7ef02e973122 h1:HZAE67Bv3
 github.com/Appkube-awsx/awsx-rds v0.0.0-20230915121119-7ef02e973122/go.mod h1:RVEABeWMDU5KDrVIylyFBeHpeRA/E/jOFU6St2GJ+s0=
 github.com/Appkube-awsx/awsx-rds v1.0.0 h1:OF8n66EXi1n3Iw7zGiigjNUSOwKWose9i5h2kufffXk=
 github.com/Appkube-awsx/awsx-rds v1.0.0/go.mod h1:RVEABeWMDU5KDrVIylyFBeHpeRA/E/jOFU6St2GJ+s0=
+github.com/Appkube-awsx/awsx-s3 v1.0.0 h1:EQJHb69GqUxAbafblI+q+1T0+rOzXqc/h+t+zQ8LPiw=
+github.com/Appkube-awsx/awsx-s3 v1.0.0/go.mod h1:YtEe63eH5zfjqn0WMS+V3rDvcJn4vxKfPqIXl+VGW20=
+github.com/Appkube-awsx/awsx-s3 v1.0.1 h1:UVJKeo74jN4eEZXjoBIp34qvEhrsGJHZ/uvqKzbUO2s=
+github.com/Appkube-awsx/awsx-s3 v1.0.1/go.mod h1:YtEe63eH5zfjqn0WMS+V3rDvcJn4vxKfPqIXl+VGW20=
+github.com/Appkube-awsx/awsx-s3 v1.0.2 h1:kOhirOyhZB9ZUxgUHXbb18ugTBszi/rWGxDJawuj6pQ=
+github.com/Appkube-awsx/awsx-s3 v1.0.2/go.mod h1:YtEe63eH5zfjqn0WMS+V3rDvcJn4vxKfPqIXl+VGW20=
+github.com/Appkube-awsx/awsx-s3 v1.1.7 h1:Sf58E9X3SHDdldqN4X7Z0VrLfqPgMiHCdTuBM9fCEDs=
+github.com/Appkube-awsx/awsx-s3 v1.1.7/go.mod h1:YtEe63eH5zfjqn0WMS+V3rDvcJn4vxKfPqIXl+VGW20=
 github.com/Appkube-awsx/awsx-vpc v1.0.2 h1:wD7a27R8ebqwdmY9gCJzTYT1ExxnamDasP/Hoe5s36k=
 github.com/Appkube-awsx/awsx-vpc v1.0.2/go.mod h1:aMEg6E695dxxV+LBzqkxhvo6WHf5xP8lOwVXagmluN8=
 github.com/Appkube-awsx/awsx-vpc v1.0.3 h1:8LVy8CcFnizPHN9YplNYib+tn0Hy9BK+M9jHf5n51BI=

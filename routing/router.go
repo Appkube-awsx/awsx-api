@@ -98,6 +98,13 @@ func NewRoutes() (r *Routes) {
 			handlers.GetEc2,
 			true,
 		},
+		{
+			"AwsxS3",
+			"GET",
+			"/awsx/s3",
+			handlers.GetS3,
+			true,
+		},
 	}
 
 	return
