@@ -105,6 +105,13 @@ func NewRoutes() (r *Routes) {
 			handlers.GetS3,
 			true,
 		},
+		{
+			"AwsxCdn",
+			"GET",
+			"/awsx/cdn",
+			handlers.GetCdn,
+			true,
+		},
 	}
 
 	return
