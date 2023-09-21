@@ -3,11 +3,14 @@ module awsx-api
 go 1.19
 
 require (
+	github.com/Appkube-awsx/awsx-cdn v1.0.1
+	github.com/Appkube-awsx/awsx-waf v1.0.0
 	github.com/Appkube-awsx/awsx-cloudelements v1.1.7
+	github.com/Appkube-awsx/awsx-dynamodb v1.0.0
 	github.com/Appkube-awsx/awsx-ec2 v1.0.0
-	github.com/Appkube-awsx/awsx-cdn v1.0.0
 	github.com/Appkube-awsx/awsx-ecs v1.0.1
 	github.com/Appkube-awsx/awsx-eks v1.0.2
+	github.com/Appkube-awsx/awsx-kinesys v1.0.2
 	github.com/Appkube-awsx/awsx-lambda v1.0.7
 	github.com/Appkube-awsx/awsx-rds v1.0.0
 	github.com/Appkube-awsx/awsx-s3 v1.0.2

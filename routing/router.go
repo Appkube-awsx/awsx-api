@@ -112,6 +112,27 @@ func NewRoutes() (r *Routes) {
 			handlers.GetCdn,
 			true,
 		},
+		{
+			"AwsxKinesys",
+			"GET",
+			"/awsx/kinesys",
+			handlers.GetKinesys,
+			true,
+		},
+		{
+			"AwsxDynamodb",
+			"GET",
+			"/awsx/dynamodb",
+			handlers.GetDynamodb,
+			true,
+		},
+		{
+			"AwsxWaf",
+			"GET",
+			"/awsx/waf",
+			handlers.GetWaf,
+			true,
+		},
 	}
 
 	return
