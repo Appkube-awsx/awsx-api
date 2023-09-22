@@ -147,6 +147,13 @@ func NewRoutes() (r *Routes) {
 			handlers.GetKms,
 			true,
 		},
+		{
+			"AwsxAppmesh",
+			"GET",
+			"/awsx/appmesh",
+			handlers.GetAppmesh,
+			true,
+		},
 	}
 
 	return

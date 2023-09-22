@@ -22,6 +22,7 @@ require (
 )
 
 require (
+	github.com/Appkube-awsx/awsx-appmesh v1.0.3 // indirect
 	github.com/Appkube-awsx/awsx-common v1.1.9 // indirect
 	github.com/Appkube-awsx/awsx-glue v0.0.0-20230922095315-536065510dc4 // indirect
 	github.com/Appkube-awsx/awsx-kms v0.0.0-20230921103052-9e84767773ea // indirect
