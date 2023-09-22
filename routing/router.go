@@ -133,6 +133,20 @@ func NewRoutes() (r *Routes) {
 			handlers.GetWaf,
 			true,
 		},
+		{
+			"AwsxGlue",
+			"GET",
+			"/awsx/glue",
+			handlers.GetGlue,
+			true,
+		},
+		{
+			"AwsxKms",
+			"GET",
+			"/awsx/kms",
+			handlers.GetKms,
+			true,
+		},
 	}
 
 	return

@@ -44,10 +44,14 @@ github.com/Appkube-awsx/awsx-eks v1.0.1 h1:rq/ClqB8B9i6AuhABajBDLikaLwK9USFAkvJU
 github.com/Appkube-awsx/awsx-eks v1.0.1/go.mod h1:0lo2JBkDYdvlB/BWc9+Pb+OBnEE5WmpnGiEPs6/tMzM=
 github.com/Appkube-awsx/awsx-eks v1.0.2 h1:+hMzfSG56eqV5P9tJrnC+WCPhXo35Xypn0HD+XR25BI=
 github.com/Appkube-awsx/awsx-eks v1.0.2/go.mod h1:0lo2JBkDYdvlB/BWc9+Pb+OBnEE5WmpnGiEPs6/tMzM=
+github.com/Appkube-awsx/awsx-glue v0.0.0-20230922095315-536065510dc4 h1:cCuOGGDZSb9rnhmfzqBcJ3sDMc0DauPrfv6GBUQdCRA=
+github.com/Appkube-awsx/awsx-glue v0.0.0-20230922095315-536065510dc4/go.mod h1:soZcAHzxA6V9un14ZCw54S9gCdlO/dnkN3AAFds11Fk=
 github.com/Appkube-awsx/awsx-kinesys v1.0.1 h1:fpEDBaMBIdCHs+aQ04GMEXzS6btQ6LczGYwBBDfilrI=
 github.com/Appkube-awsx/awsx-kinesys v1.0.1/go.mod h1:/pXBcFzAYGjdQWvOBWiHwWO/KOaC64hYc9Nl7VMZyfc=
 github.com/Appkube-awsx/awsx-kinesys v1.0.2 h1:yLNQfbtOOUaLzjzLXrHhvyshxoWkHDhKq/HWqRWzCKk=
 github.com/Appkube-awsx/awsx-kinesys v1.0.2/go.mod h1:/pXBcFzAYGjdQWvOBWiHwWO/KOaC64hYc9Nl7VMZyfc=
+github.com/Appkube-awsx/awsx-kms v0.0.0-20230921103052-9e84767773ea h1:J6VUqZrOLumFqUWIVJgzUgM7VDK0kOJdr3n6fGzbnN0=
+github.com/Appkube-awsx/awsx-kms v0.0.0-20230921103052-9e84767773ea/go.mod h1:GXYbvkHER+7wtVEpNp5ltwEyV+duH1wiat8pwECiUKM=
 github.com/Appkube-awsx/awsx-lambda v1.0.3 h1:dSlsHIASrrc4bxGpaqDNQMjqdzNY6VaWR3wZfF5xMzM=
 github.com/Appkube-awsx/awsx-lambda v1.0.3/go.mod h1:zNSLIwGPwQMdLuTp+Sq8nQ8MTBvjXM+NtG34uHS/cgo=
 github.com/Appkube-awsx/awsx-lambda v1.0.6 h1:en6XofX0tMv302IKg32R6OKfQP7XcKz27IW+ukXNKu0=
