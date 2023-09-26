@@ -4,6 +4,8 @@ github.com/Appkube-awsx/awsx-cdn v1.0.0 h1:Rwgay/pxfSSd+rIR1xVot6SYIaraLjEeWlQln
 github.com/Appkube-awsx/awsx-cdn v1.0.0/go.mod h1:dtYhot+PT3vgdrKTl1IUNIWgwQeil1zF8oU5xi1qRS0=
 github.com/Appkube-awsx/awsx-cdn v1.0.1 h1:fr4iCkv4MJGoGfb+v1JTm6acCR+Nx/tH/ejBBYd6f7k=
 github.com/Appkube-awsx/awsx-cdn v1.0.1/go.mod h1:dtYhot+PT3vgdrKTl1IUNIWgwQeil1zF8oU5xi1qRS0=
+github.com/Appkube-awsx/awsx-cdn v1.0.2 h1:E3pjY3/IZasvhgfiLZLig5aUtxt/pd3iDtQXTyN8d8I=
+github.com/Appkube-awsx/awsx-cdn v1.0.2/go.mod h1:dtYhot+PT3vgdrKTl1IUNIWgwQeil1zF8oU5xi1qRS0=
 github.com/Appkube-awsx/awsx-cloudelements v1.0.8 h1:XUtUAdvvzU5jouHerTPfQi6zQI191NFpU/Yz627Sfq0=
 github.com/Appkube-awsx/awsx-cloudelements v1.0.8/go.mod h1:0TDb4ZcAXbxAupXvXuJc/qUpZ5U1iiZsF2e0Dj9Hd48=
 github.com/Appkube-awsx/awsx-cloudelements v1.0.9 h1:P5xfzfu3m19OqajqCjUDOySl9h8xrOQa2IgyFr4KRMo=
@@ -54,6 +56,8 @@ github.com/Appkube-awsx/awsx-kinesys v1.0.2 h1:yLNQfbtOOUaLzjzLXrHhvyshxoWkHDhKq
 github.com/Appkube-awsx/awsx-kinesys v1.0.2/go.mod h1:/pXBcFzAYGjdQWvOBWiHwWO/KOaC64hYc9Nl7VMZyfc=
 github.com/Appkube-awsx/awsx-kms v0.0.0-20230921103052-9e84767773ea h1:J6VUqZrOLumFqUWIVJgzUgM7VDK0kOJdr3n6fGzbnN0=
 github.com/Appkube-awsx/awsx-kms v0.0.0-20230921103052-9e84767773ea/go.mod h1:GXYbvkHER+7wtVEpNp5ltwEyV+duH1wiat8pwECiUKM=
+github.com/Appkube-awsx/awsx-kms v1.0.0 h1:RovzKAF7OeOMzKttguAk1PdxeIl6c72tfac7+0nkdIg=
+github.com/Appkube-awsx/awsx-kms v1.0.0/go.mod h1:/LmvBGE/AicCPYDYY9I1pHJk7BO8L97Luyu82uqkAOE=
 github.com/Appkube-awsx/awsx-lambda v1.0.3 h1:dSlsHIASrrc4bxGpaqDNQMjqdzNY6VaWR3wZfF5xMzM=
 github.com/Appkube-awsx/awsx-lambda v1.0.3/go.mod h1:zNSLIwGPwQMdLuTp+Sq8nQ8MTBvjXM+NtG34uHS/cgo=
 github.com/Appkube-awsx/awsx-lambda v1.0.6 h1:en6XofX0tMv302IKg32R6OKfQP7XcKz27IW+ukXNKu0=

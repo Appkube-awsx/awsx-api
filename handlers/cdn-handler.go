@@ -4,6 +4,7 @@ import (
 	"awsx-api/log"
 	"encoding/json"
 	"fmt"
+	"github.com/Appkube-awsx/awsx-cdn/command/cloudfrontcmd"
 	"github.com/Appkube-awsx/awsx-cdn/controller"
 	"github.com/Appkube-awsx/awsx-common/authenticate"
 	"net/http"
@@ -25,13 +26,21 @@ func GetCdn(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, fmt.Sprintf("Exception: "+err.Error()), http.StatusInternalServerError)
 			return
 		}
-		result, respErr := controller.GetCdn(clientAuth)
+		result, respErr := controller.GetCdnDistributionConfigWithTags(clientAuth)
 		if respErr != nil {
 			log.Error(respErr.Error())
 			http.Error(w, fmt.Sprintf("Exception: "+respErr.Error()), http.StatusInternalServerError)
 			return
 		}
-		json.NewEncoder(w).Encode(result)
+		var cdn []cloudfrontcmd.Cdn
+		unMarshalErr := json.Unmarshal([]byte(result), &cdn)
+		if unMarshalErr != nil {
+			log.Error(unMarshalErr.Error())
+			http.Error(w, fmt.Sprintf("Exception: "+unMarshalErr.Error()), http.StatusInternalServerError)
+			return
+		}
+		json.NewEncoder(w).Encode(cdn)
+
 	} else {
 		accessKey := r.URL.Query().Get("accessKey")
 		secretKey := r.URL.Query().Get("secretKey")
@@ -43,13 +52,21 @@ func GetCdn(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, fmt.Sprintf("Exception: "+err.Error()), http.StatusInternalServerError)
 			return
 		}
-		result, respErr := controller.GetCdn(clientAuth)
+		result, respErr := controller.GetCdnDistributionConfigWithTags(clientAuth)
 		if respErr != nil {
 			log.Error(respErr.Error())
 			http.Error(w, fmt.Sprintf("Exception: "+respErr.Error()), http.StatusInternalServerError)
 			return
 		}
-		json.NewEncoder(w).Encode(result)
+		var cdn []cloudfrontcmd.Cdn
+		//all := []Cdn{}
+		unMarshalErr := json.Unmarshal([]byte(result), &cdn)
+		if unMarshalErr != nil {
+			log.Error(unMarshalErr.Error())
+			http.Error(w, fmt.Sprintf("Exception: "+unMarshalErr.Error()), http.StatusInternalServerError)
+			return
+		}
+		json.NewEncoder(w).Encode(cdn)
 	}
 
 	log.Info("/awsx/cdn completed")

@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/Appkube-awsx/awsx-common/authenticate"
-	"github.com/Appkube-awsx/awsx-kms/controllers"
+	"github.com/Appkube-awsx/awsx-kms/controller"
 	"net/http"
 )
 
