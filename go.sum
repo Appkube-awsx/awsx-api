@@ -44,6 +44,8 @@ github.com/Appkube-awsx/awsx-ecs v1.0.0 h1:MoOmR+gNLEFssJGMVT7lklHOqFVQm+FhatUWL
 github.com/Appkube-awsx/awsx-ecs v1.0.0/go.mod h1:SrHGq/Sp9xhTkObPmQyWu4Bv9Fz8+TtfaTmC5r18zxk=
 github.com/Appkube-awsx/awsx-ecs v1.0.1 h1:q5EStizAMf+q7UTxkxhgAyWeSPeAUXM//opKOs8tTeQ=
 github.com/Appkube-awsx/awsx-ecs v1.0.1/go.mod h1:SrHGq/Sp9xhTkObPmQyWu4Bv9Fz8+TtfaTmC5r18zxk=
+github.com/Appkube-awsx/awsx-ecs v1.0.2 h1:XT7D5OHfDJERKwHlVsDJuAihOUdC/v9dulqRFkH7mjI=
+github.com/Appkube-awsx/awsx-ecs v1.0.2/go.mod h1:SrHGq/Sp9xhTkObPmQyWu4Bv9Fz8+TtfaTmC5r18zxk=
 github.com/Appkube-awsx/awsx-eks v1.0.1 h1:rq/ClqB8B9i6AuhABajBDLikaLwK9USFAkvJUcBiHFk=
 github.com/Appkube-awsx/awsx-eks v1.0.1/go.mod h1:0lo2JBkDYdvlB/BWc9+Pb+OBnEE5WmpnGiEPs6/tMzM=
 github.com/Appkube-awsx/awsx-eks v1.0.2 h1:+hMzfSG56eqV5P9tJrnC+WCPhXo35Xypn0HD+XR25BI=
