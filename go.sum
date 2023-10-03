@@ -38,6 +38,10 @@ github.com/Appkube-awsx/awsx-common v1.1.9 h1:+O0/WujYlGQEP5ZRnF03qKgYvkCp/Ys1kR
 github.com/Appkube-awsx/awsx-common v1.1.9/go.mod h1:ZNNCZD2KYBNaNIpnV8UUrwlIb6nAcCkaEbOpHab/HyQ=
 github.com/Appkube-awsx/awsx-dynamodb v1.0.0 h1:xUnv8HM+jKQTUFAJj6Z3bDJtCp1/7xq0m6AbF6hs2PE=
 github.com/Appkube-awsx/awsx-dynamodb v1.0.0/go.mod h1:dl1Q7amTZYdY+B/Oijvc/uXcjfwByEXb7c6xqB1cks8=
+github.com/Appkube-awsx/awsx-dynamodb v1.0.1 h1:mm5wWEHRXxCJeNmTNqEqZXBPPtaDrzXXwzXyQV/plOg=
+github.com/Appkube-awsx/awsx-dynamodb v1.0.1/go.mod h1:dl1Q7amTZYdY+B/Oijvc/uXcjfwByEXb7c6xqB1cks8=
+github.com/Appkube-awsx/awsx-dynamodb v1.0.2 h1:ss+rYTHI2opihePLZwRfTPpRH7E+yJffInzxYjf6x1o=
+github.com/Appkube-awsx/awsx-dynamodb v1.0.2/go.mod h1:dl1Q7amTZYdY+B/Oijvc/uXcjfwByEXb7c6xqB1cks8=
 github.com/Appkube-awsx/awsx-ec2 v1.0.0 h1:J2A/ALsBBSqsmDlcyz8ptcaIappTD7vWPrGq+CyjITM=
 github.com/Appkube-awsx/awsx-ec2 v1.0.0/go.mod h1:ZfgQohBm2P/tuqL8tDTn6Y5rmlV2SmdMoErZVZgqwWM=
 github.com/Appkube-awsx/awsx-ecs v1.0.0 h1:MoOmR+gNLEFssJGMVT7lklHOqFVQm+FhatUWL86VizU=

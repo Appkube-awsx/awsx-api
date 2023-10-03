@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/Appkube-awsx/awsx-common/authenticate"
+	"github.com/Appkube-awsx/awsx-dynamodb/command"
 	"github.com/Appkube-awsx/awsx-dynamodb/controller"
 	"net/http"
 )
@@ -31,7 +32,15 @@ func GetDynamodb(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, fmt.Sprintf("Exception: "+respErr.Error()), http.StatusInternalServerError)
 			return
 		}
-		json.NewEncoder(w).Encode(result)
+		var dynamodbObj []command.DynamodbObj
+		unMarshalErr := json.Unmarshal([]byte(result), &dynamodbObj)
+		if unMarshalErr != nil {
+			log.Error(unMarshalErr.Error())
+			http.Error(w, fmt.Sprintf("Exception: "+unMarshalErr.Error()), http.StatusInternalServerError)
+			return
+		}
+		json.NewEncoder(w).Encode(dynamodbObj)
+		//json.NewEncoder(w).Encode(result)
 	} else {
 		accessKey := r.URL.Query().Get("accessKey")
 		secretKey := r.URL.Query().Get("secretKey")
@@ -49,7 +58,15 @@ func GetDynamodb(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, fmt.Sprintf("Exception: "+respErr.Error()), http.StatusInternalServerError)
 			return
 		}
-		json.NewEncoder(w).Encode(result)
+		var dynamodbObj []command.DynamodbObj
+		unMarshalErr := json.Unmarshal([]byte(result), &dynamodbObj)
+		if unMarshalErr != nil {
+			log.Error(unMarshalErr.Error())
+			http.Error(w, fmt.Sprintf("Exception: "+unMarshalErr.Error()), http.StatusInternalServerError)
+			return
+		}
+		json.NewEncoder(w).Encode(dynamodbObj)
+		//json.NewEncoder(w).Encode(result)
 	}
 
 	log.Info("/awsx/dynamodb completed")
