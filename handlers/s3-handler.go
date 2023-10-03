@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/Appkube-awsx/awsx-common/authenticate"
+	"github.com/Appkube-awsx/awsx-s3/command"
 	"github.com/Appkube-awsx/awsx-s3/controller"
 	"net/http"
 )
@@ -31,7 +32,14 @@ func GetS3(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, fmt.Sprintf("Exception: "+respErr.Error()), http.StatusInternalServerError)
 			return
 		}
-		json.NewEncoder(w).Encode(result)
+		var s3Obj []command.S3Bucket
+		unMarshalErr := json.Unmarshal([]byte(result), &s3Obj)
+		if unMarshalErr != nil {
+			log.Error(unMarshalErr.Error())
+			http.Error(w, fmt.Sprintf("Exception: "+unMarshalErr.Error()), http.StatusInternalServerError)
+			return
+		}
+		json.NewEncoder(w).Encode(s3Obj)
 	} else {
 		accessKey := r.URL.Query().Get("accessKey")
 		secretKey := r.URL.Query().Get("secretKey")
@@ -49,7 +57,14 @@ func GetS3(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, fmt.Sprintf("Exception: "+respErr.Error()), http.StatusInternalServerError)
 			return
 		}
-		json.NewEncoder(w).Encode(result)
+		var s3Obj []command.S3Bucket
+		unMarshalErr := json.Unmarshal([]byte(result), &s3Obj)
+		if unMarshalErr != nil {
+			log.Error(unMarshalErr.Error())
+			http.Error(w, fmt.Sprintf("Exception: "+unMarshalErr.Error()), http.StatusInternalServerError)
+			return
+		}
+		json.NewEncoder(w).Encode(s3Obj)
 	}
 
 	log.Info("/awsx/s3 completed")

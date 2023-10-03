@@ -40,7 +40,7 @@ func GetDynamodb(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		json.NewEncoder(w).Encode(dynamodbObj)
-		//json.NewEncoder(w).Encode(result)
+
 	} else {
 		accessKey := r.URL.Query().Get("accessKey")
 		secretKey := r.URL.Query().Get("secretKey")
@@ -66,7 +66,7 @@ func GetDynamodb(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		json.NewEncoder(w).Encode(dynamodbObj)
-		//json.NewEncoder(w).Encode(result)
+
 	}
 
 	log.Info("/awsx/dynamodb completed")

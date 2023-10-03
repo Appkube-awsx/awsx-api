@@ -80,6 +80,8 @@ github.com/Appkube-awsx/awsx-s3 v1.0.1 h1:UVJKeo74jN4eEZXjoBIp34qvEhrsGJHZ/uvqKz
 github.com/Appkube-awsx/awsx-s3 v1.0.1/go.mod h1:YtEe63eH5zfjqn0WMS+V3rDvcJn4vxKfPqIXl+VGW20=
 github.com/Appkube-awsx/awsx-s3 v1.0.2 h1:kOhirOyhZB9ZUxgUHXbb18ugTBszi/rWGxDJawuj6pQ=
 github.com/Appkube-awsx/awsx-s3 v1.0.2/go.mod h1:YtEe63eH5zfjqn0WMS+V3rDvcJn4vxKfPqIXl+VGW20=
+github.com/Appkube-awsx/awsx-s3 v1.0.3 h1:ZOFMmsnjkCIfV5uhxaWhs6LsIuA6LxZMCO09aN3LDUk=
+github.com/Appkube-awsx/awsx-s3 v1.0.3/go.mod h1:YtEe63eH5zfjqn0WMS+V3rDvcJn4vxKfPqIXl+VGW20=
 github.com/Appkube-awsx/awsx-s3 v1.1.7 h1:Sf58E9X3SHDdldqN4X7Z0VrLfqPgMiHCdTuBM9fCEDs=
 github.com/Appkube-awsx/awsx-s3 v1.1.7/go.mod h1:YtEe63eH5zfjqn0WMS+V3rDvcJn4vxKfPqIXl+VGW20=
 github.com/Appkube-awsx/awsx-vpc v1.0.2 h1:wD7a27R8ebqwdmY9gCJzTYT1ExxnamDasP/Hoe5s36k=
