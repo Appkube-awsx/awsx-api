@@ -60,6 +60,8 @@ github.com/Appkube-awsx/awsx-kinesys v1.0.1 h1:fpEDBaMBIdCHs+aQ04GMEXzS6btQ6LczG
 github.com/Appkube-awsx/awsx-kinesys v1.0.1/go.mod h1:/pXBcFzAYGjdQWvOBWiHwWO/KOaC64hYc9Nl7VMZyfc=
 github.com/Appkube-awsx/awsx-kinesys v1.0.2 h1:yLNQfbtOOUaLzjzLXrHhvyshxoWkHDhKq/HWqRWzCKk=
 github.com/Appkube-awsx/awsx-kinesys v1.0.2/go.mod h1:/pXBcFzAYGjdQWvOBWiHwWO/KOaC64hYc9Nl7VMZyfc=
+github.com/Appkube-awsx/awsx-kinesys v1.0.3 h1:nAw2wPvcGlanaA81W67+gntxt8grzfZ9T1stJ3PPxU8=
+github.com/Appkube-awsx/awsx-kinesys v1.0.3/go.mod h1:/pXBcFzAYGjdQWvOBWiHwWO/KOaC64hYc9Nl7VMZyfc=
 github.com/Appkube-awsx/awsx-kms v0.0.0-20230921103052-9e84767773ea h1:J6VUqZrOLumFqUWIVJgzUgM7VDK0kOJdr3n6fGzbnN0=
 github.com/Appkube-awsx/awsx-kms v0.0.0-20230921103052-9e84767773ea/go.mod h1:GXYbvkHER+7wtVEpNp5ltwEyV+duH1wiat8pwECiUKM=
 github.com/Appkube-awsx/awsx-kms v1.0.0 h1:RovzKAF7OeOMzKttguAk1PdxeIl6c72tfac7+0nkdIg=

@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/Appkube-awsx/awsx-common/authenticate"
+	"github.com/Appkube-awsx/awsx-kinesys/command"
 	"github.com/Appkube-awsx/awsx-kinesys/controller"
 	"net/http"
 )
@@ -25,13 +26,20 @@ func GetKinesys(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, fmt.Sprintf("Exception: "+err.Error()), http.StatusInternalServerError)
 			return
 		}
-		result, respErr := controller.GetKinesisStreams(clientAuth)
+		result, respErr := controller.GetKinesisDetailsWithTag(clientAuth)
 		if respErr != nil {
 			log.Error(respErr.Error())
 			http.Error(w, fmt.Sprintf("Exception: "+respErr.Error()), http.StatusInternalServerError)
 			return
 		}
-		json.NewEncoder(w).Encode(result)
+		var kinesysObj []command.KinesysObj
+		unMarshalErr := json.Unmarshal([]byte(result), &kinesysObj)
+		if unMarshalErr != nil {
+			log.Error(unMarshalErr.Error())
+			http.Error(w, fmt.Sprintf("Exception: "+unMarshalErr.Error()), http.StatusInternalServerError)
+			return
+		}
+		json.NewEncoder(w).Encode(kinesysObj)
 	} else {
 		accessKey := r.URL.Query().Get("accessKey")
 		secretKey := r.URL.Query().Get("secretKey")
@@ -43,13 +51,20 @@ func GetKinesys(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, fmt.Sprintf("Exception: "+err.Error()), http.StatusInternalServerError)
 			return
 		}
-		result, respErr := controller.GetKinesisStreams(clientAuth)
+		result, respErr := controller.GetKinesisDetailsWithTag(clientAuth)
 		if respErr != nil {
 			log.Error(respErr.Error())
 			http.Error(w, fmt.Sprintf("Exception: "+respErr.Error()), http.StatusInternalServerError)
 			return
 		}
-		json.NewEncoder(w).Encode(result)
+		var kinesysObj []command.KinesysObj
+		unMarshalErr := json.Unmarshal([]byte(result), &kinesysObj)
+		if unMarshalErr != nil {
+			log.Error(unMarshalErr.Error())
+			http.Error(w, fmt.Sprintf("Exception: "+unMarshalErr.Error()), http.StatusInternalServerError)
+			return
+		}
+		json.NewEncoder(w).Encode(kinesysObj)
 	}
 
 	log.Info("/awsx/kinesys completed")
