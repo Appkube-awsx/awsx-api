@@ -72,6 +72,12 @@ github.com/Appkube-awsx/awsx-lambda v1.0.6 h1:en6XofX0tMv302IKg32R6OKfQP7XcKz27I
 github.com/Appkube-awsx/awsx-lambda v1.0.6/go.mod h1:5XsqhvJhbvhL1BGdeALbS+a5MJSZrAFmQMMvur2+QNw=
 github.com/Appkube-awsx/awsx-lambda v1.0.7 h1:iiVQ+yY+BPnPIEBmKjhKOSgt5J+4wMMlufankVEjqW8=
 github.com/Appkube-awsx/awsx-lambda v1.0.7/go.mod h1:5XsqhvJhbvhL1BGdeALbS+a5MJSZrAFmQMMvur2+QNw=
+github.com/Appkube-awsx/awsx-lambda v1.0.9 h1:mlHy15f9/m+VusLcJVsxw9xgem+c7e761dHD2ATuig4=
+github.com/Appkube-awsx/awsx-lambda v1.0.9/go.mod h1:fcir729Z8gq7yypTZN4Eeoe1Fb5X09Gsu/Or63SV8+8=
+github.com/Appkube-awsx/awsx-lambda v1.1.0 h1:v7vSny7QGhxLcAGK5JlpRdp0y6YZtrZeBhwwZzeufMM=
+github.com/Appkube-awsx/awsx-lambda v1.1.0/go.mod h1:fcir729Z8gq7yypTZN4Eeoe1Fb5X09Gsu/Or63SV8+8=
+github.com/Appkube-awsx/awsx-lambda v1.1.1 h1:fKW9EXfaNibV7tcp48+Lo5BYbg9EHpxnE6xImE4UBnM=
+github.com/Appkube-awsx/awsx-lambda v1.1.1/go.mod h1:fcir729Z8gq7yypTZN4Eeoe1Fb5X09Gsu/Or63SV8+8=
 github.com/Appkube-awsx/awsx-rds v0.0.0-20230915121119-7ef02e973122 h1:HZAE67Bv3y488VNSBXEmq3+zZj4jCb0jjdEG2g6nrjs=
 github.com/Appkube-awsx/awsx-rds v0.0.0-20230915121119-7ef02e973122/go.mod h1:RVEABeWMDU5KDrVIylyFBeHpeRA/E/jOFU6St2GJ+s0=
 github.com/Appkube-awsx/awsx-rds v1.0.0 h1:OF8n66EXi1n3Iw7zGiigjNUSOwKWose9i5h2kufffXk=

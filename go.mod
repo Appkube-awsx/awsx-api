@@ -10,7 +10,7 @@ require (
 	github.com/Appkube-awsx/awsx-ecs v1.0.2
 	github.com/Appkube-awsx/awsx-eks v1.0.2
 	github.com/Appkube-awsx/awsx-kinesys v1.0.3
-	github.com/Appkube-awsx/awsx-lambda v1.0.7
+	github.com/Appkube-awsx/awsx-lambda v1.1.1
 	github.com/Appkube-awsx/awsx-rds v1.0.0
 	github.com/Appkube-awsx/awsx-s3 v1.0.3
 	github.com/Appkube-awsx/awsx-vpc v1.0.5

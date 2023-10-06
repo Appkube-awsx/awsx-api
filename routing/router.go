@@ -57,9 +57,16 @@ func NewRoutes() (r *Routes) {
 			true,
 		},
 		{
-			"AwsxLambda",
+			"AwsxLambdaWithTags",
 			"GET",
-			"/awsx/lambda/number",
+			"/awsx/lambda/function-with-tag",
+			handlers.GetLambdaWithTags,
+			true,
+		},
+		{
+			"AwsxTotalLambda",
+			"GET",
+			"/awsx/lambda/total-functions",
 			handlers.GetNumberOfLambdas,
 			true,
 		},
