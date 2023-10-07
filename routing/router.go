@@ -113,6 +113,13 @@ func NewRoutes() (r *Routes) {
 			true,
 		},
 		{
+			"AwsxS3WithTags",
+			"GET",
+			"/awsx/s3/bucket-with-tag",
+			handlers.GetS3WithTags,
+			true,
+		},
+		{
 			"AwsxCdn",
 			"GET",
 			"/awsx/cdn",
