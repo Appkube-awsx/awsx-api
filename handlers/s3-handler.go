@@ -69,13 +69,13 @@ func GetS3WithTags(w http.ResponseWriter, r *http.Request) {
 		authFlag, clientAuth, err := authenticate.AuthenticateData(vaultUrl, vaultToken, accountId, region, "", "", "", "")
 		if err != nil || !authFlag {
 			log.Error(err.Error())
-			http.Error(w, fmt.Sprintf("Exception: "+err.Error()), http.StatusInternalServerError)
+			http.Error(w, fmt.Sprintf("Authentication error: "+err.Error()), http.StatusInternalServerError)
 			return
 		}
 		result, respErr := controller.S3BucketWithTagsController(bucketName, *clientAuth)
 		if respErr != nil {
 			log.Error(respErr.Error())
-			http.Error(w, fmt.Sprintf("Exception: "+respErr.Error()), http.StatusExpectationFailed)
+			http.Error(w, fmt.Sprintf("Api error: "+respErr.Error()), http.StatusExpectationFailed)
 			return
 		}
 		var bucketObj *bucketcmd.S3Bucket
@@ -94,13 +94,13 @@ func GetS3WithTags(w http.ResponseWriter, r *http.Request) {
 		authFlag, clientAuth, err := authenticate.AuthenticateData("", "", "", region, accessKey, secretKey, crossAccountRoleArn, externalId)
 		if err != nil || !authFlag {
 			log.Error(err.Error())
-			http.Error(w, fmt.Sprintf("Exception: "+err.Error()), http.StatusInternalServerError)
+			http.Error(w, fmt.Sprintf("Authentication error: "+err.Error()), http.StatusInternalServerError)
 			return
 		}
 		result, respErr := controller.S3BucketWithTagsController(bucketName, *clientAuth)
 		if respErr != nil {
 			log.Error(respErr.Error())
-			http.Error(w, fmt.Sprintf("Exception: "+respErr.Error()), http.StatusInternalServerError)
+			http.Error(w, fmt.Sprintf("Api error: "+respErr.Error()), http.StatusInternalServerError)
 			return
 		}
 
@@ -108,7 +108,7 @@ func GetS3WithTags(w http.ResponseWriter, r *http.Request) {
 		unMarshalErr := json.Unmarshal([]byte(result), &bucketObj)
 		if unMarshalErr != nil {
 			log.Error(unMarshalErr.Error())
-			http.Error(w, fmt.Sprintf("Exception: "+unMarshalErr.Error()), http.StatusInternalServerError)
+			http.Error(w, fmt.Sprintf("Response unmarshal error : "+unMarshalErr.Error()), http.StatusInternalServerError)
 			return
 		}
 		json.NewEncoder(w).Encode(bucketObj)
