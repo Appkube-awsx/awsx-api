@@ -10,6 +10,7 @@ import (
 	"time"
 
 	"github.com/gorilla/mux"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
 // func HandleRequests() {
@@ -67,6 +68,7 @@ func NewServer() *Server {
 	mux := http.NewServeMux()
 	http.DefaultServeMux = mux
 	http.Handle("/", handler)
+	http.Handle("/management/prometheus", promhttp.Handler())
 
 	// Clients must use TLS 1.2 or higher
 	// tlsConfig := &tls.Config{
