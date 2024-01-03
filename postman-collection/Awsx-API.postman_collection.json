@@ -1,13 +1,407 @@
 {
 	"info": {
-		"_postman_id": "ec1a5dd3-6649-429e-9ae6-b0b2781ac66d",
-		"name": "Awsx-API",
+		"_postman_id": "bd1ac26f-56a5-42e6-8d76-eb932b95d879",
+		"name": "awsx-api",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "11946453"
+		"_exporter_id": "28214167"
 	},
 	"item": [
 		{
-			"name": "get-appconfig",
+			"name": "getCdn",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://34.199.12.114:7000/awsx/cdn?zone=us-east-1&accountId=SYNECTIKS/HR/AWS/062041849235&vaultUrl=http://34.199.12.114:8200/v1/kv-v1&vaultToken=s.X22v2Ma60lzujd1OlKVhMy0Q",
+					"protocol": "http",
+					"host": [
+						"34",
+						"199",
+						"12",
+						"114"
+					],
+					"port": "7000",
+					"path": [
+						"awsx",
+						"cdn"
+					],
+					"query": [
+						{
+							"key": "zone",
+							"value": "us-east-1"
+						},
+						{
+							"key": "accountId",
+							"value": "SYNECTIKS/HR/AWS/062041849235"
+						},
+						{
+							"key": "vaultUrl",
+							"value": "http://34.199.12.114:8200/v1/kv-v1"
+						},
+						{
+							"key": "vaultToken",
+							"value": "s.X22v2Ma60lzujd1OlKVhMy0Q"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getEks",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7000/awsx/eks?zone=us-east-1&accountId=SYNECTIKS/HR/AWS/062041849235&vaultUrl=http://34.199.12.114:8200/v1/kv-v1&vaultToken=s.X22v2Ma60lzujd1OlKVhMy0Q",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"awsx",
+						"eks"
+					],
+					"query": [
+						{
+							"key": "zone",
+							"value": "us-east-1"
+						},
+						{
+							"key": "accountId",
+							"value": "SYNECTIKS/HR/AWS/062041849235"
+						},
+						{
+							"key": "vaultUrl",
+							"value": "http://34.199.12.114:8200/v1/kv-v1"
+						},
+						{
+							"key": "vaultToken",
+							"value": "s.X22v2Ma60lzujd1OlKVhMy0Q"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getEcs",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7000/awsx/ecs?zone=us-east-1&accountId=SYNECTIKS/HR/AWS/062041849235&vaultUrl=http://34.199.12.114:8200/v1/kv-v1&vaultToken=s.X22v2Ma60lzujd1OlKVhMy0Q",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"awsx",
+						"ecs"
+					],
+					"query": [
+						{
+							"key": "zone",
+							"value": "us-east-1"
+						},
+						{
+							"key": "accountId",
+							"value": "SYNECTIKS/HR/AWS/062041849235"
+						},
+						{
+							"key": "vaultUrl",
+							"value": "http://34.199.12.114:8200/v1/kv-v1"
+						},
+						{
+							"key": "vaultToken",
+							"value": "s.X22v2Ma60lzujd1OlKVhMy0Q"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getDynamodbTables",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7000/awsx/dynamodb?zone=us-east-1&accountId=SYNECTIKS/HR/AWS/062041849235&vaultUrl=http://34.199.12.114:8200/v1/kv-v1&vaultToken=s.X22v2Ma60lzujd1OlKVhMy0Q",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"awsx",
+						"dynamodb"
+					],
+					"query": [
+						{
+							"key": "zone",
+							"value": "us-east-1"
+						},
+						{
+							"key": "accountId",
+							"value": "SYNECTIKS/HR/AWS/062041849235"
+						},
+						{
+							"key": "vaultUrl",
+							"value": "http://34.199.12.114:8200/v1/kv-v1"
+						},
+						{
+							"key": "vaultToken",
+							"value": "s.X22v2Ma60lzujd1OlKVhMy0Q"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getS3",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7000/awsx/s3?zone=us-east-1&accountId=SYNECTIKS/HR/AWS/062041849235&vaultUrl=http://34.199.12.114:8200/v1/kv-v1&vaultToken=s.X22v2Ma60lzujd1OlKVhMy0Q",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"awsx",
+						"s3"
+					],
+					"query": [
+						{
+							"key": "zone",
+							"value": "us-east-1"
+						},
+						{
+							"key": "accountId",
+							"value": "SYNECTIKS/HR/AWS/062041849235"
+						},
+						{
+							"key": "vaultUrl",
+							"value": "http://34.199.12.114:8200/v1/kv-v1"
+						},
+						{
+							"key": "vaultToken",
+							"value": "s.X22v2Ma60lzujd1OlKVhMy0Q"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getS3WithTag",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7000/awsx/s3/bucket-with-tag?zone=us-east-1&accountId=SYNECTIKS/HR/AWS/062041849235&vaultUrl=http://34.199.12.114:8200/v1/kv-v1&vaultToken=s.X22v2Ma60lzujd1OlKVhMy0Q&bucketName=afreen-test-bucket",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"awsx",
+						"s3",
+						"bucket-with-tag"
+					],
+					"query": [
+						{
+							"key": "zone",
+							"value": "us-east-1"
+						},
+						{
+							"key": "accountId",
+							"value": "SYNECTIKS/HR/AWS/062041849235"
+						},
+						{
+							"key": "vaultUrl",
+							"value": "http://34.199.12.114:8200/v1/kv-v1"
+						},
+						{
+							"key": "vaultToken",
+							"value": "s.X22v2Ma60lzujd1OlKVhMy0Q"
+						},
+						{
+							"key": "bucketName",
+							"value": "afreen-test-bucket"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getRds",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7000/awsx/rds?zone=us-east-1&accountId=SYNECTIKS/HR/AWS/062041849235&vaultUrl=http://34.199.12.114:8200/v1/kv-v1&vaultToken=s.X22v2Ma60lzujd1OlKVhMy0Q",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"awsx",
+						"rds"
+					],
+					"query": [
+						{
+							"key": "zone",
+							"value": "us-east-1"
+						},
+						{
+							"key": "accountId",
+							"value": "SYNECTIKS/HR/AWS/062041849235"
+						},
+						{
+							"key": "vaultUrl",
+							"value": "http://34.199.12.114:8200/v1/kv-v1"
+						},
+						{
+							"key": "vaultToken",
+							"value": "s.X22v2Ma60lzujd1OlKVhMy0Q"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getKinesys",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7000/awsx/kinesys?zone=us-east-1&accountId=SYNECTIKS/HR/AWS/062041849235&vaultUrl=http://34.199.12.114:8200/v1/kv-v1&vaultToken=s.X22v2Ma60lzujd1OlKVhMy0Q",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"awsx",
+						"kinesys"
+					],
+					"query": [
+						{
+							"key": "zone",
+							"value": "us-east-1"
+						},
+						{
+							"key": "accountId",
+							"value": "SYNECTIKS/HR/AWS/062041849235"
+						},
+						{
+							"key": "vaultUrl",
+							"value": "http://34.199.12.114:8200/v1/kv-v1"
+						},
+						{
+							"key": "vaultToken",
+							"value": "s.X22v2Ma60lzujd1OlKVhMy0Q"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getLambda",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7000/awsx/lambda?zone=us-east-1&accountId=SYNECTIKS/HR/AWS/062041849235&vaultUrl=http://34.199.12.114:8200/v1/kv-v1&vaultToken=s.X22v2Ma60lzujd1OlKVhMy0Q",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"awsx",
+						"lambda"
+					],
+					"query": [
+						{
+							"key": "zone",
+							"value": "us-east-1"
+						},
+						{
+							"key": "accountId",
+							"value": "SYNECTIKS/HR/AWS/062041849235"
+						},
+						{
+							"key": "vaultUrl",
+							"value": "http://34.199.12.114:8200/v1/kv-v1"
+						},
+						{
+							"key": "vaultToken",
+							"value": "s.X22v2Ma60lzujd1OlKVhMy0Q"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getLambdaWithTags",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7000/awsx/lambda/function-with-tag?accountId=SYNECTIKS/HR/AWS/062041849235&vaultUrl=http://34.199.12.114:8200/v1/kv-v1&vaultToken=s.X22v2Ma60lzujd1OlKVhMy0Q&functionName=Function-appkube-test",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"awsx",
+						"lambda",
+						"function-with-tag"
+					],
+					"query": [
+						{
+							"key": "zone",
+							"value": "us-east-1",
+							"disabled": true
+						},
+						{
+							"key": "accountId",
+							"value": "SYNECTIKS/HR/AWS/062041849235"
+						},
+						{
+							"key": "vaultUrl",
+							"value": "http://34.199.12.114:8200/v1/kv-v1"
+						},
+						{
+							"key": "vaultToken",
+							"value": "s.X22v2Ma60lzujd1OlKVhMy0Q"
+						},
+						{
+							"key": "functionName",
+							"value": "Function-appkube-test"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "cpu_utilization_panel",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -24,7 +418,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:7000/awsx/appconfig?accountId=657907747545",
+					"raw": "http://localhost:7000/awsx/ec2/cpu-utilization-panel?zone=us-east-1&externalId=DJ6@a8hzG@xkFwSvLmkSR5SN&crossAccountRoleArn=arn:aws:iam::<accountId>:role/CrossAccount&elementType=AWS/EC2&instanceID=i-05e4e6757f13da657&query=CPUUtilization&statistic=SampleCount,Average,Maximum",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -32,62 +426,37 @@
 					"port": "7000",
 					"path": [
 						"awsx",
-						"appconfig"
+						"ec2",
+						"cpu-utilization-panel"
 					],
 					"query": [
 						{
-							"key": "accountId",
-							"value": "657907747545"
+							"key": "zone",
+							"value": "us-east-1"
 						},
 						{
-							"key": "vaultUrl",
-							"value": "xyz",
-							"disabled": true
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "cloud-elements",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:7000/awsx/cloud-elements?accountId=657907747545",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "7000",
-					"path": [
-						"awsx",
-						"cloud-elements"
-					],
-					"query": [
-						{
-							"key": "accountId",
-							"value": "657907747545"
+							"key": "externalId",
+							"value": "DJ6@a8hzG@xkFwSvLmkSR5SN"
 						},
 						{
-							"key": "vaultUrl",
-							"value": "xyz",
-							"disabled": true
+							"key": "crossAccountRoleArn",
+							"value": "arn:aws:iam::<accountId>:role/CrossAccount"
 						},
 						{
-							"key": "elementKey",
-							"value": "RESOURCE-IDF",
-							"disabled": true
+							"key": "elementType",
+							"value": "AWS/EC2"
+						},
+						{
+							"key": "instanceID",
+							"value": "i-05e4e6757f13da657"
+						},
+						{
+							"key": "query",
+							"value": "CPUUtilization"
+						},
+						{
+							"key": "statistic",
+							"value": "SampleCount,Average,Maximum"
 						}
 					]
 				}
