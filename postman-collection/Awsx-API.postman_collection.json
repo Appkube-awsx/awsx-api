@@ -401,6 +401,87 @@
 			"response": []
 		},
 		{
+			"name": "cpu_utilization_panel_olf",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7000/awsx-api/getQueryOutput?zone=us-east-1&externalId=DJ6@a8hzG@xkFwSvLmkSR5SN&crossAccountRoleArn=arn:aws:iam::657907747545:role/CrossAccount&elementType=AWS/EC2&instanceID=i-05e4e6757f13da657&query=cpu_panel&filter=Average,SampleCount,Maximum&responseType=frame",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"awsx-api",
+						"getQueryOutput"
+					],
+					"query": [
+						{
+							"key": "zone",
+							"value": "us-east-1"
+						},
+						{
+							"key": "externalId",
+							"value": "DJ6@a8hzG@xkFwSvLmkSR5SN"
+						},
+						{
+							"key": "crossAccountRoleArn",
+							"value": "arn:aws:iam::657907747545:role/CrossAccount"
+						},
+						{
+							"key": "elementType",
+							"value": "AWS/EC2"
+						},
+						{
+							"key": "instanceID",
+							"value": "i-05e4e6757f13da657"
+						},
+						{
+							"key": "query",
+							"value": "cpu_panel"
+						},
+						{
+							"key": "filter",
+							"value": "Average,SampleCount,Maximum"
+						},
+						{
+							"key": "commandType",
+							"value": "cpu-utilization",
+							"disabled": true
+						},
+						{
+							"key": "responseType",
+							"value": "frame"
+						},
+						{
+							"key": "startTime",
+							"value": "2023-07-01T00:00:00Z",
+							"disabled": true
+						},
+						{
+							"key": "endTime",
+							"value": "2023-12-14T23:59:59Z",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "cpu_utilization_panel",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
@@ -418,16 +499,15 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:7000/awsx/ec2/cpu-utilization-panel?zone=us-east-1&externalId=DJ6@a8hzG@xkFwSvLmkSR5SN&crossAccountRoleArn=arn:aws:iam::<accountId>:role/CrossAccount&elementType=AWS/EC2&instanceID=i-05e4e6757f13da657&query=CPUUtilization&statistic=SampleCount,Average,Maximum",
+					"raw": "http://localhost:7000/awsx-api/getQueryOutput?zone=us-east-1&externalId=<>&crossAccountRoleArn=<>&elementType=AWS/EC2&instanceID=<>&query=cpu_utilization_panel&responseType=json",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "7000",
 					"path": [
-						"awsx",
-						"ec2",
-						"cpu-utilization-panel"
+						"awsx-api",
+						"getQueryOutput"
 					],
 					"query": [
 						{
@@ -436,11 +516,11 @@
 						},
 						{
 							"key": "externalId",
-							"value": "DJ6@a8hzG@xkFwSvLmkSR5SN"
+							"value": "<>"
 						},
 						{
 							"key": "crossAccountRoleArn",
-							"value": "arn:aws:iam::<accountId>:role/CrossAccount"
+							"value": "<>"
 						},
 						{
 							"key": "elementType",
@@ -448,15 +528,25 @@
 						},
 						{
 							"key": "instanceID",
-							"value": "i-05e4e6757f13da657"
+							"value": "<>"
 						},
 						{
 							"key": "query",
-							"value": "CPUUtilization"
+							"value": "cpu_utilization_panel"
 						},
 						{
-							"key": "statistic",
-							"value": "SampleCount,Average,Maximum"
+							"key": "endTime",
+							"value": "2023-12-14T23:59:59Z",
+							"disabled": true
+						},
+						{
+							"key": "startTime",
+							"value": "2023-07-01T00:00:00Z",
+							"disabled": true
+						},
+						{
+							"key": "responseType",
+							"value": "json"
 						}
 					]
 				}
