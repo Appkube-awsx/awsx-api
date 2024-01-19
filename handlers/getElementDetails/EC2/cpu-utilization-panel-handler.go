@@ -95,11 +95,37 @@ func GetCpuUtilizationPanel(w http.ResponseWriter, r *http.Request) {
 				}
 			}
 		} else {
-			err = json.NewEncoder(w).Encode(jsonString)
+			type UsageData struct {
+				AverageUsage float64 `json:"AverageUsage"`
+				CurrentUsage float64 `json:"CurrentUsage"`
+				MaxUsage     float64 `json:"MaxUsage"`
+			}
+			var data UsageData
+			err := json.Unmarshal([]byte(jsonString), &data)
 			if err != nil {
-				http.Error(w, fmt.Sprintf(fmt.Sprintf("Exception: %s ", err)), http.StatusInternalServerError)
+				http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
 				return
 			}
+
+			// Marshal the struct back to JSON
+			jsonBytes, err := json.Marshal(data)
+			if err != nil {
+				http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
+				return
+			}
+
+			// Set Content-Type header and write the JSON response
+			w.Header().Set("Content-Type", "application/json")
+			_, err = w.Write(jsonBytes)
+			if err != nil {
+				http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
+				return
+			}
+			//err = json.NewEncoder(w).Encode(jsonString)
+			//if err != nil {
+			//	http.Error(w, fmt.Sprintf(fmt.Sprintf("Exception: %s ", err)), http.StatusInternalServerError)
+			//	return
+			//}
 		}
 	}
 
