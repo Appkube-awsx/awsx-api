@@ -5,7 +5,7 @@ WORKDIR /app
 ARG ARTIFACT_NAME=awsx-api
 ARG CONF_FILE=conf/config.yaml
 COPY ${ARTIFACT_NAME} /app/
-RUN MKDIR /app/conf
+RUN mkdir /app/conf
 COPY ${CONF_FILE} /app/conf
 EXPOSE 7000
 ENTRYPOINT [ "./awsx-api start" ]
