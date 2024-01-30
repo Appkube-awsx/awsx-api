@@ -8,4 +8,4 @@ COPY ${ARTIFACT_NAME} /app/
 RUN mkdir /app/conf
 COPY ${CONF_FILE} /app/conf
 EXPOSE 7000
-ENTRYPOINT [ "./awsx-api start" ]
+ENTRYPOINT [ "./awsx-api","start" ]
