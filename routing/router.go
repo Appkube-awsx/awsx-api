@@ -2,7 +2,7 @@ package routing
 
 import (
 	"awsx-api/handlers/getElementDetails/EC2"
-	
+
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -113,7 +113,14 @@ func NewRoutes() (r *Routes) {
 			EC2.ExecuteQuery,
 			true,
 		},
-		
+		{
+			"AwsxEc2",
+			"GET",
+			"/awsx-api/ec2/getQueryOutput",
+			EC2.ExecuteNetworkQuery,
+			true,
+		},
+
 		// {
 		// 	"AwsxEks",
 		// 	"GET",
