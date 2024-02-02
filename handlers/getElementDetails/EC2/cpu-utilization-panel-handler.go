@@ -9,7 +9,7 @@ import (
 	"github.com/Appkube-awsx/awsx-getelementdetails/handler/EC2"
 	"github.com/spf13/cobra"
 	"net/http"
-	"awsx-api/handlers/getElementDetails/EKS"
+	// "awsx-api/handlers/getElementDetails/EKS"
 )
 
 func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
@@ -20,9 +20,9 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 		
 		GetCpuUtilizationPanel(w, r)
 		
-	}else if  elementType == "ContainerInsights" && query == "cpu_utilization_panel"   {
+	// }else if  elementType == "ContainerInsights" && query == "cpu_utilization_panel"   {
 		
-		EKS.GetEKSCpuUtilizationPanel(w, r)
+	// 	EKS.GetEKSCpuUtilizationPanel(w, r)
 		
 	} else {
 		http.Error(w, fmt.Sprintf("panel not found"), http.StatusBadRequest)

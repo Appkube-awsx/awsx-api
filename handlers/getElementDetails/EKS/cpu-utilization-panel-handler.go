@@ -12,8 +12,7 @@ import (
 	
 )
 
-
-func GetEKSCpuUtilizationPanel(w http.ResponseWriter, r *http.Request) {
+func GetEKScpuUtilizationPanel(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	region := r.URL.Query().Get("zone")

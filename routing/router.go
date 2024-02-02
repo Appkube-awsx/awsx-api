@@ -2,6 +2,7 @@ package routing
 
 import (
 	"awsx-api/handlers/getElementDetails/EC2"
+	"awsx-api/handlers/getElementDetails/EKS"
 
 	"net/http"
 
@@ -118,6 +119,21 @@ func NewRoutes() (r *Routes) {
 			"GET",
 			"/awsx-api/ec2/getQueryOutput",
 			EC2.ExecuteNetworkQuery,
+			true,
+		},
+		{
+			"AwsxEks",
+			"GET",
+			"/awsx-api/eksCpu/getQueryOutput",
+			EKS.GetEKScpuUtilizationPanel,
+			true,
+		},
+
+		{
+			"AwsxEks",
+			"GET",
+			"/awsx-api/eksMemory/getQueryOutput",
+			EKS.GetEKSMemoryUtilizationPanel,
 			true,
 		},
 
