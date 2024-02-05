@@ -142,6 +142,13 @@ func NewRoutes() (r *Routes) {
 			EKS.GetEKSNetworkUtilizationPanel,
 			true,
 		},
+		{
+			"AwsxEks",
+			"GET",
+			"/awsx-api/eksStorage/getQueryOutput",
+			EKS.GetEKSStorageUtilizationPanel,
+			true,
+		},
 
 		// {
 		// 	"AwsxEks",
