@@ -12,14 +12,14 @@ import (
 	"github.com/spf13/cobra"
 )
 
-type cpuResult struct {
+type cpulimitResult struct {
 	RawData []struct {
 		Timestamp time.Time
 		Value     float64
 	} `json:"RawData"`
 }
 
-func GetCpuRequestsPanel(w http.ResponseWriter, r *http.Request) {
+func GetCpuLimitPanel(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	region := r.URL.Query().Get("zone")
@@ -28,7 +28,6 @@ func GetCpuRequestsPanel(w http.ResponseWriter, r *http.Request) {
 	crossAccountRoleArn := r.URL.Query().Get("crossAccountRoleArn")
 	externalId := r.URL.Query().Get("externalId")
 	responseType := r.URL.Query().Get("responseType")
-	// filter := r.URL.Query().Get("filter")
 	clusterName := r.URL.Query().Get("clusterName")
 	elementType := r.URL.Query().Get("elementType")
 	startTime := r.URL.Query().Get("startTime")
@@ -55,19 +54,19 @@ func GetCpuRequestsPanel(w http.ResponseWriter, r *http.Request) {
 		cmd.PersistentFlags().StringVar(&startTime, "startTime", r.URL.Query().Get("startTime"), "Description of the startTime flag")
 		cmd.PersistentFlags().StringVar(&endTime, "endTime", r.URL.Query().Get("endTime"), "Description of the endTime flag")
 		cmd.PersistentFlags().StringVar(&responseType, "responseType", r.URL.Query().Get("responseType"), "responseType flag - json/frame")
-		jsonString, cloudwatchMetricData, err := EKS.GetCPURequestData(cmd, clientAuth)
+		jsonString, cloudwatchMetricData, err := EKS.GetCPULimitsData(cmd, clientAuth)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
 			return
 		}
-		if elementType == "ContainerInsights" && query == "cpu_requests_panel" && responseType == "frame" {
+		if elementType == "ContainerInsights" && query == "cpu_limits_panel" && responseType == "frame" {
 			err = json.NewEncoder(w).Encode(cloudwatchMetricData)
 			if err != nil {
 				http.Error(w, fmt.Sprintf("Exception: %s ", err), http.StatusInternalServerError)
 				return
 			}
 		} else {
-			var data cpuResult
+			var data cpulimitResult
 			err := json.Unmarshal([]byte(jsonString), &data)
 			if err != nil {
 				http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
