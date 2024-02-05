@@ -11,7 +11,7 @@ require (
 
 require (
 	github.com/Appkube-awsx/awsx-common v1.2.7
-	github.com/Appkube-awsx/awsx-getelementdetails v1.1.4
+	github.com/Appkube-awsx/awsx-getelementdetails v1.1.5
 	github.com/prometheus/client_golang v1.18.0
 	github.com/spf13/cobra v1.7.0
 )
