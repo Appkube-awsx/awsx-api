@@ -128,12 +128,18 @@ func NewRoutes() (r *Routes) {
 			EKS.GetEKScpuUtilizationPanel,
 			true,
 		},
-
 		{
 			"AwsxEks",
 			"GET",
 			"/awsx-api/eksMemory/getQueryOutput",
 			EKS.GetEKSMemoryUtilizationPanel,
+			true,
+		},
+		{
+			"AwsxEks",
+			"GET",
+			"/awsx-api/eksNetwork/getQueryOutput",
+			EKS.GetEKSNetworkUtilizationPanel,
 			true,
 		},
 
