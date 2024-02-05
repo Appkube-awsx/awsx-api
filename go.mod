@@ -3,7 +3,7 @@ module awsx-api
 go 1.19
 
 require (
-	github.com/aws/aws-sdk-go v1.45.9
+	github.com/aws/aws-sdk-go v1.50.10
 	github.com/gorilla/mux v1.8.0
 	github.com/rs/zerolog v1.29.0
 	gopkg.in/yaml.v3 v3.0.1
@@ -11,9 +11,9 @@ require (
 
 require (
 	github.com/Appkube-awsx/awsx-common v1.2.7
-	github.com/Appkube-awsx/awsx-getelementdetails v1.1.4
+	github.com/Appkube-awsx/awsx-getelementdetails v1.1.5
 	github.com/prometheus/client_golang v1.18.0
-	github.com/spf13/cobra v1.7.0
+	github.com/spf13/cobra v1.8.0
 )
 
 require (
