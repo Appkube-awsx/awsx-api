@@ -158,9 +158,9 @@ func NewRoutes() (r *Routes) {
 			true,
 		},
 		{
-			"AwsxEc2",
+			"AwsxECS",
 			"GET",
-			"/awsx-api/getECSQueryOutput",
+			"/awsx-api/ecsCpuRequests/getQueryOutput",
 			ECS.GetContainerPanel,
 			true,
 		},

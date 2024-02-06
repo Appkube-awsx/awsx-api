@@ -28,6 +28,7 @@ func GetContainerPanel(w http.ResponseWriter, r *http.Request) {
 	elementType := r.URL.Query().Get("elementType")
 	startTime := r.URL.Query().Get("startTime")
 	endTime := r.URL.Query().Get("endTime")
+	query := r.URL.Query().Get("query")
 
 	// Initialize CommandParam
 	commandParam := model.CommandParam{}
@@ -46,14 +47,12 @@ func GetContainerPanel(w http.ResponseWriter, r *http.Request) {
 	authFlag, clientAuth, _ := authenticate.DoAuthenticate(commandParam)
 
 	if authFlag {
-		// Create Cobra command
 		cmd := &cobra.Command{}
 		cmd.PersistentFlags().StringVar(&clusterName, "clusterName", r.URL.Query().Get("clusterName"), "Description of the clusterName flag")
 		cmd.PersistentFlags().StringVar(&elementType, "elementType", r.URL.Query().Get("elementType"), "Description of the elementType flag")
 		cmd.PersistentFlags().StringVar(&startTime, "startTime", r.URL.Query().Get("startTime"), "Description of the startTime flag")
 		cmd.PersistentFlags().StringVar(&endTime, "endTime", r.URL.Query().Get("endTime"), "Description of the endTime flag")
 		cmd.PersistentFlags().StringVar(&responseType, "responseType", r.URL.Query().Get("responseType"), "responseType flag - json/frame")
-		query := r.URL.Query().Get("query")
 
 		// Call ECS package function to get metrics
 		jsonString, ecsMetricData, err := ECS.GetContainerPanel(cmd, clientAuth)
@@ -61,7 +60,7 @@ func GetContainerPanel(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
 			return
 		}
-		if elementType == "ContainerInsights" && query == "cpu_utilization_panel" {
+		if elementType == "ContainerInsights" && query == "Cpu_utilization_panel" {
 			if responseType == "frame" {
 				switch filter {
 				case "Current":
