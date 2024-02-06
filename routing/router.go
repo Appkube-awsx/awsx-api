@@ -192,6 +192,13 @@ func NewRoutes() (r *Routes) {
 			ECS.GetStorageUtilizationPanel,
 			true,
 		},
+		{
+			"AwsxECS",
+			"GET",
+			"/awsx-api/ecsNetworkRequests/getQueryOutput",
+			ECS.GetECSNetworkUtilizationPanel,
+			true,
+		},
 
 		// {
 		// 	"AwsxEks",
