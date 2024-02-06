@@ -1,15 +1,14 @@
 package EKS
 
 import (
-	
 	"encoding/json"
 	"fmt"
+	"net/http"
+
 	"github.com/Appkube-awsx/awsx-common/authenticate"
 	"github.com/Appkube-awsx/awsx-common/model"
 	"github.com/Appkube-awsx/awsx-getelementdetails/handler/EKS"
 	"github.com/spf13/cobra"
-	"net/http"
-	
 )
 
 func GetEKScpuUtilizationPanel(w http.ResponseWriter, r *http.Request) {
@@ -26,8 +25,8 @@ func GetEKScpuUtilizationPanel(w http.ResponseWriter, r *http.Request) {
 	elementType := r.URL.Query().Get("elementType")
 	startTime := r.URL.Query().Get("startTime")
 	endTime := r.URL.Query().Get("endTime")
+	query := r.URL.Query().Get("query")
 
-	//var err error
 
 	commandParam := model.CommandParam{}
 
@@ -54,66 +53,61 @@ func GetEKScpuUtilizationPanel(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
 			return
 		}
-		if responseType == "frame" {
-			if filter == "SampleCount" {
-				err = json.NewEncoder(w).Encode(cloudwatchMetricData["CurrentUsage"])
+		if elementType == "ContainerInsights" && query == "cpu_utilization_panel" {
+			if responseType == "frame" {
+				if filter == "SampleCount" {
+					err = json.NewEncoder(w).Encode(cloudwatchMetricData["CurrentUsage"])
+					if err != nil {
+						http.Error(w, fmt.Sprintf("Exception: %s ", err), http.StatusInternalServerError)
+						return
+					}
+				} else if filter == "Average" {
+					err = json.NewEncoder(w).Encode(cloudwatchMetricData["AverageUsage"])
+					if err != nil {
+						http.Error(w, fmt.Sprintf(fmt.Sprintf("Exception: %s ", err)), http.StatusInternalServerError)
+						return
+					}
+				} else if filter == "Maximum" {
+					err = json.NewEncoder(w).Encode(cloudwatchMetricData["MaxUsage"])
+					if err != nil {
+						http.Error(w, fmt.Sprintf(fmt.Sprintf("Exception: %s ", err)), http.StatusInternalServerError)
+						return
+					}
+				} else {
+					fmt.Println("this is else json", cloudwatchMetricData)
+					err = json.NewEncoder(w).Encode(cloudwatchMetricData)
+					if err != nil {
+						http.Error(w, fmt.Sprintf(fmt.Sprintf("Exception: %s ", err)), http.StatusInternalServerError)
+						return
+					}
+				}
+			} else {
+				type UsageData struct {
+					AverageUsage float64 `json:"AverageUsage"`
+					CurrentUsage float64 `json:"CurrentUsage"`
+					MaxUsage     float64 `json:"MaxUsage"`
+				}
+				var data UsageData
+				err := json.Unmarshal([]byte(jsonString), &data)
 				if err != nil {
-					http.Error(w, fmt.Sprintf("Exception: %s ", err), http.StatusInternalServerError)
+					http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
 					return
 				}
-			} else if filter == "Average" {
-				err = json.NewEncoder(w).Encode(cloudwatchMetricData["AverageUsage"])
-				if err != nil {
-					http.Error(w, fmt.Sprintf(fmt.Sprintf("Exception: %s ", err)), http.StatusInternalServerError)
-					return
-				}
-			} else if filter == "Maximum" {
-				err = json.NewEncoder(w).Encode(cloudwatchMetricData["MaxUsage"])
-				if err != nil {
-					http.Error(w, fmt.Sprintf(fmt.Sprintf("Exception: %s ", err)), http.StatusInternalServerError)
-					return
-				}
-			} else {fmt.Println("this is else json", cloudwatchMetricData)
-				err = json.NewEncoder(w).Encode(cloudwatchMetricData)
-				if err != nil {
-					http.Error(w, fmt.Sprintf(fmt.Sprintf("Exception: %s ", err)), http.StatusInternalServerError)
-					return
-				}
-			}
-		} else {
-			type UsageData struct {
-				AverageUsage float64 `json:"AverageUsage"`
-				CurrentUsage float64 `json:"CurrentUsage"`
-				MaxUsage     float64 `json:"MaxUsage"`
-			}
-			var data UsageData
-			err := json.Unmarshal([]byte(jsonString), &data)
-			if err != nil {
-				http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
-				return
-			}
 
-			// Marshal the struct back to JSON
-			jsonBytes, err := json.Marshal(data)
-			if err != nil {
-				http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
-				return
+				jsonBytes, err := json.Marshal(data)
+				if err != nil {
+					http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
+					return
+				}
+
+				w.Header().Set("Content-Type", "application/json")
+				_, err = w.Write(jsonBytes)
+				if err != nil {
+					http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
+					return
+				}
 			}
-			// Set Content-Type header and write the JSON response
-			w.Header().Set("Content-Type", "application/json")
-			_, err = w.Write(jsonBytes)
-			if err != nil {
-				http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
-				return
-			}
-			//err = json.NewEncoder(w).Encode(jsonString)
-			//if err != nil {
-			//	http.Error(w, fmt.Sprintf(fmt.Sprintf("Exception: %s ", err)), http.StatusInternalServerError)
-			//	return
-			//}
 		}
 	}
 
 }
-
-
