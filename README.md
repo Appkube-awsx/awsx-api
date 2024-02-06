@@ -1,10 +1,10 @@
-- awsx-api
-- project architecture
-- api-endpoint ( curl commad)
-- start server
+- [awsx-api](#awsx-api)
+- [project architecture](#project-architecture)
+- [api-endpoint](#api-endpoint) 
+- [start server](#start-server)
 - build/run/debug/test in postman
-- how to add a handler
-- 
+
+
 
 
 # awsx-api
