@@ -171,6 +171,13 @@ func NewRoutes() (r *Routes) {
 			ECS.GetContainerPanel,
 			true,
 		},
+		{
+			"AwsxECS",
+			"GET",
+			"/awsx-api/ecsMemoryRequests/getQueryOutput",
+			ECS.GetECSMemoryUtilizationPanel,
+			true,
+		},
 
 		// {
 		// 	"AwsxEks",
