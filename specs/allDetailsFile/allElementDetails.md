@@ -1,4 +1,13 @@
-## All Subcommands and Options for EC2
+- [All subcommands plugins references for EC2](#all-subcommands-plugins-references-for-ec2)
+- [All subcommands plugins references for ECS](#all-subcommands-plugins-references-for-ecs)
+- [All subcommands plugins references for EKS](#all-subcommands-plugins-references-for-eks)
+
+# All subcommands plugins references for EC2
+All the supported subcommands and there source code locations are mentiioned in 
+
+    https://github.com/Appkube-awsx/awsx-api/blob/main/specs/allElementPanel/ec2readme.md
+
+
 
 | S.No | Panels Name | Commands |API EndPoint | Details |
 |------|-------------|-------------|-------------|-------------|
@@ -7,7 +16,12 @@
 | 3    | storage_utilization_panel         | `go run awsx-getelementdetails.go --zone=us-east-1 --externalId=<afreen1309XXX> --crossAccountRoleArn=<afreen1309XXX> --instanceID="i-05e4e6757f13da657" --query="storage_utilization_panel" --elementType="AWS/EC2" --RootVolumeId="i-05e4e6757f13da657" --EBSVolume1Id="vol-0db5984a7f9d77c4d" --EBSVolume2Id="vol-0e065bd2535df7a54" --responseType=json --startTime="" --endTime=""` | http://localhost:7000/awsx-api/ec2/getQueryOutput?zone=us-east-1&externalId=<afreen1309XXX>&crossAccountRoleArn=arn:<afreen1309XXX>&elementType=AWS/EC2&query=storage_utilization_panel&responseType=frame&instanceID=i-05e4e6757f13da657|This will get the specific EC2 instance storage utilization data  |
 | 4   | network_utilization_panel         | `go run awsx-getelementdetails.go --zone=us-east-1 --externalId=<afreen1309XXX> --crossAccountRoleArn=<afreen1309XXX> --instanceID="i-05e4e6757f13da657" --query="network_utilization_panel" --elementType="AWS/EC2" --responseType=json --startTime="" --endTime=""` | http://localhost:7000/awsx-api/ec2/getQueryOutput?zone=us-east-1&externalId=<afreen1309XXX>&crossAccountRoleArn=<afreen1309XXX>&elementType=AWS/EC2&query=storage_utilization_panel&responseType=frame&instanceID=i-05e4e6757f13da657|This will get the specific EC2 instance network utilization data  |
 
-## All Subcommands and Options for ECS
+
+# All subcommands plugins references for ECS
+All the supported subcommands and there source code locations are mentiioned in 
+
+    https://github.com/Appkube-awsx/awsx-api/blob/main/specs/allElementPanel/ecsreadme.md
+
 
 | S.No | Panels Name | Commands |API EndPoint | Details |
 |------|-------------|-------------|-------------|-------------|
@@ -16,7 +30,12 @@
 | 3    | storage_utilization_panel         | `go run awsx-getelementdetails.go --zone=us-east-1 --externalId=<afreen1309XXX> --crossAccountRoleArn=<afreen1309XXX> --clusterName="myclustTT" --query="storage_utilization_panel" --elementType="ContainerInsights"  --responseType=json --startTime="" --endTime=""` |http://localhost:7000/awsx-api/ecsStorageRequests/getQueryOutput?elementType=ContainerInsights&crossAccountRoleArn=<afreen1309XXX>&clusterName=myclustTT&startTime=&endTime=&responseType=json&query=Storage_utilization_panel|This will get the specific ECS cluster storage utilization data  |
 | 4   | network_utilization_panel         | `go run awsx-getelementdetails.go --zone=us-east-1 --externalId=<afreen1309XXX> --crossAccountRoleArn=<afreen1309XXX> --clusterName="myclustTT" --query="network_utilization_panel" --elementType="ContainerInsights" --responseType=json --startTime="" --endTime=""` | http://localhost:7000/awsx-api/ecsNetworkRequests/getQueryOutput?elementType=ContainerInsights&clusterName=myclustTT&startTime=&endTime=&crossAccountRoleArn=<afreen1309XXX>&responseType=frame&query=Network_utilization_panel|This will get the specific ECS cluster network utilization data  |
 
-## All Subcommands and Options for EKS
+
+# All subcommands plugins references for EKS
+All the supported subcommands and there source code locations are mentiioned in 
+
+    https://github.com/Appkube-awsx/awsx-api/blob/main/specs/allElementPanel/eksreadme.md
+
 
 | S.No | Panels Name | Commands |API EndPoint | Details |
 |------|-------------|-------------|-------------|-------------|
