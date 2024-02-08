@@ -160,6 +160,13 @@ func NewRoutes() (r *Routes) {
 		{
 			"AwsxEks",
 			"GET",
+			"/awsx-api/eksCpuLimits/getQueryOutput",
+			EKS.GetCpuLimitPanel,
+			true,
+		},
+		{
+			"AwsxEks",
+			"GET",
 			"/awsx-api/eksAllocatableCpu/getQueryOutput",
 			EKS.GetAllocatableCpuPanel,
 			true,
