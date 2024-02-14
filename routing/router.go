@@ -1,13 +1,9 @@
 package routing
 
 import (
-	"awsx-api/handlers/getElementDetails/EC2"
-	"awsx-api/handlers/getElementDetails/ECS"
-	"awsx-api/handlers/getElementDetails/EKS"
-
-	"net/http"
-
+	"awsx-api/handlers"
 	"github.com/gorilla/mux"
+	"net/http"
 )
 
 // Route describes a single route
@@ -108,104 +104,112 @@ func NewRoutes() (r *Routes) {
 		//	handlers.GetEc2,
 		//	true,
 		//},
+
 		{
-			"AwsxEc2",
+			"AwsxCloudWatchQueryApi",
 			"GET",
 			"/awsx-api/getQueryOutput",
-			EC2.ExecuteQuery,
+			handlers.ExecuteQuery,
 			true,
 		},
-		{
-			"AwsxEc2",
-			"GET",
-			"/awsx-api/ec2/getQueryOutput",
-			EC2.ExecuteNetworkQuery,
-			true,
-		},
-		{
-			"AwsxEks",
-			"GET",
-			"/awsx-api/eksCpu/getQueryOutput",
-			EKS.GetEKScpuUtilizationPanel,
-			true,
-		},
-		{
-			"AwsxEks",
-			"GET",
-			"/awsx-api/eksMemory/getQueryOutput",
-			EKS.GetEKSMemoryUtilizationPanel,
-			true,
-		},
-		{
-			"AwsxEks",
-			"GET",
-			"/awsx-api/eksNetwork/getQueryOutput",
-			EKS.GetEKSNetworkUtilizationPanel,
-			true,
-		},
-		{
-			"AwsxEks",
-			"GET",
-			"/awsx-api/eksStorage/getQueryOutput",
-			EKS.GetEKSStorageUtilizationPanel,
-			true,
-		},
-		{
-			"AwsxEks",
-			"GET",
-			"/awsx-api/eksCpuRequests/getQueryOutput",
-			EKS.GetCpuRequestsPanel,
-			true,
-		},
-		{
-			"AwsxEks",
-			"GET",
-			"/awsx-api/eksCpuLimits/getQueryOutput",
-			EKS.GetCpuLimitPanel,
-			true,
-		},
-		{
-			"AwsxEks",
-			"GET",
-			"/awsx-api/eksAllocatableCpu/getQueryOutput",
-			EKS.GetAllocatableCpuPanel,
-			true,
-		},
-		{
-			"AwsxEks",
-			"GET",
-			"/awsx-api/eksCpuGraph/getQueryOutput",
-			EKS.GetCpuGraphPanel,
-			true,
-		},
-		{
-			"AwsxECS",
-			"GET",
-			"/awsx-api/ecsCpuRequests/getQueryOutput",
-			ECS.GetContainerPanel,
-			true,
-		},
-		{
-			"AwsxECS",
-			"GET",
-			"/awsx-api/ecsMemoryRequests/getQueryOutput",
-			ECS.GetECSMemoryUtilizationPanel,
-			true,
-		},
-		{
-			"AwsxECS",
-			"GET",
-			"/awsx-api/ecsStorageRequests/getQueryOutput",
-			ECS.GetStorageUtilizationPanel,
-			true,
-		},
-		{
-			"AwsxECS",
-			"GET",
-			"/awsx-api/ecsNetworkRequests/getQueryOutput",
-			ECS.GetECSNetworkUtilizationPanel,
-			true,
-		},
+		// {
+		// 	"AwsxEc2",
+		// 	"GET",
+		// 	"/awsx-api/getQueryOutput",
+		// 	EC2.ExecuteQuery,
+		// 	true,
+		// },
+		// {
+		// 	"AwsxEc2",
+		// 	"GET",
+		// 	"/awsx-api/ec2/getQueryOutput",
+		// 	EC2.ExecuteNetworkQuery,
+		// 	true,
+		// },
+		// {
+		// 	"AwsxEks",
+		// 	"GET",
+		// 	"/awsx-api/eksCpu/getQueryOutput",
+		// 	EKS.GetEKScpuUtilizationPanel,
+		// 	true,
+		// },
+		// {
+		// 	"AwsxEks",
+		// 	"GET",
+		// 	"/awsx-api/eksMemory/getQueryOutput",
+		// 	EKS.GetEKSMemoryUtilizationPanel,
+		// 	true,
+		// },
+		// {
+		// 	"AwsxEks",
+		// 	"GET",
+		// 	"/awsx-api/eksNetwork/getQueryOutput",
+		// 	EKS.GetEKSNetworkUtilizationPanel,
+		// 	true,
+		// },
+		// {
+		// 	"AwsxEks",
+		// 	"GET",
+		// 	"/awsx-api/eksStorage/getQueryOutput",
+		// 	EKS.GetEKSStorageUtilizationPanel,
+		// 	true,
+		// },
+		// {
+		// 	"AwsxEks",
+		// 	"GET",
+		// 	"/awsx-api/eksCpuRequests/getQueryOutput",
+		// 	EKS.GetCpuRequestsPanel,
+		// 	true,
+		// },
+		// {
+		// 	"AwsxEks",
+		// 	"GET",
+		// 	"/awsx-api/eksCpuLimits/getQueryOutput",
+		// 	EKS.GetCpuLimitPanel,
+		// 	true,
+		// },
+		// {
+		// 	"AwsxEks",
+		// 	"GET",
+		// 	"/awsx-api/eksAllocatableCpu/getQueryOutput",
+		// 	EKS.GetAllocatableCpuPanel,
+		// 	true,
+		// },
+		// {
+		// 	"AwsxEks",
+		// 	"GET",
+		// 	"/awsx-api/eksCpuGraph/getQueryOutput",
+		// 	EKS.GetCpuGraphPanel,
+		// 	true,
+		// },
+		// {
+		// 	"AwsxECS",
+		// 	"GET",
+		// 	"/awsx-api/ecsCpuRequests/getQueryOutput",
+		// 	ECS.GetContainerPanel,
+		// 	true,
+		// },
+		// {
+		// 	"AwsxECS",
+		// 	"GET",
+		// 	"/awsx-api/ecsMemoryRequests/getQueryOutput",
+		// 	ECS.GetECSMemoryUtilizationPanel,
+		// 	true,
+		// },
+		// {
+		// 	"AwsxECS",
+		// 	"GET",
+		// 	"/awsx-api/ecsStorageRequests/getQueryOutput",
+		// 	ECS.GetStorageUtilizationPanel,
+		// 	true,
+		// },
+		// {
+		// 	"AwsxECS",
+		// 	"GET",
+		// 	"/awsx-api/ecsNetworkRequests/getQueryOutput",
+		// 	ECS.GetECSNetworkUtilizationPanel,
+		// 	true,
+		// },
 
 		// {
 		// 	"AwsxEks",
