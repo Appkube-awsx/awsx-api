@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "bd1ac26f-56a5-42e6-8d76-eb932b95d879",
+		"_postman_id": "8ab4b64b-889a-4abe-ac33-5582d87aa060",
 		"name": "awsx-api",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "28214167"
+		"_exporter_id": "30003799"
 	},
 	"item": [
 		{
@@ -435,11 +435,11 @@
 						},
 						{
 							"key": "externalId",
-							"value": "DJ6@a8hzG@xkFwSvLmkSR5SN"
+							"value": "<>"
 						},
 						{
 							"key": "crossAccountRoleArn",
-							"value": "arn:aws:iam::657907747545:role/CrossAccount"
+							"value": "<>"
 						},
 						{
 							"key": "elementType",
@@ -482,7 +482,7 @@
 			"response": []
 		},
 		{
-			"name": "cpu_utilization_panel",
+			"name": "ec2cpu_utilization_panel",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -550,6 +550,136 @@
 						}
 					]
 				}
+			},
+			"response": []
+		},
+		{
+			"name": "eksCpuUtilization_panel",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7000/awsx-api/getQueryOutput?zone=us-east-1&externalId=DJ6@a8hzG@xkFwSvLmkSR5SN&crossAccountRoleArn=arn:aws:iam::657907747545:role/CrossAccount&elementType=ContainerInsights&clusterName=myclustTT&query=cpu_utilization_panel&responseType=frame",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"awsx-api",
+						"getQueryOutput"
+					],
+					"query": [
+						{
+							"key": "zone",
+							"value": "us-east-1"
+						},
+						{
+							"key": "externalId",
+							"value": "<>"
+						},
+						{
+							"key": "crossAccountRoleArn",
+							"value": "<>"
+						},
+						{
+							"key": "elementType",
+							"value": "ContainerInsights"
+						},
+						{
+							"key": "clusterName",
+							"value": "myclustTT"
+						},
+						{
+							"key": "query",
+							"value": "cpu_utilization_panel"
+						},
+						{
+							"key": "responseType",
+							"value": "frame"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "eksMemoryutilization_panel",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "eksCpuGraph",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "eksMemoryUtilization",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "eksStorageUtilization",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "eksNetworkUtilization",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "eksCpuRequests",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "eksAllocatableCpu",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "eksCpuLimits",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "ec2NetworkUtilization",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "ec2StorageUtilization",
+			"request": {
+				"method": "GET",
+				"header": []
 			},
 			"response": []
 		}
