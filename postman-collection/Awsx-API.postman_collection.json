@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "8ab4b64b-889a-4abe-ac33-5582d87aa060",
-		"name": "awsx-api",
+		"_postman_id": "17ea7c16-3472-4ac2-bd7a-4ff459fe1a79",
+		"name": "awsx-api Copy",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "30003799"
+		"_exporter_id": "4204032"
 	},
 	"item": [
 		{
@@ -418,7 +418,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:7000/awsx-api/getQueryOutput?zone=us-east-1&externalId=DJ6@a8hzG@xkFwSvLmkSR5SN&crossAccountRoleArn=arn:aws:iam::657907747545:role/CrossAccount&elementType=AWS/EC2&instanceID=i-05e4e6757f13da657&query=cpu_panel&filter=Average,SampleCount,Maximum&responseType=frame",
+					"raw": "http://localhost:7000/awsx-api/getQueryOutput?zone=us-east-1&externalId=<>&crossAccountRoleArn=<>&elementType=AWS/EC2&instanceID=i-05e4e6757f13da657&query=cpu_panel&filter=Average,SampleCount,Maximum&responseType=frame",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -499,7 +499,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:7000/awsx-api/getQueryOutput?zone=us-east-1&externalId=<>&crossAccountRoleArn=<>&elementType=AWS/EC2&instanceID=<>&query=cpu_utilization_panel&responseType=json",
+					"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=9321&elementType=EC2&query=cpu_utilization_panel",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -511,42 +511,21 @@
 					],
 					"query": [
 						{
-							"key": "zone",
-							"value": "us-east-1"
-						},
-						{
-							"key": "externalId",
-							"value": "<>"
-						},
-						{
-							"key": "crossAccountRoleArn",
-							"value": "<>"
+							"key": "elementId",
+							"value": "9321"
 						},
 						{
 							"key": "elementType",
-							"value": "AWS/EC2"
-						},
-						{
-							"key": "instanceID",
-							"value": "<>"
+							"value": "EC2"
 						},
 						{
 							"key": "query",
 							"value": "cpu_utilization_panel"
 						},
 						{
-							"key": "endTime",
-							"value": "2023-12-14T23:59:59Z",
-							"disabled": true
-						},
-						{
-							"key": "startTime",
-							"value": "2023-07-01T00:00:00Z",
-							"disabled": true
-						},
-						{
 							"key": "responseType",
-							"value": "json"
+							"value": "json",
+							"disabled": true
 						}
 					]
 				}
@@ -559,7 +538,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:7000/awsx-api/getQueryOutput?zone=us-east-1&externalId=DJ6@a8hzG@xkFwSvLmkSR5SN&crossAccountRoleArn=arn:aws:iam::657907747545:role/CrossAccount&elementType=ContainerInsights&clusterName=myclustTT&query=cpu_utilization_panel&responseType=frame",
+					"raw": "http://localhost:7000/awsx-api/getQueryOutput?zone=us-east-1&externalId=<>&crossAccountRoleArn=<>&elementType=ContainerInsights&clusterName=myclustTT&query=cpu_utilization_panel&responseType=frame",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -607,7 +586,10 @@
 			"name": "eksMemoryutilization_panel",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": ""
+				}
 			},
 			"response": []
 		},
@@ -615,7 +597,10 @@
 			"name": "eksCpuGraph",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": ""
+				}
 			},
 			"response": []
 		},
@@ -623,7 +608,10 @@
 			"name": "eksMemoryUtilization",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": ""
+				}
 			},
 			"response": []
 		},
@@ -631,7 +619,10 @@
 			"name": "eksStorageUtilization",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": ""
+				}
 			},
 			"response": []
 		},
@@ -639,7 +630,10 @@
 			"name": "eksNetworkUtilization",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": ""
+				}
 			},
 			"response": []
 		},
@@ -647,7 +641,10 @@
 			"name": "eksCpuRequests",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": ""
+				}
 			},
 			"response": []
 		},
@@ -655,7 +652,10 @@
 			"name": "eksAllocatableCpu",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": ""
+				}
 			},
 			"response": []
 		},
@@ -663,7 +663,10 @@
 			"name": "eksCpuLimits",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": ""
+				}
 			},
 			"response": []
 		},
@@ -671,7 +674,10 @@
 			"name": "ec2NetworkUtilization",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": ""
+				}
 			},
 			"response": []
 		},
@@ -679,7 +685,10 @@
 			"name": "ec2StorageUtilization",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": ""
+				}
 			},
 			"response": []
 		}
