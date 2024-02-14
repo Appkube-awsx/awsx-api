@@ -1,5 +1,4 @@
 server:
-  address: localhost
   port: 7000
   static_content_root_directory: /home/userTests/awsx-api-static-files
   cors_allow_all: true
