@@ -1,10 +1,11 @@
-- awsx-api
-- project architecture
-- api-endpoint ( curl commad)
-- start server
-- build/run/debug/test in postman
-- how to add a handler
-- 
+- [awsx-api](#awsx-api)
+- [project architecture](#project-architecture)
+- [api-endpoint](#api-endpoint) 
+- [start server](#start-server)
+- [Details of All Sub Command](#details-of-all-sub-command)
+
+
+
 
 
 # awsx-api
@@ -52,6 +53,31 @@ awsx-api is a golang based REST api server that exposes GET, POST, DELETE and PU
         * log.go: A custom log.go created for awsx-api.
 
 # api-endpoint 
+    
+https://github.com/Appkube-awsx/awsx-api/blob/main/specs/allDetailsFile/allElementDetails.md
+
+- build/run/debug/test in postman
 
 # start server
     go run .\main.go start
+
+# Details of All Sub Command
+
+All the supported subcommands and there source code locations are mentiioned in 
+
+for getElementDetails
+
+https://github.com/Appkube-awsx/awsx-api/tree/main/specs/allElementPanel
+
+for costDetails
+
+https://github.com/Appkube-awsx/awsx-cost/blob/main/awsx-costData/README.md
+        
+    
+
+| S.No | Sub-command           | Description                                           | Output Format                                  | Functionalities                                                                                                                                                                            | Specs Links |
+|------|-----------------------|-------------------------------------------------------|---------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------|
+| 1    | getLandingZoneDetails | Collect Information about any specific landing zone  | Percentage(%)                               | 1. Get Elements Metadata, 2. Get List of every elements with their config infos, 3. Get List of products and Environments for the landing Zone, 4. Get the cost of the landing zone   |    |
+| 2    | getLandingZoneCompliance | Collect Information about any specific landing zone compliances and security | Bytes                                 | 1. Get overall account Compliance, 2. Get the elementWise Compliance, 3. Run Compliance on products and environments                                                                       |  |
+| 3    | getElementDetails | Collect Information about specific cloud elements -Run Queries | Percentage(%), Bytes                               | 1. EC2, 2. EKS, 3. ECS, 4. LAMBDA, 5. API Gw, 6. Load Balancer  |    [https://github.com/Appkube-awsx/awsx-api/tree/main/specs/allElementPanel](https://github.com/Appkube-awsx/awsx-api/tree/main/specs/allElementPanel)   |
+| 4    | getCostDetails        | Collect Information about account and elements specific costs | Bytes                            | 1. Total Account, 2. Product and Envwise, 3. Element Wise, 4. Spikes and Trends, 5. App/Data/Nw Service wise Costs                                                                      | [https://github.com/Appkube-awsx/awsx-cost](https://github.com/Appkube-awsx/awsx-cost)|
