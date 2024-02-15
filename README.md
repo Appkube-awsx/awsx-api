@@ -1,16 +1,11 @@
 - [awsx-api](#awsx-api)
 - [project architecture](#project-architecture)
-- [api-endpoint](#api-endpoint) 
+- [api-endpoint](#api-endpoint)
 - [start server](#start-server)
 - [Details of All Sub Command](#details-of-all-sub-command)
 
-
-
-
-
 # awsx-api
 awsx-api is a golang based REST api server that exposes GET, POST, DELETE and PUT endpoints that will subsequently allow us to perform the full range of operations on AWS entities.\
-
 
 # project architecture
 ![project structure](project_structure.png "project structure")
@@ -57,6 +52,8 @@ awsx-api is a golang based REST api server that exposes GET, POST, DELETE and PU
 https://github.com/Appkube-awsx/awsx-api/blob/main/specs/allDetailsFile/allElementDetails.md
 
 - build/run/debug/test in postman
+
+
 
 # start server
     go run .\main.go start
