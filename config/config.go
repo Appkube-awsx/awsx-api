@@ -3,6 +3,7 @@ package config
 import (
 	"awsx-api/log"
 	"fmt"
+	"github.com/Appkube-awsx/awsx-common/model"
 	"gopkg.in/yaml.v3"
 	"io/ioutil"
 	"sync"
@@ -11,6 +12,8 @@ import (
 // Global configuration for the application.
 var configuration Config
 var rwMutex sync.RWMutex
+
+var awsClientCache = make(map[string]*model.Auth)
 
 // Server configuration
 type Server struct {
@@ -102,4 +105,13 @@ func Set(conf *Config) {
 	rwMutex.Lock()
 	defer rwMutex.Unlock()
 	configuration = *conf
+}
+
+// Get the aws client based on element type
+func GetAwsClient(elementType string) (auth *model.Auth) {
+	return awsClientCache[elementType]
+}
+
+func SetAwsClient(elementType string, auth *model.Auth) {
+	awsClientCache[elementType] = auth
 }

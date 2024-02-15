@@ -1,5 +1,7 @@
 github.com/Appkube-awsx/awsx-common v1.2.7 h1:uDAfwhRx1PrBCOqjrHSgh9CTK5gXeR/qiaORJTzenbc=
 github.com/Appkube-awsx/awsx-common v1.2.7/go.mod h1:ZNNCZD2KYBNaNIpnV8UUrwlIb6nAcCkaEbOpHab/HyQ=
+github.com/Appkube-awsx/awsx-common v1.2.8 h1:WqIWPKJ5RipwJMX08CfOy2x3GuCIlSiT2Bt3CHBK+7A=
+github.com/Appkube-awsx/awsx-common v1.2.8/go.mod h1:ZNNCZD2KYBNaNIpnV8UUrwlIb6nAcCkaEbOpHab/HyQ=
 github.com/Appkube-awsx/awsx-getelementdetails v1.1.6 h1:ER0ufCkDw6POcDWTaksNe917uuMJfLKqX8Yd77tuo98=
 github.com/Appkube-awsx/awsx-getelementdetails v1.1.6/go.mod h1:JvsFK3BXWFf0FKGPcOLE/4c1NoGoAZo5+9FteQ51IAo=
 github.com/Appkube-awsx/awsx-getelementdetails v1.1.7 h1:0i0HUSYQQ3hcKzmufSf5NaLddSPHthI0UZH9H73pW1w=

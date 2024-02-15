@@ -1,6 +1,8 @@
 package EC2
 
 import (
+	"awsx-api/config"
+	"awsx-api/log"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -41,9 +43,18 @@ func GetCpuUtilizationPanel(w http.ResponseWriter, r *http.Request) {
 		commandParam.ExternalId = externalId
 		commandParam.Region = region
 	}
-	authFlag, clientAuth, _ := authenticate.DoAuthenticate(commandParam)
 
-	if authFlag {
+	var clientAuth *model.Auth
+	if config.GetAwsClient(elementType) == nil {
+		log.Infof("creating new aws connection for element type :  " + elementType)
+		_, clientAuth, _ = authenticate.DoAuthenticate(commandParam)
+		config.SetAwsClient(elementType, clientAuth)
+	} else {
+		log.Infof("getting aws connection from cache for element type :  " + elementType)
+		clientAuth = config.GetAwsClient(elementType)
+	}
+
+	if clientAuth != nil {
 		cmd := &cobra.Command{}
 		cmd.PersistentFlags().StringVar(&elementId, "elementId", r.URL.Query().Get("elementId"), "Description of the elementId flag")
 		cmd.PersistentFlags().StringVar(&instanceId, "instanceId", r.URL.Query().Get("instanceId"), "Description of the instanceId flag")
@@ -56,7 +67,10 @@ func GetCpuUtilizationPanel(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
 			return
 		}
+		log.Infof("response type :" + responseType)
 		if responseType == "frame" {
+			log.Infof("creating response frame")
+			log.Infof("response type :" + responseType)
 			if filter == "SampleCount" {
 				err = json.NewEncoder(w).Encode(cloudwatchMetricData["CurrentUsage"])
 				if err != nil {
@@ -83,6 +97,7 @@ func GetCpuUtilizationPanel(w http.ResponseWriter, r *http.Request) {
 				}
 			}
 		} else {
+			log.Infof("creating response json")
 			type UsageData struct {
 				AverageUsage float64 `json:"AverageUsage"`
 				CurrentUsage float64 `json:"CurrentUsage"`
