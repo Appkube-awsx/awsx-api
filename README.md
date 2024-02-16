@@ -226,13 +226,52 @@ go run aws-getTopologyDetails.go --vault-url=vault.synectiks.net --elementType=m
 --responseType=json
 
 
-/awsx-api/getQueryOutput?elementCategory=Infra,cloudElementId="12233",query=getSLADetails
+/awsx-api/getQueryOutput?elementType=EC2,cloudElementId="12233",query=getSLADetailsOfEC2
 
-go run aws-getSlaDetails.go --vault-url=vault.synectiks.net --elementCategory=Infra --cloudElementId="12233" --query="getSLADetails" 
+go run aws-getSlaDetails.go --vault-url=vault.synectiks.net --elementType=EC2 --cloudElementId="12233" --query="getSLADetailsOfEC2" 
+--responseType=json
+
+/awsx-api/getQueryOutput?elementType=EKS,cloudElementId="12233",query=getSLADetailsOfEKS
+
+go run aws-getSlaDetails.go --vault-url=vault.synectiks.net --elementType=EKS --cloudElementId="12233" --query="getSLADetailsOfEKS" 
+--responseType=json
+
+/awsx-api/getQueryOutput?elementType=ECS,cloudElementId="12233",query=getSLADetailsOfECS
+
+go run aws-getSlaDetails.go --vault-url=vault.synectiks.net --elementType=ECS --cloudElementId="12233" --query="getSLADetailsOfECS" 
+--responseType=json
+
+/awsx-api/getQueryOutput?elementType=LAMBDA,cloudElementId="12233",query=getSLADetailsOfLambda
+
+go run aws-getSlaDetails.go --vault-url=vault.synectiks.net --elementType=ECS --cloudElementId="12233" --query="getSLADetailsOfLAMBDA" 
+--responseType=json
+
+/awsx-api/getQueryOutput?elementType=RDS,cloudElementId="12233",query=getSLADetailsOfRDS
+
+go run aws-getSlaDetails.go --vault-url=vault.synectiks.net --elementType=RDS --cloudElementId="12233" --query="getSLADetailsOfRDS" 
+--responseType=json
+
+/awsx-api/getQueryOutput?elementType=AppService,serviceId="12233",query=getSLADetailsOfAppService
+
+go run aws-getSlaDetails.go --vault-url=vault.synectiks.net --elementType=AppService --serviceId="12233" --query="getSLADetailsOfAppService" 
+--responseType=json
+
+/awsx-api/getQueryOutput?elementType=DataService,serviceId="12233",query=getSLADetailsOfDataService
+
+go run aws-getSlaDetails.go --vault-url=vault.synectiks.net --elementType=DataService --serviceId="12233" --query="getSLADetailsOfDataService" 
+--responseType=json
+
+/awsx-api/getQueryOutput?elementType=NwService,serviceId="12233",query=getSLADetailsOfNwService
+
+go run aws-getSlaDetails.go --vault-url=vault.synectiks.net --elementType=DataService --serviceId="12233" --query="getSLADetailsOfNwService" 
 --responseType=json
 
 
-/awsx-api/getQueryOutput?elementCategory=business,businessElementId="12233",query=getSLADetails
+/awsx-api/getQueryOutput?elementType=module,moduleId="12233",query=getSLADetailsOfModule
 
-go run aws-getSlaDetails.go --vault-url=vault.synectiks.net --elementCategory=business  --businessElementId="12233" --query="getSLADetails" 
+
+go run aws-getSlaDetails.go --vault-url=vault.synectiks.net --elementType=module 
+--moduleId="12233" --query="getSLADetailsOfModule" 
 --responseType=json
+
+
