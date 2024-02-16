@@ -49,7 +49,7 @@ awsx-api is a golang based REST api server that exposes GET, POST, DELETE and PU
 
 # api-endpoint 
     
-https://github.com/Appkube-awsx/awsx-api/blob/main/specs/allDetailsFile/allElementDetails.md
+https://github.com/Appkube-awsx/awsx-api/blob/main/specs/allgetElementDetailsList/allElementDetails.md
 
 - build/run/debug/test in postman
 
@@ -64,7 +64,7 @@ All the supported subcommands and there source code locations are mentiioned in
 
 for getElementDetails
 
-https://github.com/Appkube-awsx/awsx-api/tree/main/specs/allElementPanel
+https://github.com/Appkube-awsx/awsx-api/tree/main/specs/getElementDetails
 
 for costDetails
 
