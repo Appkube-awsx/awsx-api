@@ -68,8 +68,7 @@ Code   | Summary
 
 # curl command 
 ```
-curl --location 'http://localhost:7000/awsx-api/getQueryOutput?zone=us-east-1&externalId=<>afreen1309XXXX>crossAccountRoleArn=<afreen1309xxx>CrossAccount&elementType=AWS%2FEC2&instanceID=i-05e4e6757f13da657&query=cpu_utilization_panel&endTime=2023-12-02T23%3A59%3A59Z&startTime=2023-12-01T00%3A00%3A00Z&responseType=json' \
---data ''
+http://localhost:7000/awsx-api/getQueryOutput?vaultUrl=<afreenxxxx1309>&elementType=EC2&elementId=900000&query=cpu_utilization_panel&responsetype=json&endTime=2023-12-02T23%3A59%3A59Z&startTime=2023-12-01T00%3A00%3A00Z
 ```
 
 ## output
@@ -89,8 +88,7 @@ The `testAppkubeCputUtilization` function is a Go function designed to query CPU
 #### Parameters
 
 - `zone` (string): The AWS region/zone to query (e.g., "us-east-1").
-- `externalId` (string): External identifier for authentication.
-- `crossAccountRoleArn` (string): ARN (Amazon Resource Name) of the cross-account IAM role.
+- `vaultUrl` appears to be a query parameter used to specify the URL of a vault
 - `elementType` (string): Type of the AWS resource (e.g., "AWS/EC2").
 - `instanceID` (string): ID of the specific AWS instance.
 - `query` (string): Query type, in this case, "CPUUtilization".

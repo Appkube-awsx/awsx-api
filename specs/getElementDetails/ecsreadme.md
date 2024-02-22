@@ -68,8 +68,9 @@ Code   | Summary
 
 ## curl command 
 ```
-curl --location http://localhost:7000/awsx-api/getQueryOutput?zone=us-east-1&externalId=<afreen1309XXX>&crossAccountRoleArn=<afreen1309XXXX>&elementType=ContainerInsights&clusterName=myclustTT&query=cpu_utilization_panel&responseType=json
+curl --location http://localhost:7000/awsx-api/getQueryOutput?vaultUrl=<afreenxxxx1309>&elementType=EC2&elementId=9331&query=cpu_utilization_panel&responsetype=json&endTime=2023-12-02T23%3A59%3A59Z&startTime=2023-12-01T00%3A00%3A00Z
 ```
+
 
 ## output
 ```
