@@ -54,7 +54,7 @@ func GetCpuGraphPanel(w http.ResponseWriter, r *http.Request) {
 		cmd.PersistentFlags().StringVar(&startTime, "startTime", r.URL.Query().Get("startTime"), "Description of the startTime flag")
 		cmd.PersistentFlags().StringVar(&endTime, "endTime", r.URL.Query().Get("endTime"), "Description of the endTime flag")
 		cmd.PersistentFlags().StringVar(&responseType, "responseType", r.URL.Query().Get("responseType"), "responseType flag - json/frame")
-		jsonString, cloudwatchMetricData, err := EKS.GetCPUUtilizationData(cmd, clientAuth)
+		jsonString, cloudwatchMetricData, err := EKS.GetCPUUtilizationData(cmd, clientAuth,nil)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
 			return
