@@ -2,6 +2,8 @@ github.com/Appkube-awsx/awsx-common v1.2.8 h1:WqIWPKJ5RipwJMX08CfOy2x3GuCIlSiT2B
 github.com/Appkube-awsx/awsx-common v1.2.8/go.mod h1:ZNNCZD2KYBNaNIpnV8UUrwlIb6nAcCkaEbOpHab/HyQ=
 github.com/Appkube-awsx/awsx-getelementdetails v1.1.9 h1:OeSIqLsWms71Fuc/6u0JYgdCE815ivqkHKARhNgrTMA=
 github.com/Appkube-awsx/awsx-getelementdetails v1.1.9/go.mod h1:JvsFK3BXWFf0FKGPcOLE/4c1NoGoAZo5+9FteQ51IAo=
+github.com/Appkube-awsx/awsx-getelementdetails v1.2.1 h1:VyoVd44Nt5yRu84jYKPsUMeCwbSfiVII+uaZPwTuNEE=
+github.com/Appkube-awsx/awsx-getelementdetails v1.2.1/go.mod h1:JvsFK3BXWFf0FKGPcOLE/4c1NoGoAZo5+9FteQ51IAo=
 github.com/aws/aws-sdk-go v1.50.10 h1:H3NQvqRUKG+9oysCKTIyylpkqfPA7MiBtzTnu/cIGqE=
 github.com/aws/aws-sdk-go v1.50.10/go.mod h1:LF8svs817+Nz+DmiMQKTO3ubZ/6IaTpq3TjupRn3Eqk=
 github.com/beorn7/perks v1.0.1 h1:VlbKKnNfV8bJzeqoa4cOKqO6bYr3WgKZxO8Z16+hsOM=
