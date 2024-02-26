@@ -17,4 +17,13 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	if elementType == "EKS" && query == "cpu_utilization_panel" {
 		EKS.GetEKScpuUtilizationPanel(w, r)
 	}
+	if elementType == "EKS" && query == "memory_utilization_panel" {
+		EKS.GetEKSMemoryUtilizationPanel(w, r)
+	}
+	if elementType == "EKS" && query == "network_utilization_panel" {
+		EKS.GetEKSNetworkUtilizationPanel(w, r)
+	}
+	if elementType == "EKS" && query == "cpu_requests_panel" {
+		EKS.GetEKSCPURequestPanel(w, r)
+	}
 }
