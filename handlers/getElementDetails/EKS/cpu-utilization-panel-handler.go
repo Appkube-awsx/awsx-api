@@ -6,12 +6,13 @@ import (
 	"fmt"
 	"net/http"
 	"sync"
+
 	"github.com/Appkube-awsx/awsx-common/authenticate"
 
 	"github.com/Appkube-awsx/awsx-common/awsclient"
-	"github.com/aws/aws-sdk-go/service/cloudwatch"
 	"github.com/Appkube-awsx/awsx-common/model"
 	"github.com/Appkube-awsx/awsx-getelementdetails/handler/EKS"
+	"github.com/aws/aws-sdk-go/service/cloudwatch"
 	"github.com/spf13/cobra"
 )
 
