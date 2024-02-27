@@ -6,39 +6,43 @@ import (
 	"fmt"
 	"net/http"
 	"sync"
+	"time"
 
 	"github.com/Appkube-awsx/awsx-common/authenticate"
 	"github.com/Appkube-awsx/awsx-common/awsclient"
-	"github.com/aws/aws-sdk-go/service/cloudwatch"
-
 	"github.com/Appkube-awsx/awsx-common/model"
 	"github.com/Appkube-awsx/awsx-getelementdetails/handler/EC2"
+	"github.com/aws/aws-sdk-go/service/cloudwatch"
 	"github.com/spf13/cobra"
 )
 
+type netInpackets struct {
+	RawData []struct {
+		Timestamp time.Time
+		Value     float64
+	} `json:"RawData"`
+}
+
 var (
-	netauthCache       sync.Map
-	netclientCache     sync.Map
-	netauthCacheLock   sync.RWMutex
-	netclientCacheLock sync.RWMutex
+	authCacheIn       sync.Map
+	clientCacheIn     sync.Map
+	authCacheLockIn   sync.RWMutex
+	clientCacheLockIn sync.RWMutex
 )
 
-func GetNetworkUtilizationPanel(w http.ResponseWriter, r *http.Request) {
+func GetNetworkInPacketsPanel(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	region := r.URL.Query().Get("zone")
 	elementId := r.URL.Query().Get("elementId")
 	elementApiUrl := r.URL.Query().Get("cmdbApiUrl")
 	elementType := r.URL.Query().Get("elementType")
-
 	crossAccountRoleArn := r.URL.Query().Get("crossAccountRoleArn")
 	externalId := r.URL.Query().Get("externalId")
 	responseType := r.URL.Query().Get("responseType")
-	filter := r.URL.Query().Get("filter")
 	instanceId := r.URL.Query().Get("instanceId")
 	startTime := r.URL.Query().Get("startTime")
 	endTime := r.URL.Query().Get("endTime")
-
 	commandParam := model.CommandParam{}
 
 	if elementId != "" {
@@ -50,12 +54,12 @@ func GetNetworkUtilizationPanel(w http.ResponseWriter, r *http.Request) {
 		commandParam.ExternalId = externalId
 		commandParam.Region = region
 	}
-	clientAuth, err := netauthenticateAndCache(commandParam)
+	clientAuth, err := authenticateAndCacheIn(commandParam)
 	if err != nil {
 		http.Error(w, fmt.Sprintf("Authentication failed: %s", err), http.StatusInternalServerError)
 		return
 	}
-	cloudwatchClient, err := netcloudwatchClientCache(*clientAuth)
+	cloudwatchClient, err := cloudwatchClientCacheIn(*clientAuth)
 	if err != nil {
 		http.Error(w, fmt.Sprintf("Cloudwatch client creation/store in cache failed: %s", err), http.StatusInternalServerError)
 		return
@@ -68,81 +72,48 @@ func GetNetworkUtilizationPanel(w http.ResponseWriter, r *http.Request) {
 		cmd.PersistentFlags().StringVar(&startTime, "startTime", r.URL.Query().Get("startTime"), "Description of the startTime flag")
 		cmd.PersistentFlags().StringVar(&endTime, "endTime", r.URL.Query().Get("endTime"), "Description of the endTime flag")
 		cmd.PersistentFlags().StringVar(&responseType, "responseType", r.URL.Query().Get("responseType"), "responseType flag - json/frame")
-		jsonString, cloudwatchMetricData, err := EC2.GetNetworkUtilizationPanel(cmd, clientAuth, cloudwatchClient)
+		jsonString, cloudwatchMetricData, err := EC2.GetNetworkInPacketsPanel(cmd, clientAuth, cloudwatchClient)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
 			return
 		}
 		log.Infof("response type :" + responseType)
 		if responseType == "frame" {
-			log.Infof("creating response frame")
-			log.Infof("response type :" + responseType)
-			if filter == "InboundTraffic" {
-				err = json.NewEncoder(w).Encode(cloudwatchMetricData["InboundTraffic"])
-				if err != nil {
-					http.Error(w, fmt.Sprintf("Exception: %s ", err), http.StatusInternalServerError)
-					return
-				}
-			} else if filter == "OutboundTraffic" {
-				err = json.NewEncoder(w).Encode(cloudwatchMetricData["OutboundTraffic"])
-				if err != nil {
-					http.Error(w, fmt.Sprintf("Exception: %s ", err), http.StatusInternalServerError)
-					return
-				}
-			} else if filter == "DataTransferred" {
-				err = json.NewEncoder(w).Encode(cloudwatchMetricData["DataTransferred"])
-				if err != nil {
-					http.Error(w, fmt.Sprintf("Exception: %s ", err), http.StatusInternalServerError)
-					return
-				}
-			} else {
-				err = json.NewEncoder(w).Encode(cloudwatchMetricData)
-				if err != nil {
-					http.Error(w, fmt.Sprintf("Exception: %s ", err), http.StatusInternalServerError)
-					return
-				}
+			err = json.NewEncoder(w).Encode(cloudwatchMetricData)
+			if err != nil {
+				http.Error(w, fmt.Sprintf("Exception: %s ", err), http.StatusInternalServerError)
+				return
 			}
 		} else {
-			log.Infof("creating response json")
-			type UsageData struct {
-				InboundTraffic float64 `json:"InboundTraffic"`
-				OutboundTraffic float64 `json:"OutboundTraffic"`
-				DataTransferred float64 `json:"DataTrasferred"`
-			}
-			var data UsageData
+			var data netInpackets
 			err := json.Unmarshal([]byte(jsonString), &data)
 			if err != nil {
 				http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
 				return
 			}
 
-			// Marshal the struct back to JSON
 			jsonBytes, err := json.Marshal(data)
 			if err != nil {
 				http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
 				return
 			}
-
-			// Set Content-Type header and write the JSON response
 			w.Header().Set("Content-Type", "application/json")
 			_, err = w.Write(jsonBytes)
 			if err != nil {
 				http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
 				return
 			}
-
 		}
 	}
-
 }
 
-func netauthenticateAndCache(commandParam model.CommandParam) (*model.Auth, error) {
+func authenticateAndCacheIn(commandParam model.CommandParam) (*model.Auth, error) {
 	cacheKey := commandParam.CloudElementId
 
-	netauthCacheLock.Lock()
-	if auth, ok := netauthCache.Load(cacheKey); ok {
+	authCacheLockIn.Lock()
+	if auth, ok := authCacheIn.Load(cacheKey); ok {
 		log.Infof("client credentials found in cache")
-		netauthCacheLock.Unlock()
+		authCacheLockIn.Unlock()
 		return auth.(*model.Auth), nil
 	}
 
@@ -153,19 +124,19 @@ func netauthenticateAndCache(commandParam model.CommandParam) (*model.Auth, erro
 		return nil, err
 	}
 
-	netauthCache.Store(cacheKey, clientAuth)
-	netauthCacheLock.Unlock()
+	authCacheIn.Store(cacheKey, clientAuth)
+	authCacheLockIn.Unlock()
 
 	return clientAuth, nil
 }
 
-func netcloudwatchClientCache(clientAuth model.Auth) (*cloudwatch.CloudWatch, error) {
+func cloudwatchClientCacheIn(clientAuth model.Auth) (*cloudwatch.CloudWatch, error) {
 	cacheKey := clientAuth.CrossAccountRoleArn
 
-	netclientCacheLock.Lock()
-	if client, ok := netclientCache.Load(cacheKey); ok {
+	clientCacheLockIn.Lock()
+	if client, ok := clientCacheIn.Load(cacheKey); ok {
 		log.Infof("cloudwatch client found in cache for given cross acount role: %s", cacheKey)
-		netclientCacheLock.Unlock()
+		clientCacheLockIn.Unlock()
 		return client.(*cloudwatch.CloudWatch), nil
 	}
 
@@ -173,8 +144,8 @@ func netcloudwatchClientCache(clientAuth model.Auth) (*cloudwatch.CloudWatch, er
 	log.Infof("creating new cloudwatch client for given cross acount role: %s", cacheKey)
 	cloudWatchClient := awsclient.GetClient(clientAuth, awsclient.CLOUDWATCH).(*cloudwatch.CloudWatch)
 
-	netclientCache.Store(cacheKey, cloudWatchClient)
-	netclientCacheLock.Unlock()
+	clientCacheIn.Store(cacheKey, cloudWatchClient)
+	clientCacheLockIn.Unlock()
 
 	return cloudWatchClient, nil
 }

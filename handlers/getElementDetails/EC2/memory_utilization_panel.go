@@ -17,13 +17,13 @@ import (
 )
 
 var (
-	netauthCache       sync.Map
-	netclientCache     sync.Map
-	netauthCacheLock   sync.RWMutex
-	netclientCacheLock sync.RWMutex
+	memauthCache       sync.Map
+	memclientCache     sync.Map
+	memauthCacheLock   sync.RWMutex
+	memclientCacheLock sync.RWMutex
 )
 
-func GetNetworkUtilizationPanel(w http.ResponseWriter, r *http.Request) {
+func GetMemoryUtilizationPanel(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	region := r.URL.Query().Get("zone")
@@ -50,12 +50,12 @@ func GetNetworkUtilizationPanel(w http.ResponseWriter, r *http.Request) {
 		commandParam.ExternalId = externalId
 		commandParam.Region = region
 	}
-	clientAuth, err := netauthenticateAndCache(commandParam)
+	clientAuth, err := memauthenticateAndCache(commandParam)
 	if err != nil {
 		http.Error(w, fmt.Sprintf("Authentication failed: %s", err), http.StatusInternalServerError)
 		return
 	}
-	cloudwatchClient, err := netcloudwatchClientCache(*clientAuth)
+	cloudwatchClient, err := memcloudwatchClientCache(*clientAuth)
 	if err != nil {
 		http.Error(w, fmt.Sprintf("Cloudwatch client creation/store in cache failed: %s", err), http.StatusInternalServerError)
 		return
@@ -68,7 +68,7 @@ func GetNetworkUtilizationPanel(w http.ResponseWriter, r *http.Request) {
 		cmd.PersistentFlags().StringVar(&startTime, "startTime", r.URL.Query().Get("startTime"), "Description of the startTime flag")
 		cmd.PersistentFlags().StringVar(&endTime, "endTime", r.URL.Query().Get("endTime"), "Description of the endTime flag")
 		cmd.PersistentFlags().StringVar(&responseType, "responseType", r.URL.Query().Get("responseType"), "responseType flag - json/frame")
-		jsonString, cloudwatchMetricData, err := EC2.GetNetworkUtilizationPanel(cmd, clientAuth, cloudwatchClient)
+		jsonString, cloudwatchMetricData, err := EC2.GetMemoryUtilizationPanel(cmd, clientAuth, cloudwatchClient)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
 			return
@@ -77,20 +77,20 @@ func GetNetworkUtilizationPanel(w http.ResponseWriter, r *http.Request) {
 		if responseType == "frame" {
 			log.Infof("creating response frame")
 			log.Infof("response type :" + responseType)
-			if filter == "InboundTraffic" {
-				err = json.NewEncoder(w).Encode(cloudwatchMetricData["InboundTraffic"])
+			if filter == "SampleCount" {
+				err = json.NewEncoder(w).Encode(cloudwatchMetricData["CurrentUsage"])
 				if err != nil {
 					http.Error(w, fmt.Sprintf("Exception: %s ", err), http.StatusInternalServerError)
 					return
 				}
-			} else if filter == "OutboundTraffic" {
-				err = json.NewEncoder(w).Encode(cloudwatchMetricData["OutboundTraffic"])
+			} else if filter == "Average" {
+				err = json.NewEncoder(w).Encode(cloudwatchMetricData["AverageUsage"])
 				if err != nil {
 					http.Error(w, fmt.Sprintf("Exception: %s ", err), http.StatusInternalServerError)
 					return
 				}
-			} else if filter == "DataTransferred" {
-				err = json.NewEncoder(w).Encode(cloudwatchMetricData["DataTransferred"])
+			} else if filter == "Maximum" {
+				err = json.NewEncoder(w).Encode(cloudwatchMetricData["MaxUsage"])
 				if err != nil {
 					http.Error(w, fmt.Sprintf("Exception: %s ", err), http.StatusInternalServerError)
 					return
@@ -105,9 +105,9 @@ func GetNetworkUtilizationPanel(w http.ResponseWriter, r *http.Request) {
 		} else {
 			log.Infof("creating response json")
 			type UsageData struct {
-				InboundTraffic float64 `json:"InboundTraffic"`
-				OutboundTraffic float64 `json:"OutboundTraffic"`
-				DataTransferred float64 `json:"DataTrasferred"`
+				AverageUsage float64 `json:"AverageUsage"`
+				CurrentUsage float64 `json:"CurrentUsage"`
+				MaxUsage     float64 `json:"MaxUsage"`
 			}
 			var data UsageData
 			err := json.Unmarshal([]byte(jsonString), &data)
@@ -136,13 +136,13 @@ func GetNetworkUtilizationPanel(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func netauthenticateAndCache(commandParam model.CommandParam) (*model.Auth, error) {
+func memauthenticateAndCache(commandParam model.CommandParam) (*model.Auth, error) {
 	cacheKey := commandParam.CloudElementId
 
-	netauthCacheLock.Lock()
-	if auth, ok := netauthCache.Load(cacheKey); ok {
+	memauthCacheLock.Lock()
+	if auth, ok := memauthCache.Load(cacheKey); ok {
 		log.Infof("client credentials found in cache")
-		netauthCacheLock.Unlock()
+		memauthCacheLock.Unlock()
 		return auth.(*model.Auth), nil
 	}
 
@@ -153,19 +153,19 @@ func netauthenticateAndCache(commandParam model.CommandParam) (*model.Auth, erro
 		return nil, err
 	}
 
-	netauthCache.Store(cacheKey, clientAuth)
-	netauthCacheLock.Unlock()
+	memauthCache.Store(cacheKey, clientAuth)
+	memauthCacheLock.Unlock()
 
 	return clientAuth, nil
 }
 
-func netcloudwatchClientCache(clientAuth model.Auth) (*cloudwatch.CloudWatch, error) {
+func memcloudwatchClientCache(clientAuth model.Auth) (*cloudwatch.CloudWatch, error) {
 	cacheKey := clientAuth.CrossAccountRoleArn
 
-	netclientCacheLock.Lock()
-	if client, ok := netclientCache.Load(cacheKey); ok {
+	memclientCacheLock.Lock()
+	if client, ok := memclientCache.Load(cacheKey); ok {
 		log.Infof("cloudwatch client found in cache for given cross acount role: %s", cacheKey)
-		netclientCacheLock.Unlock()
+		memclientCacheLock.Unlock()
 		return client.(*cloudwatch.CloudWatch), nil
 	}
 
@@ -173,8 +173,8 @@ func netcloudwatchClientCache(clientAuth model.Auth) (*cloudwatch.CloudWatch, er
 	log.Infof("creating new cloudwatch client for given cross acount role: %s", cacheKey)
 	cloudWatchClient := awsclient.GetClient(clientAuth, awsclient.CLOUDWATCH).(*cloudwatch.CloudWatch)
 
-	netclientCache.Store(cacheKey, cloudWatchClient)
-	netclientCacheLock.Unlock()
+	memclientCache.Store(cacheKey, cloudWatchClient)
+	memclientCacheLock.Unlock()
 
 	return cloudWatchClient, nil
 }
