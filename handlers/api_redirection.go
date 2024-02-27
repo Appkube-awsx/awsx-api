@@ -30,4 +30,7 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	if elementType == "ECS" && query == "cpu_utilization_panel" {
 		ECS.GetECScpuUtilizationPanel(w, r)
 	}
+	if elementType == "ECS" && query == "memory_utilization_panel" {
+		ECS.GetECSMemoryUtilizationPanel(w, r)
+	}
 }
