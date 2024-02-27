@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"awsx-api/handlers/getElementDetails/EC2"
+	"awsx-api/handlers/getElementDetails/ECS"
 	"awsx-api/handlers/getElementDetails/EKS"
 	"awsx-api/log"
 	"net/http"
@@ -24,6 +25,9 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 		EKS.GetEKSNetworkUtilizationPanel(w, r)
 	}
 	if elementType == "EKS" && query == "cpu_requests_panel" {
-		EKS.GetEKSCPURequestPanel(w, r)
+		EKS.GetCpuRequestsPanel(w, r)
+	}
+	if elementType == "ECS" && query == "cpu_utilization_panel" {
+		ECS.GetECScpuUtilizationPanel(w, r)
 	}
 }
