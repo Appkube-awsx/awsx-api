@@ -16,7 +16,6 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// Define package level variables for allocatable CPU panel
 var (
 	allocatableCPUAuthCache       sync.Map
 	allocatableCPUClientCache     sync.Map
