@@ -24,9 +24,12 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	if elementType == "EKS" && query == "network_utilization_panel" {
 		EKS.GetEKSNetworkUtilizationPanel(w, r)
 	}
-	if elementType == "EKS" && query == "cpu_requests_panel" {
-		EKS.GetCpuRequestsPanel(w, r)
+	if elementType == "EKS" && query == "allocatable_cpu_panel" {
+		EKS.GetEKSAllocatableCPUPanel(w, r)
 	}
+	// if elementType == "EKS" && query == "cpu_limits_panel" {
+	// 	EKS.GetEKSCpuLimitsPanel(w, r)
+	// }
 	if elementType == "ECS" && query == "cpu_utilization_panel" {
 		ECS.GetECScpuUtilizationPanel(w, r)
 	}
