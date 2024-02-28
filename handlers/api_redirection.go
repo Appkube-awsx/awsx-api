@@ -36,6 +36,24 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	if elementType == "ECS" && query == "memory_utilization_panel" {
 		ECS.GetECSMemoryUtilizationPanel(w, r)
 	}
+	if elementType == "ECS" && query == "cpu_reservation_panel" {
+		ECS.GetCPUReservationData(w, r)
+	}
+	if elementType == "ECS" && query == "memory_reservation_panel" {
+		ECS.GetMemoryReservationData(w, r)
+	}
+	if elementType == "ECS" || elementType == "AWS/ECS" && query == "net_rxinbytes_panel" {
+		ECS.GetECSNetworkRxInBytesPanel(w, r)
+	}
+	if elementType == "ECS" || elementType == "AWS/ECS" && query == "net_txinbytes_panel" {
+		ECS.GetECSNetworkTxInBytesPanel(w, r)
+	}
+	if elementType == "ECS" || elementType == "AWS/ECS" && query == "volume_read_bytes_panel" {
+		ECS.GetECSReadBytesPanel(w, r)
+	}
+	if elementType == "ECS" || elementType == "AWS/ECS" && query == "volume_write_bytes_panel" {
+		ECS.GetECSWriteBytesPanel(w, r)
+	}
 	if elementType == "EC2" && query == "memory_utilization_panel" {
 		EC2.GetMemoryUtilizationPanel(w, r)
 	}
