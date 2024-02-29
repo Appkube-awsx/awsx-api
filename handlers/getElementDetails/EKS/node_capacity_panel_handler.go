@@ -1,28 +1,38 @@
 package EKS
 
 import (
-	"awsx-api/log"
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 	"sync"
 
 	"github.com/Appkube-awsx/awsx-common/authenticate"
 	"github.com/Appkube-awsx/awsx-common/awsclient"
 	"github.com/Appkube-awsx/awsx-common/model"
-	"github.com/Appkube-awsx/awsx-getelementdetails/handler/EKS"
 	"github.com/aws/aws-sdk-go/service/cloudwatch"
 	"github.com/spf13/cobra"
 )
 
 var (
-	netAuthCache       sync.Map
-	netClientCache     sync.Map
-	netAuthCacheLock   sync.RWMutex
-	netClientCacheLock sync.RWMutex
+	nodeCapacityAuthCache   = sync.Map{}
+	nodeCapacityClientCache = sync.Map{}
+	nodeCapacityAuthMutex   sync.RWMutex
+	nodeCapacityClientMutex sync.RWMutex
 )
 
-func GetEKSNetworkUtilizationPanel(w http.ResponseWriter, r *http.Request) {
+type NodeCapacityMetrics struct {
+	CPUUsage     float64 `json:"cpu_usage"`
+	MemoryUsage  float64 `json:"memory_usage"`
+	StorageAvail float64 `json:"storage_avail"`
+}
+
+type NodeCapacityPanel struct {
+	RawData  map[string]*cloudwatch.GetMetricDataOutput `json:"raw_data"`
+	JsonData string                                     `json:"json_data"`
+}
+
+func GetEKSNodeCapacityPanel(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	region := r.URL.Query().Get("zone")
@@ -31,8 +41,6 @@ func GetEKSNetworkUtilizationPanel(w http.ResponseWriter, r *http.Request) {
 	crossAccountRoleArn := r.URL.Query().Get("crossAccountRoleArn")
 	externalId := r.URL.Query().Get("externalId")
 	responseType := r.URL.Query().Get("responseType")
-	filter := r.URL.Query().Get("filter")
-	instanceId := r.URL.Query().Get("instanceId")
 	elementType := r.URL.Query().Get("elementType")
 	startTime := r.URL.Query().Get("startTime")
 	endTime := r.URL.Query().Get("endTime")
@@ -49,13 +57,13 @@ func GetEKSNetworkUtilizationPanel(w http.ResponseWriter, r *http.Request) {
 		commandParam.Region = region
 	}
 
-	clientAuth, err := netAuthenticateAndCache(commandParam)
+	clientAuth, err := authenticateAndCache(commandParam)
 	if err != nil {
 		http.Error(w, fmt.Sprintf("Authentication failed: %s", err), http.StatusInternalServerError)
 		return
 	}
 
-	cloudwatchClient, err := netCloudwatchClientCache(*clientAuth)
+	cloudwatchClient, err := cloudwatchClientCache(*clientAuth)
 	if err != nil {
 		http.Error(w, fmt.Sprintf("Cloudwatch client creation/store in cache failed: %s", err), http.StatusInternalServerError)
 		return
@@ -64,13 +72,12 @@ func GetEKSNetworkUtilizationPanel(w http.ResponseWriter, r *http.Request) {
 	if clientAuth != nil {
 		cmd := &cobra.Command{}
 		cmd.PersistentFlags().StringVar(&elementId, "elementId", r.URL.Query().Get("elementId"), "Description of the elementId flag")
-		cmd.PersistentFlags().StringVar(&instanceId, "instanceId", r.URL.Query().Get("instanceId"), "Description of the instanceId flag")
 		cmd.PersistentFlags().StringVar(&elementType, "elementType", r.URL.Query().Get("elementType"), "Description of the elementType flag")
 		cmd.PersistentFlags().StringVar(&startTime, "startTime", r.URL.Query().Get("startTime"), "Description of the startTime flag")
 		cmd.PersistentFlags().StringVar(&endTime, "endTime", r.URL.Query().Get("endTime"), "Description of the endTime flag")
 		cmd.PersistentFlags().StringVar(&responseType, "responseType", r.URL.Query().Get("responseType"), "responseType flag - json/frame")
 
-		jsonString, cloudwatchMetricData, err := EKS.GetNetworkUtilizationPanel(cmd, clientAuth, cloudwatchClient)
+		jsonString, cloudwatchMetricData, err := GetNodeCapacityPanel(cmd, clientAuth, cloudwatchClient)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
 			return
@@ -81,12 +88,12 @@ func GetEKSNetworkUtilizationPanel(w http.ResponseWriter, r *http.Request) {
 		if responseType == "frame" {
 			log.Infof("creating response frame")
 
-			if filter == "InboundTraffic" {
-				err = json.NewEncoder(w).Encode(cloudwatchMetricData["InboundTraffic"])
-			} else if filter == "OutboundTraffic" {
-				err = json.NewEncoder(w).Encode(cloudwatchMetricData["OutboundTraffic"])
-			} else if filter == "DataTransferred" {
-				err = json.NewEncoder(w).Encode(cloudwatchMetricData["DataTransferred"])
+			if elementType == "CPU" {
+				err = json.NewEncoder(w).Encode(cloudwatchMetricData["CPUUsage"])
+			} else if elementType == "Memory" {
+				err = json.NewEncoder(w).Encode(cloudwatchMetricData["MemoryUsage"])
+			} else if elementType == "Storage" {
+				err = json.NewEncoder(w).Encode(cloudwatchMetricData["StorageAvail"])
 			} else {
 				err = json.NewEncoder(w).Encode(cloudwatchMetricData)
 			}
@@ -98,27 +105,8 @@ func GetEKSNetworkUtilizationPanel(w http.ResponseWriter, r *http.Request) {
 		} else {
 			log.Infof("creating response json")
 
-			type NetworkResult struct {
-				InboundTraffic  float64 `json:"inboundTraffic"`
-				OutboundTraffic float64 `json:"outboundTraffic"`
-				DataTransferred float64 `json:"dataTransferred"`
-			}
-
-			var data NetworkResult
-			err := json.Unmarshal([]byte(jsonString), &data)
-			if err != nil {
-				http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
-				return
-			}
-
-			jsonBytes, err := json.Marshal(data)
-			if err != nil {
-				http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
-				return
-			}
-
 			w.Header().Set("Content-Type", "application/json")
-			_, err = w.Write(jsonBytes)
+			_, err = w.Write([]byte(jsonString))
 			if err != nil {
 				http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
 				return
@@ -127,13 +115,13 @@ func GetEKSNetworkUtilizationPanel(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func netAuthenticateAndCache(commandParam model.CommandParam) (*model.Auth, error) {
+func authenticateAndCache(commandParam model.CommandParam) (*model.Auth, error) {
 	cacheKey := commandParam.CloudElementId
 
-	netAuthCacheLock.Lock()
-	defer netAuthCacheLock.Unlock()
+	nodeCapacityAuthMutex.Lock()
+	defer nodeCapacityAuthMutex.Unlock()
 
-	if auth, ok := netAuthCache.Load(cacheKey); ok {
+	if auth, ok := nodeCapacityAuthCache.Load(cacheKey); ok {
 		log.Infof("client credentials found in cache")
 		return auth.(*model.Auth), nil
 	}
@@ -144,17 +132,17 @@ func netAuthenticateAndCache(commandParam model.CommandParam) (*model.Auth, erro
 		return nil, err
 	}
 
-	netAuthCache.Store(cacheKey, clientAuth)
+	nodeCapacityAuthCache.Store(cacheKey, clientAuth)
 	return clientAuth, nil
 }
 
-func netCloudwatchClientCache(clientAuth model.Auth) (*cloudwatch.CloudWatch, error) {
+func cloudwatchClientCache(clientAuth model.Auth) (*cloudwatch.CloudWatch, error) {
 	cacheKey := clientAuth.CrossAccountRoleArn
 
-	netClientCacheLock.Lock()
-	defer netClientCacheLock.Unlock()
+	nodeCapacityClientMutex.Lock()
+	defer nodeCapacityClientMutex.Unlock()
 
-	if client, ok := netClientCache.Load(cacheKey); ok {
+	if client, ok := nodeCapacityClientCache.Load(cacheKey); ok {
 		log.Infof("cloudwatch client found in cache for given cross account role: %s", cacheKey)
 		return client.(*cloudwatch.CloudWatch), nil
 	}
@@ -162,6 +150,24 @@ func netCloudwatchClientCache(clientAuth model.Auth) (*cloudwatch.CloudWatch, er
 	log.Infof("creating new cloudwatch client for given cross account role: %s", cacheKey)
 	cloudWatchClient := awsclient.GetClient(clientAuth, awsclient.CLOUDWATCH).(*cloudwatch.CloudWatch)
 
-	netClientCache.Store(cacheKey, cloudWatchClient)
+	nodeCapacityClientCache.Store(cacheKey, cloudWatchClient)
 	return cloudWatchClient, nil
+}
+
+func GetNodeCapacityPanel(cmd *cobra.Command, clientAuth *model.Auth, cloudWatchClient *cloudwatch.CloudWatch) (string, map[string]*cloudwatch.GetMetricDataOutput, error) {
+	// Implement your logic here to retrieve node capacity metrics and panel data.
+	// Example:
+	// 1. Query cloudwatchClient to get metric data for CPU, memory, and storage.
+	// 2. Process the data and return it as required.
+	// 3. Handle any errors encountered during the process.
+
+	// Placeholder implementation
+	jsonString := `{"cpu_usage": 80.5, "memory_usage": 60.2, "storage_avail": 120}`
+	cloudwatchMetricData := map[string]*cloudwatch.GetMetricDataOutput{
+		"CPUUsage":     { /* CloudWatch Metric Data for CPU Usage */ },
+		"MemoryUsage":  { /* CloudWatch Metric Data for Memory Usage */ },
+		"StorageAvail": { /* CloudWatch Metric Data for Storage Available */ },
+	}
+
+	return jsonString, cloudwatchMetricData, nil
 }

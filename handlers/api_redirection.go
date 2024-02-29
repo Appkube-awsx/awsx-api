@@ -18,6 +18,12 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	if elementType == "EKS" && query == "cpu_utilization_panel" {
 		EKS.GetEKScpuUtilizationPanel(w, r)
 	}
+	if elementType == "EKS" && query == "cpu_node_utilization_panel" {
+		EKS.GetEKSCPUUtilizationNodeGraphPanel(w, r)
+	}
+	if elementType == "EKS" && query == "cpu_graph_utilization_panel" {
+		EKS.GetEKSCPUUtilizationPanel(w, r)
+	}
 	if elementType == "EKS" && query == "memory_utilization_panel" {
 		EKS.GetEKSMemoryUtilizationPanel(w, r)
 	}
@@ -26,6 +32,36 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	}
 	if elementType == "EKS" && query == "allocatable_cpu_panel" {
 		EKS.GetEKSAllocatableCPUPanel(w, r)
+	}
+	if elementType == "EKS" && query == "cpu_limits_panel" {
+		EKS.GetEKSCPULimitsPanel(w, r)
+	}
+	if elementType == "EKS" && query == "cpu_requests_panel" {
+		EKS.GetEKSCPURequestsPanel(w, r)
+	}
+	if elementType == "EKS" && query == "memory_limits_panel" {
+		EKS.GetEKSMemoryLimitsPanel(w, r)
+	}
+	if elementType == "EKS" && query == "memory_requests_panel" {
+		EKS.GetEKSMemoryRequestPanel(w, r)
+	}
+	if elementType == "EKS" && query == "memory_usage_panel" {
+		EKS.GetEKSMemoryUsagePanel(w, r)
+	}
+	if elementType == "EKS" && query == "memory_graph_utilization_panel" {
+		EKS.GetEKSMemoryUtilizationGraphPanel(w, r)
+	}
+	if elementType == "EKS" && query == "network_availability_panel" {
+		EKS.GetEKSNetworkAvailabilityPanel(w, r)
+	}
+	if elementType == "EKS" && query == "network_in_out_panel" {
+		EKS.GetEKSNetworkInOutPanel(w, r)
+	}
+	if elementType == "EKS" && query == "network_throughput_panel" {
+		EKS.GetEKSNeworkThroughputPanel(w, r)
+	}
+	if elementType == "EKS" && query == "network_throughput_single_panel" {
+		EKS.GetNetworkThroughputSinglePanel(w, r)
 	}
 	// if elementType == "EKS" && query == "cpu_limits_panel" {
 	// 	EKS.GetEKSCpuLimitsPanel(w, r)

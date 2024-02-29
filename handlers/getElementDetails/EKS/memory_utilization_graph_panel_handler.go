@@ -17,14 +17,22 @@ import (
 )
 
 var (
-	cpuRequestsAuthCache       sync.Map
-	cpuRequestsClientCache     sync.Map
-	cpuRequestsAuthCacheLock   sync.RWMutex
-	cpuRequestsClientCacheLock sync.RWMutex
+	memUtilAuthCache       sync.Map
+	memUtilClientCache     sync.Map
+	memUtilAuthCacheLock   sync.RWMutex
+	memUtilClientCacheLock sync.RWMutex
 )
 
-// GetEKSCPURequestsPanel handles the request for the CPU requests panel data
-func GetEKSCPURequestsPanel(w http.ResponseWriter, r *http.Request) {
+// MemoryUtilizationResult represents the structure of memory utilization data
+type MemoryUtilizationResult struct {
+	RawData []struct {
+		Timestamp time.Time
+		Value     float64
+	} `json:"RawData"`
+}
+
+// GetEKSMemoryUtilizationGraphPanel handles the request for the memory utilization graph panel data
+func GetEKSMemoryUtilizationGraphPanel(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	// Parse query parameters
@@ -51,22 +59,15 @@ func GetEKSCPURequestsPanel(w http.ResponseWriter, r *http.Request) {
 		commandParam.Region = region
 	}
 
-	type cpuRequestsResult struct {
-		RawData []struct {
-			Timestamp time.Time
-			Value     float64
-		} `json:"RawData"`
-	}
-
 	// Authenticate and get client authentication details
-	clientAuth, err := cpuRequestsAuthenticateAndCache(commandParam)
+	clientAuth, err := memUtilAuthenticateAndCache(commandParam)
 	if err != nil {
 		http.Error(w, fmt.Sprintf("Authentication failed: %s", err), http.StatusInternalServerError)
 		return
 	}
 
 	// Get CloudWatch client
-	cloudwatchClient, err := cpuRequestsCloudwatchClientCache(*clientAuth)
+	cloudwatchClient, err := memUtilCloudwatchClientCache(*clientAuth)
 	if err != nil {
 		http.Error(w, fmt.Sprintf("Cloudwatch client creation/store in cache failed: %s", err), http.StatusInternalServerError)
 		return
@@ -75,29 +76,30 @@ func GetEKSCPURequestsPanel(w http.ResponseWriter, r *http.Request) {
 	if clientAuth != nil {
 		// Prepare cobra command
 		cmd := &cobra.Command{}
-		cmd.PersistentFlags().StringVar(&elementId, "elementId", r.URL.Query().Get("elementId"), "Description of the cloudElementID flag")
-		cmd.PersistentFlags().StringVar(&instanceId, "instanceId", r.URL.Query().Get("instanceId"), "Description of the instanceID flag")
+		cmd.PersistentFlags().StringVar(&elementId, "elementId", r.URL.Query().Get("elementId"), "Description of the elementId flag")
+		cmd.PersistentFlags().StringVar(&instanceId, "instanceId", r.URL.Query().Get("instanceId"), "Description of the instanceId flag")
 		cmd.PersistentFlags().StringVar(&elementType, "elementType", r.URL.Query().Get("elementType"), "Description of the elementType flag")
 		cmd.PersistentFlags().StringVar(&startTime, "startTime", r.URL.Query().Get("startTime"), "Description of the startTime flag")
 		cmd.PersistentFlags().StringVar(&endTime, "endTime", r.URL.Query().Get("endTime"), "Description of the endTime flag")
 		cmd.PersistentFlags().StringVar(&responseType, "responseType", r.URL.Query().Get("responseType"), "responseType flag - json/frame")
 
-		// Get CPU requests panel data
-		jsonString, cloudwatchMetricData, err := EKS.GetCPURequestData(cmd, clientAuth, cloudwatchClient)
+		// Get memory utilization data
+		jsonString, memoryUtilData, err := EKS.GetMemoryUtilizationGraphData(cmd, clientAuth, cloudwatchClient)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
 			return
 		}
-		log.Infof("response type :" + responseType)
+
+		log.Infof("response type: %s", responseType)
 
 		if responseType == "frame" {
-			err = json.NewEncoder(w).Encode(cloudwatchMetricData)
+			err = json.NewEncoder(w).Encode(memoryUtilData)
 			if err != nil {
-				http.Error(w, fmt.Sprintf("Exception: %s ", err), http.StatusInternalServerError)
+				http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
 				return
 			}
 		} else {
-			var data cpuRequestsResult
+			var data MemoryUtilizationResult
 			err := json.Unmarshal([]byte(jsonString), &data)
 			if err != nil {
 				http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
@@ -109,6 +111,7 @@ func GetEKSCPURequestsPanel(w http.ResponseWriter, r *http.Request) {
 				http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
 				return
 			}
+
 			w.Header().Set("Content-Type", "application/json")
 			_, err = w.Write(jsonBytes)
 			if err != nil {
@@ -119,14 +122,14 @@ func GetEKSCPURequestsPanel(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// cpuRequestsAuthenticateAndCache authenticates and caches client details for CPU requests
-func cpuRequestsAuthenticateAndCache(commandParam model.CommandParam) (*model.Auth, error) {
+// memUtilAuthenticateAndCache authenticates and caches client details for memory utilization
+func memUtilAuthenticateAndCache(commandParam model.CommandParam) (*model.Auth, error) {
 	cacheKey := commandParam.CloudElementId
 
-	cpuRequestsAuthCacheLock.Lock()
-	defer cpuRequestsAuthCacheLock.Unlock()
+	memUtilAuthCacheLock.Lock()
+	defer memUtilAuthCacheLock.Unlock()
 
-	if auth, ok := cpuRequestsAuthCache.Load(cacheKey); ok {
+	if auth, ok := memUtilAuthCache.Load(cacheKey); ok {
 		return auth.(*model.Auth), nil
 	}
 
@@ -135,22 +138,22 @@ func cpuRequestsAuthenticateAndCache(commandParam model.CommandParam) (*model.Au
 		return nil, err
 	}
 
-	cpuRequestsAuthCache.Store(cacheKey, clientAuth)
+	memUtilAuthCache.Store(cacheKey, clientAuth)
 	return clientAuth, nil
 }
 
-// cpuRequestsCloudwatchClientCache caches cloudwatch client for CPU requests
-func cpuRequestsCloudwatchClientCache(clientAuth model.Auth) (*cloudwatch.CloudWatch, error) {
+// memUtilCloudwatchClientCache caches cloudwatch client for memory utilization
+func memUtilCloudwatchClientCache(clientAuth model.Auth) (*cloudwatch.CloudWatch, error) {
 	cacheKey := clientAuth.CrossAccountRoleArn
 
-	cpuRequestsClientCacheLock.Lock()
-	defer cpuRequestsClientCacheLock.Unlock()
+	memUtilClientCacheLock.Lock()
+	defer memUtilClientCacheLock.Unlock()
 
-	if client, ok := cpuRequestsClientCache.Load(cacheKey); ok {
+	if client, ok := memUtilClientCache.Load(cacheKey); ok {
 		return client.(*cloudwatch.CloudWatch), nil
 	}
 
 	cloudWatchClient := awsclient.GetClient(clientAuth, awsclient.CLOUDWATCH).(*cloudwatch.CloudWatch)
-	cpuRequestsClientCache.Store(cacheKey, cloudWatchClient)
+	memUtilClientCache.Store(cacheKey, cloudWatchClient)
 	return cloudWatchClient, nil
 }
