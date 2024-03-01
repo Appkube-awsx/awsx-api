@@ -31,7 +31,7 @@ func ExecuteLandingzoneQueries(w http.ResponseWriter, r *http.Request) {
 	}
 	_, clientAuth, err := authenticate.DoAuthenticate(commandParam)
 	if err != nil {
-		http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
+		http.Error(w, fmt.Sprintf("error in getting aws credentials: %s", err), http.StatusInternalServerError)
 		return
 	}
 	var instances interface{}
@@ -89,7 +89,7 @@ func ExecuteLandingzoneQueries(w http.ResponseWriter, r *http.Request) {
 	}
 	err = json.NewEncoder(w).Encode(instances)
 	if err != nil {
-		http.Error(w, fmt.Sprintf("errror in encoding api response in json: %s ", err), http.StatusInternalServerError)
+		http.Error(w, fmt.Sprintf("errror in json encoding %s ", err), http.StatusInternalServerError)
 		return
 	}
 }
