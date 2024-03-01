@@ -7,6 +7,7 @@ import (
 	"github.com/Appkube-awsx/awsx-common/model"
 	"github.com/Appkube-awsx/awsx-getlandingzonedetails/handler/API_GW"
 	"github.com/Appkube-awsx/awsx-getlandingzonedetails/handler/CDN"
+	"github.com/Appkube-awsx/awsx-getlandingzonedetails/handler/CONFIG_SERVICE"
 	"github.com/Appkube-awsx/awsx-getlandingzonedetails/handler/DYNAMODB"
 	"github.com/Appkube-awsx/awsx-getlandingzonedetails/handler/EC2"
 	"github.com/Appkube-awsx/awsx-getlandingzonedetails/handler/ECS"
@@ -82,6 +83,9 @@ func ExecuteLandingzoneQueries(w http.ResponseWriter, r *http.Request) {
 	}
 	if query == "getWafList" {
 		instances, err = WAF.ListWafInstances(clientAuth, nil)
+	}
+	if query == "getDiscoveredResourceCounts" {
+		instances, err = CONFIG_SERVICE.DiscoveredResourceCounts(clientAuth, nil)
 	}
 	if err != nil {
 		http.Error(w, fmt.Sprintf("api error: %s", err), http.StatusInternalServerError)
