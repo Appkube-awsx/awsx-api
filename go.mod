@@ -10,13 +10,14 @@ require (
 )
 
 require (
-	github.com/Appkube-awsx/awsx-common v1.2.8
+	github.com/Appkube-awsx/awsx-common v1.3.0
 	github.com/Appkube-awsx/awsx-getelementdetails v1.2.3
 	github.com/prometheus/client_golang v1.18.0
 	github.com/spf13/cobra v1.8.0
 )
 
 require (
+	github.com/Appkube-awsx/awsx-getlandingzonedetails v1.0.1 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/cespare/xxhash/v2 v2.2.0 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect

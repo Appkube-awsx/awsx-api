@@ -1,14 +1,12 @@
 package EKS
 
 import (
+	"awsx-api/log"
 	"encoding/json"
 	"fmt"
-	"log"
 	"net/http"
 	"sync"
 
-	"github.com/Appkube-awsx/awsx-common/authenticate"
-	"github.com/Appkube-awsx/awsx-common/awsclient"
 	"github.com/Appkube-awsx/awsx-common/model"
 	"github.com/aws/aws-sdk-go/service/cloudwatch"
 	"github.com/spf13/cobra"
@@ -115,44 +113,44 @@ func GetEKSNodeCapacityPanel(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func authenticateAndCache(commandParam model.CommandParam) (*model.Auth, error) {
-	cacheKey := commandParam.CloudElementId
-
-	nodeCapacityAuthMutex.Lock()
-	defer nodeCapacityAuthMutex.Unlock()
-
-	if auth, ok := nodeCapacityAuthCache.Load(cacheKey); ok {
-		log.Infof("client credentials found in cache")
-		return auth.(*model.Auth), nil
-	}
-
-	log.Infof("getting client credentials from vault/db")
-	_, clientAuth, err := authenticate.DoAuthenticate(commandParam)
-	if err != nil {
-		return nil, err
-	}
-
-	nodeCapacityAuthCache.Store(cacheKey, clientAuth)
-	return clientAuth, nil
-}
-
-func cloudwatchClientCache(clientAuth model.Auth) (*cloudwatch.CloudWatch, error) {
-	cacheKey := clientAuth.CrossAccountRoleArn
-
-	nodeCapacityClientMutex.Lock()
-	defer nodeCapacityClientMutex.Unlock()
-
-	if client, ok := nodeCapacityClientCache.Load(cacheKey); ok {
-		log.Infof("cloudwatch client found in cache for given cross account role: %s", cacheKey)
-		return client.(*cloudwatch.CloudWatch), nil
-	}
-
-	log.Infof("creating new cloudwatch client for given cross account role: %s", cacheKey)
-	cloudWatchClient := awsclient.GetClient(clientAuth, awsclient.CLOUDWATCH).(*cloudwatch.CloudWatch)
-
-	nodeCapacityClientCache.Store(cacheKey, cloudWatchClient)
-	return cloudWatchClient, nil
-}
+//func authenticateAndCache(commandParam model.CommandParam) (*model.Auth, error) {
+//	cacheKey := commandParam.CloudElementId
+//
+//	nodeCapacityAuthMutex.Lock()
+//	defer nodeCapacityAuthMutex.Unlock()
+//
+//	if auth, ok := nodeCapacityAuthCache.Load(cacheKey); ok {
+//		log.Infof("client credentials found in cache")
+//		return auth.(*model.Auth), nil
+//	}
+//
+//	log.Infof("getting client credentials from vault/db")
+//	_, clientAuth, err := authenticate.DoAuthenticate(commandParam)
+//	if err != nil {
+//		return nil, err
+//	}
+//
+//	nodeCapacityAuthCache.Store(cacheKey, clientAuth)
+//	return clientAuth, nil
+//}
+//
+//func cloudwatchClientCache(clientAuth model.Auth) (*cloudwatch.CloudWatch, error) {
+//	cacheKey := clientAuth.CrossAccountRoleArn
+//
+//	nodeCapacityClientMutex.Lock()
+//	defer nodeCapacityClientMutex.Unlock()
+//
+//	if client, ok := nodeCapacityClientCache.Load(cacheKey); ok {
+//		log.Infof("cloudwatch client found in cache for given cross account role: %s", cacheKey)
+//		return client.(*cloudwatch.CloudWatch), nil
+//	}
+//
+//	log.Infof("creating new cloudwatch client for given cross account role: %s", cacheKey)
+//	cloudWatchClient := awsclient.GetClient(clientAuth, awsclient.CLOUDWATCH).(*cloudwatch.CloudWatch)
+//
+//	nodeCapacityClientCache.Store(cacheKey, cloudWatchClient)
+//	return cloudWatchClient, nil
+//}
 
 func GetNodeCapacityPanel(cmd *cobra.Command, clientAuth *model.Auth, cloudWatchClient *cloudwatch.CloudWatch) (string, map[string]*cloudwatch.GetMetricDataOutput, error) {
 	// Implement your logic here to retrieve node capacity metrics and panel data.
