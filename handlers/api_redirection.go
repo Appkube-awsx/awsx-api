@@ -67,9 +67,19 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	if elementType == "EKS" && query == "network_throughput_single_panel" {
 		EKS.GetNetworkThroughputSinglePanel(w, r)
 	}
-	// if elementType == "EKS" && query == "cpu_limits_panel" {
-	// 	EKS.GetEKSCpuLimitsPanel(w, r)
+	// if elementType == "EKS" && query == "node_capacity_panel" {
+	// 	EKS.NodeCapacityPanelHandler(w, r)
 	// }
+	if elementType == "EKS" && query == "node_downtime_panel" {
+		EKS.GetEKSDowntimePanel(w, r)
+	}
+	if elementType == "EKS" && query == "node_uptime_panel" {
+		EKS.NodeUptimePanelHandler(w, r)
+	}
+	if elementType == "EKS" && query == "node_event_logs_panel" {
+		EKS.GetEKSEventLogsPanel(w, r)
+	}
+	
 	if elementType == "ECS" && query == "cpu_utilization_panel" {
 		ECS.GetECScpuUtilizationPanel(w, r)
 	}
