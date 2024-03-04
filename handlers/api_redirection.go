@@ -79,7 +79,7 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	if elementType == "EKS" && query == "node_event_logs_panel" {
 		EKS.GetEKSEventLogsPanel(w, r)
 	}
-	
+
 	if elementType == "ECS" && query == "cpu_utilization_panel" {
 		ECS.GetECScpuUtilizationPanel(w, r)
 	}
