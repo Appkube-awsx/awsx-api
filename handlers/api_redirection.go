@@ -173,5 +173,8 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	if elementType == "EC2" && query == "net_throughput_panel" {
 		EC2.GetNetworkThroughputPanel(w, r)
 	}
+	if elementType == "EC2" && query == "latency_panel" {
+		EC2.GetLatencyPanel(w, r)
+	}
 
 }

@@ -1,696 +1,2030 @@
 {
 	"info": {
-		"_postman_id": "17ea7c16-3472-4ac2-bd7a-4ff459fe1a79",
-		"name": "awsx-api Copy",
+		"_postman_id": "95e4a6f5-6d4a-40ff-ba45-38f42b5cb2bd",
+		"name": "awsx-api",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "4204032"
+		"_exporter_id": "24280300",
+		"_collection_link": "https://cloudy-crater-160851.postman.co/workspace/shahrukh~365b6eca-9bce-488c-ad7c-5102f5faca3c/collection/24280300-95e4a6f5-6d4a-40ff-ba45-38f42b5cb2bd?action=share&source=collection_link&creator=24280300"
 	},
 	"item": [
 		{
-			"name": "getCdn",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://34.199.12.114:7000/awsx/cdn?zone=us-east-1&accountId=SYNECTIKS/HR/AWS/062041849235&vaultUrl=http://34.199.12.114:8200/v1/kv-v1&vaultToken=s.X22v2Ma60lzujd1OlKVhMy0Q",
-					"protocol": "http",
-					"host": [
-						"34",
-						"199",
-						"12",
-						"114"
-					],
-					"port": "7000",
-					"path": [
-						"awsx",
-						"cdn"
-					],
-					"query": [
+			"name": "getelementdetails",
+			"item": [
+				{
+					"name": "EC2",
+					"item": [
 						{
-							"key": "zone",
-							"value": "us-east-1"
+							"name": "cpu_usage_idle_panel",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=900000&elementType=EC2&query=cpu_usage_idle_panel&responseType=json&startTime=2024-02-28T00:00:00Z&endTime=2024-02-28T23:59:59Z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "900000"
+										},
+										{
+											"key": "elementType",
+											"value": "EC2"
+										},
+										{
+											"key": "query",
+											"value": "cpu_usage_idle_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "json"
+										},
+										{
+											"key": "startTime",
+											"value": "2024-02-28T00:00:00Z"
+										},
+										{
+											"key": "endTime",
+											"value": "2024-02-28T23:59:59Z"
+										}
+									]
+								}
+							},
+							"response": []
 						},
 						{
-							"key": "accountId",
-							"value": "SYNECTIKS/HR/AWS/062041849235"
+							"name": "cpu_usage_nice_panel",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=900000&elementType=EC2&query=cpu_usage_nice_panel&responseType=json&startTime=2024-02-28T00:00:00Z&endTime=2024-02-28T23:59:59Z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "900000"
+										},
+										{
+											"key": "elementType",
+											"value": "EC2"
+										},
+										{
+											"key": "query",
+											"value": "cpu_usage_nice_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "json"
+										},
+										{
+											"key": "startTime",
+											"value": "2024-02-28T00:00:00Z"
+										},
+										{
+											"key": "endTime",
+											"value": "2024-02-28T23:59:59Z"
+										}
+									]
+								}
+							},
+							"response": []
 						},
 						{
-							"key": "vaultUrl",
-							"value": "http://34.199.12.114:8200/v1/kv-v1"
+							"name": "cpu_usage_sys_panel",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=900000&elementType=EC2&query=cpu_usage_sys_panel&responseType=json&startTime=2024-01-01T00:00:00Z&endTime=2024-02-21T23:59:59Z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "900000"
+										},
+										{
+											"key": "elementType",
+											"value": "EC2"
+										},
+										{
+											"key": "query",
+											"value": "cpu_usage_sys_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "json"
+										},
+										{
+											"key": "startTime",
+											"value": "2024-01-01T00:00:00Z"
+										},
+										{
+											"key": "endTime",
+											"value": "2024-02-21T23:59:59Z"
+										}
+									]
+								}
+							},
+							"response": []
 						},
 						{
-							"key": "vaultToken",
-							"value": "s.X22v2Ma60lzujd1OlKVhMy0Q"
+							"name": "cpu_usage_user_panel",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=900000&elementType=EC2&query=cpu_usage_user_panel&responseType=json&startTime=2024-01-01T00:00:00Z&endTime=2024-02-21T23:59:59Z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "900000"
+										},
+										{
+											"key": "elementType",
+											"value": "EC2"
+										},
+										{
+											"key": "query",
+											"value": "cpu_usage_user_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "json"
+										},
+										{
+											"key": "startTime",
+											"value": "2024-01-01T00:00:00Z"
+										},
+										{
+											"key": "endTime",
+											"value": "2024-02-21T23:59:59Z"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "cpu_utilization_panel",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=900000&elementType=EC2&query=cpu_utilization_panel&responseType=json&startTime=2024-01-01T00:00:00Z&endTime=2024-02-21T23:59:59Z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "900000"
+										},
+										{
+											"key": "elementType",
+											"value": "EC2"
+										},
+										{
+											"key": "query",
+											"value": "cpu_utilization_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "json"
+										},
+										{
+											"key": "startTime",
+											"value": "2024-01-01T00:00:00Z"
+										},
+										{
+											"key": "endTime",
+											"value": "2024-02-21T23:59:59Z"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "disk_available_panel",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=900000&elementType=EC2&query=disk_available_panel&responseType=json&startTime=2024-01-01T00:00:00Z&endTime=2024-02-21T23:59:59Z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "900000"
+										},
+										{
+											"key": "elementType",
+											"value": "EC2"
+										},
+										{
+											"key": "query",
+											"value": "disk_available_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "json"
+										},
+										{
+											"key": "startTime",
+											"value": "2024-01-01T00:00:00Z"
+										},
+										{
+											"key": "endTime",
+											"value": "2024-02-21T23:59:59Z"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "disk_reads_panel",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=900000&elementType=EC2&query=disk_reads_panel&responseType=json&startTime=2024-01-01T00:00:00Z&endTime=2024-02-21T23:59:59Z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "900000"
+										},
+										{
+											"key": "elementType",
+											"value": "EC2"
+										},
+										{
+											"key": "query",
+											"value": "disk_reads_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "json"
+										},
+										{
+											"key": "startTime",
+											"value": "2024-01-01T00:00:00Z"
+										},
+										{
+											"key": "endTime",
+											"value": "2024-02-21T23:59:59Z"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "disk_used_panel",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=900000&elementType=EC2&query=disk_used_panel&responseType=json&startTime=2024-01-01T00:00:00Z&endTime=2024-02-21T23:59:59Z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "900000"
+										},
+										{
+											"key": "elementType",
+											"value": "EC2"
+										},
+										{
+											"key": "query",
+											"value": "disk_used_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "json"
+										},
+										{
+											"key": "startTime",
+											"value": "2024-01-01T00:00:00Z"
+										},
+										{
+											"key": "endTime",
+											"value": "2024-02-21T23:59:59Z"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "disk_writes_panel",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=900000&elementType=EC2&query=disk_writes_panel&responseType=json&startTime=2024-01-01T00:00:00Z&endTime=2024-02-21T23:59:59Z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "900000"
+										},
+										{
+											"key": "elementType",
+											"value": "EC2"
+										},
+										{
+											"key": "query",
+											"value": "disk_writes_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "json"
+										},
+										{
+											"key": "startTime",
+											"value": "2024-01-01T00:00:00Z"
+										},
+										{
+											"key": "endTime",
+											"value": "2024-02-21T23:59:59Z"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "mem_cached_panel",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=900000&elementType=EC2&query=mem_cached_panel&responseType=json&startTime=2024-01-01T00:00:00Z&endTime=2024-02-28T23:59:59Z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "900000"
+										},
+										{
+											"key": "elementType",
+											"value": "EC2"
+										},
+										{
+											"key": "query",
+											"value": "mem_cached_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "json"
+										},
+										{
+											"key": "startTime",
+											"value": "2024-01-01T00:00:00Z"
+										},
+										{
+											"key": "endTime",
+											"value": "2024-02-28T23:59:59Z"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "mem_usage_free_panel",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=900000&elementType=EC2&query=mem_usage_free_panel&responseType=json&startTime=2024-01-01T00:00:00Z&endTime=2024-02-28T23:59:59Z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "900000"
+										},
+										{
+											"key": "elementType",
+											"value": "EC2"
+										},
+										{
+											"key": "query",
+											"value": "mem_usage_free_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "json"
+										},
+										{
+											"key": "startTime",
+											"value": "2024-01-01T00:00:00Z"
+										},
+										{
+											"key": "endTime",
+											"value": "2024-02-28T23:59:59Z"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "mem_usage_total_panel",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=900000&elementType=EC2&query=mem_usage_total_panel&responseType=json&startTime=2024-01-01T00:00:00Z&endTime=2024-02-28T23:59:59Z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "900000"
+										},
+										{
+											"key": "elementType",
+											"value": "EC2"
+										},
+										{
+											"key": "query",
+											"value": "mem_usage_total_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "json"
+										},
+										{
+											"key": "startTime",
+											"value": "2024-01-01T00:00:00Z"
+										},
+										{
+											"key": "endTime",
+											"value": "2024-02-28T23:59:59Z"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "mem_usage_used_panel",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=900000&elementType=EC2&query=mem_usage_used_panel&responseType=json&startTime=2024-01-01T00:00:00Z&endTime=2024-02-28T23:59:59Z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "900000"
+										},
+										{
+											"key": "elementType",
+											"value": "EC2"
+										},
+										{
+											"key": "query",
+											"value": "mem_usage_used_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "json"
+										},
+										{
+											"key": "startTime",
+											"value": "2024-01-01T00:00:00Z"
+										},
+										{
+											"key": "endTime",
+											"value": "2024-02-28T23:59:59Z"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "memory_utilization_panel",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=900000&elementType=EC2&query=memory_utilization_panel&responseType=json&startTime=2024-01-01T00:00:00Z&endTime=2024-02-28T23:59:59Z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "900000"
+										},
+										{
+											"key": "elementType",
+											"value": "EC2"
+										},
+										{
+											"key": "query",
+											"value": "memory_utilization_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "json"
+										},
+										{
+											"key": "startTime",
+											"value": "2024-01-01T00:00:00Z"
+										},
+										{
+											"key": "endTime",
+											"value": "2024-02-28T23:59:59Z"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "net_inbytes_panel",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=900000&elementType=EC2&query=net_inbytes_panel&responseType=json&startTime=2024-01-01T00:00:00Z&endTime=2024-02-28T23:59:59Z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "900000"
+										},
+										{
+											"key": "elementType",
+											"value": "EC2"
+										},
+										{
+											"key": "query",
+											"value": "net_inbytes_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "json"
+										},
+										{
+											"key": "startTime",
+											"value": "2024-01-01T00:00:00Z"
+										},
+										{
+											"key": "endTime",
+											"value": "2024-02-28T23:59:59Z"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "net_inpackets_panel",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=900000&elementType=EC2&query=net_inpackets_panel&responseType=json&startTime=2024-01-01T00:00:00Z&endTime=2024-02-28T23:59:59Z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "900000"
+										},
+										{
+											"key": "elementType",
+											"value": "EC2"
+										},
+										{
+											"key": "query",
+											"value": "net_inpackets_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "json"
+										},
+										{
+											"key": "startTime",
+											"value": "2024-01-01T00:00:00Z"
+										},
+										{
+											"key": "endTime",
+											"value": "2024-02-28T23:59:59Z"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "net_outbytes_panel",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=900000&elementType=EC2&query=net_outbytes_panel&responseType=json&startTime=2024-01-01T00:00:00Z&endTime=2024-02-28T23:59:59Z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "900000"
+										},
+										{
+											"key": "elementType",
+											"value": "EC2"
+										},
+										{
+											"key": "query",
+											"value": "net_outbytes_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "json"
+										},
+										{
+											"key": "startTime",
+											"value": "2024-01-01T00:00:00Z"
+										},
+										{
+											"key": "endTime",
+											"value": "2024-02-28T23:59:59Z"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "net_outpackets_panel",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=900000&elementType=EC2&query=net_outpackets_panel&responseType=json&startTime=2024-01-01T00:00:00Z&endTime=2024-02-28T23:59:59Z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "900000"
+										},
+										{
+											"key": "elementType",
+											"value": "EC2"
+										},
+										{
+											"key": "query",
+											"value": "net_outpackets_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "json"
+										},
+										{
+											"key": "startTime",
+											"value": "2024-01-01T00:00:00Z"
+										},
+										{
+											"key": "endTime",
+											"value": "2024-02-28T23:59:59Z"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "network_utilization_panel",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=900000&elementType=EC2&query=network_utilization_panel&responseType=json&startTime=2024-01-01T00:00:00Z&endTime=2024-02-28T23:59:59Z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "900000"
+										},
+										{
+											"key": "elementType",
+											"value": "EC2"
+										},
+										{
+											"key": "query",
+											"value": "network_utilization_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "json"
+										},
+										{
+											"key": "startTime",
+											"value": "2024-01-01T00:00:00Z"
+										},
+										{
+											"key": "endTime",
+											"value": "2024-02-28T23:59:59Z"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "net_throughput_panel",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=900000&elementType=EC2&query=net_throughput_panel&responseType=json&startTime=2024-01-01T00:00:00Z&endTime=2024-02-28T23:59:59Z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "900000"
+										},
+										{
+											"key": "elementType",
+											"value": "EC2"
+										},
+										{
+											"key": "query",
+											"value": "net_throughput_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "json"
+										},
+										{
+											"key": "startTime",
+											"value": "2024-01-01T00:00:00Z"
+										},
+										{
+											"key": "endTime",
+											"value": "2024-02-28T23:59:59Z"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "latency_panel",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=900000&elementType=EC2&query=latency_panel&responseType=json&startTime=2024-01-01T00:00:00Z&endTime=2024-02-28T23:59:59Z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "900000"
+										},
+										{
+											"key": "elementType",
+											"value": "EC2"
+										},
+										{
+											"key": "query",
+											"value": "latency_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "json"
+										},
+										{
+											"key": "startTime",
+											"value": "2024-01-01T00:00:00Z"
+										},
+										{
+											"key": "endTime",
+											"value": "2024-02-28T23:59:59Z"
+										}
+									]
+								}
+							},
+							"response": []
 						}
 					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "getEks",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:7000/awsx/eks?zone=us-east-1&accountId=SYNECTIKS/HR/AWS/062041849235&vaultUrl=http://34.199.12.114:8200/v1/kv-v1&vaultToken=s.X22v2Ma60lzujd1OlKVhMy0Q",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "7000",
-					"path": [
-						"awsx",
-						"eks"
-					],
-					"query": [
-						{
-							"key": "zone",
-							"value": "us-east-1"
-						},
-						{
-							"key": "accountId",
-							"value": "SYNECTIKS/HR/AWS/062041849235"
-						},
-						{
-							"key": "vaultUrl",
-							"value": "http://34.199.12.114:8200/v1/kv-v1"
-						},
-						{
-							"key": "vaultToken",
-							"value": "s.X22v2Ma60lzujd1OlKVhMy0Q"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "getEcs",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:7000/awsx/ecs?zone=us-east-1&accountId=SYNECTIKS/HR/AWS/062041849235&vaultUrl=http://34.199.12.114:8200/v1/kv-v1&vaultToken=s.X22v2Ma60lzujd1OlKVhMy0Q",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "7000",
-					"path": [
-						"awsx",
-						"ecs"
-					],
-					"query": [
-						{
-							"key": "zone",
-							"value": "us-east-1"
-						},
-						{
-							"key": "accountId",
-							"value": "SYNECTIKS/HR/AWS/062041849235"
-						},
-						{
-							"key": "vaultUrl",
-							"value": "http://34.199.12.114:8200/v1/kv-v1"
-						},
-						{
-							"key": "vaultToken",
-							"value": "s.X22v2Ma60lzujd1OlKVhMy0Q"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "getDynamodbTables",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:7000/awsx/dynamodb?zone=us-east-1&accountId=SYNECTIKS/HR/AWS/062041849235&vaultUrl=http://34.199.12.114:8200/v1/kv-v1&vaultToken=s.X22v2Ma60lzujd1OlKVhMy0Q",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "7000",
-					"path": [
-						"awsx",
-						"dynamodb"
-					],
-					"query": [
-						{
-							"key": "zone",
-							"value": "us-east-1"
-						},
-						{
-							"key": "accountId",
-							"value": "SYNECTIKS/HR/AWS/062041849235"
-						},
-						{
-							"key": "vaultUrl",
-							"value": "http://34.199.12.114:8200/v1/kv-v1"
-						},
-						{
-							"key": "vaultToken",
-							"value": "s.X22v2Ma60lzujd1OlKVhMy0Q"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "getS3",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:7000/awsx/s3?zone=us-east-1&accountId=SYNECTIKS/HR/AWS/062041849235&vaultUrl=http://34.199.12.114:8200/v1/kv-v1&vaultToken=s.X22v2Ma60lzujd1OlKVhMy0Q",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "7000",
-					"path": [
-						"awsx",
-						"s3"
-					],
-					"query": [
-						{
-							"key": "zone",
-							"value": "us-east-1"
-						},
-						{
-							"key": "accountId",
-							"value": "SYNECTIKS/HR/AWS/062041849235"
-						},
-						{
-							"key": "vaultUrl",
-							"value": "http://34.199.12.114:8200/v1/kv-v1"
-						},
-						{
-							"key": "vaultToken",
-							"value": "s.X22v2Ma60lzujd1OlKVhMy0Q"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "getS3WithTag",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:7000/awsx/s3/bucket-with-tag?zone=us-east-1&accountId=SYNECTIKS/HR/AWS/062041849235&vaultUrl=http://34.199.12.114:8200/v1/kv-v1&vaultToken=s.X22v2Ma60lzujd1OlKVhMy0Q&bucketName=afreen-test-bucket",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "7000",
-					"path": [
-						"awsx",
-						"s3",
-						"bucket-with-tag"
-					],
-					"query": [
-						{
-							"key": "zone",
-							"value": "us-east-1"
-						},
-						{
-							"key": "accountId",
-							"value": "SYNECTIKS/HR/AWS/062041849235"
-						},
-						{
-							"key": "vaultUrl",
-							"value": "http://34.199.12.114:8200/v1/kv-v1"
-						},
-						{
-							"key": "vaultToken",
-							"value": "s.X22v2Ma60lzujd1OlKVhMy0Q"
-						},
-						{
-							"key": "bucketName",
-							"value": "afreen-test-bucket"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "getRds",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:7000/awsx/rds?zone=us-east-1&accountId=SYNECTIKS/HR/AWS/062041849235&vaultUrl=http://34.199.12.114:8200/v1/kv-v1&vaultToken=s.X22v2Ma60lzujd1OlKVhMy0Q",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "7000",
-					"path": [
-						"awsx",
-						"rds"
-					],
-					"query": [
-						{
-							"key": "zone",
-							"value": "us-east-1"
-						},
-						{
-							"key": "accountId",
-							"value": "SYNECTIKS/HR/AWS/062041849235"
-						},
-						{
-							"key": "vaultUrl",
-							"value": "http://34.199.12.114:8200/v1/kv-v1"
-						},
-						{
-							"key": "vaultToken",
-							"value": "s.X22v2Ma60lzujd1OlKVhMy0Q"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "getKinesys",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:7000/awsx/kinesys?zone=us-east-1&accountId=SYNECTIKS/HR/AWS/062041849235&vaultUrl=http://34.199.12.114:8200/v1/kv-v1&vaultToken=s.X22v2Ma60lzujd1OlKVhMy0Q",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "7000",
-					"path": [
-						"awsx",
-						"kinesys"
-					],
-					"query": [
-						{
-							"key": "zone",
-							"value": "us-east-1"
-						},
-						{
-							"key": "accountId",
-							"value": "SYNECTIKS/HR/AWS/062041849235"
-						},
-						{
-							"key": "vaultUrl",
-							"value": "http://34.199.12.114:8200/v1/kv-v1"
-						},
-						{
-							"key": "vaultToken",
-							"value": "s.X22v2Ma60lzujd1OlKVhMy0Q"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "getLambda",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:7000/awsx/lambda?zone=us-east-1&accountId=SYNECTIKS/HR/AWS/062041849235&vaultUrl=http://34.199.12.114:8200/v1/kv-v1&vaultToken=s.X22v2Ma60lzujd1OlKVhMy0Q",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "7000",
-					"path": [
-						"awsx",
-						"lambda"
-					],
-					"query": [
-						{
-							"key": "zone",
-							"value": "us-east-1"
-						},
-						{
-							"key": "accountId",
-							"value": "SYNECTIKS/HR/AWS/062041849235"
-						},
-						{
-							"key": "vaultUrl",
-							"value": "http://34.199.12.114:8200/v1/kv-v1"
-						},
-						{
-							"key": "vaultToken",
-							"value": "s.X22v2Ma60lzujd1OlKVhMy0Q"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "getLambdaWithTags",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:7000/awsx/lambda/function-with-tag?accountId=SYNECTIKS/HR/AWS/062041849235&vaultUrl=http://34.199.12.114:8200/v1/kv-v1&vaultToken=s.X22v2Ma60lzujd1OlKVhMy0Q&functionName=Function-appkube-test",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "7000",
-					"path": [
-						"awsx",
-						"lambda",
-						"function-with-tag"
-					],
-					"query": [
-						{
-							"key": "zone",
-							"value": "us-east-1",
-							"disabled": true
-						},
-						{
-							"key": "accountId",
-							"value": "SYNECTIKS/HR/AWS/062041849235"
-						},
-						{
-							"key": "vaultUrl",
-							"value": "http://34.199.12.114:8200/v1/kv-v1"
-						},
-						{
-							"key": "vaultToken",
-							"value": "s.X22v2Ma60lzujd1OlKVhMy0Q"
-						},
-						{
-							"key": "functionName",
-							"value": "Function-appkube-test"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "cpu_utilization_panel_olf",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
 				},
-				"url": {
-					"raw": "http://localhost:7000/awsx-api/getQueryOutput?zone=us-east-1&externalId=<>&crossAccountRoleArn=<>&elementType=AWS/EC2&instanceID=i-05e4e6757f13da657&query=cpu_panel&filter=Average,SampleCount,Maximum&responseType=frame",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "7000",
-					"path": [
-						"awsx-api",
-						"getQueryOutput"
-					],
-					"query": [
+				{
+					"name": "EKS",
+					"item": [
 						{
-							"key": "zone",
-							"value": "us-east-1"
+							"name": "allocatable_cpu_panel",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=9315&elementType=EKS&query=allocatable_cpu_panel&responseType=json&startTime=2024-02-28T00:00:00Z&endTime=2024-02-28T23:59:59Z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "9315"
+										},
+										{
+											"key": "elementType",
+											"value": "EKS"
+										},
+										{
+											"key": "query",
+											"value": "allocatable_cpu_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "json"
+										},
+										{
+											"key": "startTime",
+											"value": "2024-02-28T00:00:00Z"
+										},
+										{
+											"key": "endTime",
+											"value": "2024-02-28T23:59:59Z"
+										}
+									]
+								}
+							},
+							"response": []
 						},
 						{
-							"key": "externalId",
-							"value": "<>"
+							"name": "cpu_limits_panel",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=9315&elementType=EKS&query=cpu_limits_panel&responseType=json&startTime=2024-02-28T00:00:00Z&endTime=2024-02-28T23:59:59Z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "9315"
+										},
+										{
+											"key": "elementType",
+											"value": "EKS"
+										},
+										{
+											"key": "query",
+											"value": "cpu_limits_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "json"
+										},
+										{
+											"key": "startTime",
+											"value": "2024-02-28T00:00:00Z"
+										},
+										{
+											"key": "endTime",
+											"value": "2024-02-28T23:59:59Z"
+										}
+									]
+								}
+							},
+							"response": []
 						},
 						{
-							"key": "crossAccountRoleArn",
-							"value": "<>"
+							"name": "cpu_utilization_panel",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=9315&elementType=EKS&query=cpu_utilization_panel&responseType=json&startTime=2024-02-28T00:00:00Z&endTime=2024-02-28T23:59:59Z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "9315"
+										},
+										{
+											"key": "elementType",
+											"value": "EKS"
+										},
+										{
+											"key": "query",
+											"value": "cpu_utilization_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "json"
+										},
+										{
+											"key": "startTime",
+											"value": "2024-02-28T00:00:00Z"
+										},
+										{
+											"key": "endTime",
+											"value": "2024-02-28T23:59:59Z"
+										}
+									]
+								}
+							},
+							"response": []
 						},
 						{
-							"key": "elementType",
-							"value": "AWS/EC2"
+							"name": "cpu_graph_utilization_panel",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=9315&elementType=EKS&query=cpu_graph_utilization_panel&responseType=json&startTime=2024-02-28T00:00:00Z&endTime=2024-02-28T23:59:59Z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "9315"
+										},
+										{
+											"key": "elementType",
+											"value": "EKS"
+										},
+										{
+											"key": "query",
+											"value": "cpu_graph_utilization_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "json"
+										},
+										{
+											"key": "startTime",
+											"value": "2024-02-28T00:00:00Z"
+										},
+										{
+											"key": "endTime",
+											"value": "2024-02-28T23:59:59Z"
+										}
+									]
+								}
+							},
+							"response": []
 						},
 						{
-							"key": "instanceID",
-							"value": "i-05e4e6757f13da657"
+							"name": "cpu_requests_panel",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=9315&elementType=EKS&query=cpu_requests_panel&responseType=json&startTime=2024-02-28T00:00:00Z&endTime=2024-02-28T23:59:59Z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "9315"
+										},
+										{
+											"key": "elementType",
+											"value": "EKS"
+										},
+										{
+											"key": "query",
+											"value": "cpu_requests_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "json"
+										},
+										{
+											"key": "startTime",
+											"value": "2024-02-28T00:00:00Z"
+										},
+										{
+											"key": "endTime",
+											"value": "2024-02-28T23:59:59Z"
+										}
+									]
+								}
+							},
+							"response": []
 						},
 						{
-							"key": "query",
-							"value": "cpu_panel"
+							"name": "cpu_node_utilization_panel",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=9315&elementType=EKS&query=cpu_node_utilization_panel&responseType=json&startTime=2024-02-28T00:00:00Z&endTime=2024-02-28T23:59:59Z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "9315"
+										},
+										{
+											"key": "elementType",
+											"value": "EKS"
+										},
+										{
+											"key": "query",
+											"value": "cpu_node_utilization_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "json"
+										},
+										{
+											"key": "startTime",
+											"value": "2024-02-28T00:00:00Z"
+										},
+										{
+											"key": "endTime",
+											"value": "2024-02-28T23:59:59Z"
+										}
+									]
+								}
+							},
+							"response": []
 						},
 						{
-							"key": "filter",
-							"value": "Average,SampleCount,Maximum"
+							"name": "memory_utilization_panel",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=9315&elementType=EKS&query=memory_utilization_panel&responseType=json&startTime=2024-02-28T00:00:00Z&endTime=2024-02-28T23:59:59Z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "9315"
+										},
+										{
+											"key": "elementType",
+											"value": "EKS"
+										},
+										{
+											"key": "query",
+											"value": "memory_utilization_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "json"
+										},
+										{
+											"key": "startTime",
+											"value": "2024-02-28T00:00:00Z"
+										},
+										{
+											"key": "endTime",
+											"value": "2024-02-28T23:59:59Z"
+										}
+									]
+								}
+							},
+							"response": []
 						},
 						{
-							"key": "commandType",
-							"value": "cpu-utilization",
-							"disabled": true
+							"name": "memory_limits_panel",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=9315&elementType=EKS&query=memory_limits_panel&responseType=json&startTime=2024-02-28T00:00:00Z&endTime=2024-02-28T23:59:59Z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "9315"
+										},
+										{
+											"key": "elementType",
+											"value": "EKS"
+										},
+										{
+											"key": "query",
+											"value": "memory_limits_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "json"
+										},
+										{
+											"key": "startTime",
+											"value": "2024-02-28T00:00:00Z"
+										},
+										{
+											"key": "endTime",
+											"value": "2024-02-28T23:59:59Z"
+										}
+									]
+								}
+							},
+							"response": []
 						},
 						{
-							"key": "responseType",
-							"value": "frame"
+							"name": "memory_requests_panel",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=9315&elementType=EKS&query=memory_requests_panel&responseType=json&startTime=2024-02-28T00:00:00Z&endTime=2024-02-28T23:59:59Z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "9315"
+										},
+										{
+											"key": "elementType",
+											"value": "EKS"
+										},
+										{
+											"key": "query",
+											"value": "memory_requests_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "json"
+										},
+										{
+											"key": "startTime",
+											"value": "2024-02-28T00:00:00Z"
+										},
+										{
+											"key": "endTime",
+											"value": "2024-02-28T23:59:59Z"
+										}
+									]
+								}
+							},
+							"response": []
 						},
 						{
-							"key": "startTime",
-							"value": "2023-07-01T00:00:00Z",
-							"disabled": true
+							"name": "memory_usage_panel",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=9315&elementType=EKS&query=memory_usage_panel&responseType=json&startTime=2024-02-28T00:00:00Z&endTime=2024-02-28T23:59:59Z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "9315"
+										},
+										{
+											"key": "elementType",
+											"value": "EKS"
+										},
+										{
+											"key": "query",
+											"value": "memory_usage_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "json"
+										},
+										{
+											"key": "startTime",
+											"value": "2024-02-28T00:00:00Z"
+										},
+										{
+											"key": "endTime",
+											"value": "2024-02-28T23:59:59Z"
+										}
+									]
+								}
+							},
+							"response": []
 						},
 						{
-							"key": "endTime",
-							"value": "2023-12-14T23:59:59Z",
-							"disabled": true
+							"name": "memory_graph_utilization_panel",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=9315&elementType=EKS&query=memory_graph_utilization_panel&responseType=json&startTime=2024-02-28T00:00:00Z&endTime=2024-02-28T23:59:59Z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "9315"
+										},
+										{
+											"key": "elementType",
+											"value": "EKS"
+										},
+										{
+											"key": "query",
+											"value": "memory_graph_utilization_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "json"
+										},
+										{
+											"key": "startTime",
+											"value": "2024-02-28T00:00:00Z"
+										},
+										{
+											"key": "endTime",
+											"value": "2024-02-28T23:59:59Z"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "network_availability_panel",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=9315&elementType=EKS&query=network_availability_panel&responseType=json&startTime=2024-02-28T00:00:00Z&endTime=2024-02-28T23:59:59Z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "9315"
+										},
+										{
+											"key": "elementType",
+											"value": "EKS"
+										},
+										{
+											"key": "query",
+											"value": "network_availability_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "json"
+										},
+										{
+											"key": "startTime",
+											"value": "2024-02-28T00:00:00Z"
+										},
+										{
+											"key": "endTime",
+											"value": "2024-02-28T23:59:59Z"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "network_in_out_panel",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=9315&elementType=EKS&query=network_in_out_panel&responseType=json&startTime=2024-02-28T00:00:00Z&endTime=2024-02-28T23:59:59Z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "9315"
+										},
+										{
+											"key": "elementType",
+											"value": "EKS"
+										},
+										{
+											"key": "query",
+											"value": "network_in_out_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "json"
+										},
+										{
+											"key": "startTime",
+											"value": "2024-02-28T00:00:00Z"
+										},
+										{
+											"key": "endTime",
+											"value": "2024-02-28T23:59:59Z"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "network_throughput_panel",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=9315&elementType=EKS&query=network_throughput_panel&responseType=json&startTime=2024-02-28T00:00:00Z&endTime=2024-02-28T23:59:59Z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "9315"
+										},
+										{
+											"key": "elementType",
+											"value": "EKS"
+										},
+										{
+											"key": "query",
+											"value": "network_throughput_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "json"
+										},
+										{
+											"key": "startTime",
+											"value": "2024-02-28T00:00:00Z"
+										},
+										{
+											"key": "endTime",
+											"value": "2024-02-28T23:59:59Z"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "network_throughput_single_panel",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=9315&elementType=EKS&query=network_throughput_single_panel&responseType=json&startTime=2024-02-28T00:00:00Z&endTime=2024-02-28T23:59:59Z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "9315"
+										},
+										{
+											"key": "elementType",
+											"value": "EKS"
+										},
+										{
+											"key": "query",
+											"value": "network_throughput_single_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "json"
+										},
+										{
+											"key": "startTime",
+											"value": "2024-02-28T00:00:00Z"
+										},
+										{
+											"key": "endTime",
+											"value": "2024-02-28T23:59:59Z"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "network_utilization_panel",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=9315&elementType=EKS&query=network_utilization_panel&responseType=json&startTime=2024-02-28T00:00:00Z&endTime=2024-02-28T23:59:59Z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "9315"
+										},
+										{
+											"key": "elementType",
+											"value": "EKS"
+										},
+										{
+											"key": "query",
+											"value": "network_utilization_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "json"
+										},
+										{
+											"key": "startTime",
+											"value": "2024-02-28T00:00:00Z"
+										},
+										{
+											"key": "endTime",
+											"value": "2024-02-28T23:59:59Z"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "node_downtime_panel",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=9315&elementType=EKS&query=node_downtime_panel&responseType=json&startTime=2024-02-28T00:00:00Z&endTime=2024-02-28T23:59:59Z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "9315"
+										},
+										{
+											"key": "elementType",
+											"value": "EKS"
+										},
+										{
+											"key": "query",
+											"value": "node_downtime_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "json"
+										},
+										{
+											"key": "startTime",
+											"value": "2024-02-28T00:00:00Z"
+										},
+										{
+											"key": "endTime",
+											"value": "2024-02-28T23:59:59Z"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "node_uptime_panel",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=9315&elementType=EKS&query=node_uptime_panel&responseType=json&startTime=2024-02-28T00:00:00Z&endTime=2024-02-28T23:59:59Z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "9315"
+										},
+										{
+											"key": "elementType",
+											"value": "EKS"
+										},
+										{
+											"key": "query",
+											"value": "node_uptime_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "json"
+										},
+										{
+											"key": "startTime",
+											"value": "2024-02-28T00:00:00Z"
+										},
+										{
+											"key": "endTime",
+											"value": "2024-02-28T23:59:59Z"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "node_event_logs_panel",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=9315&elementType=EKS&query=node_event_logs_panel&responseType=json&startTime=2024-02-28T00:00:00Z&endTime=2024-02-28T23:59:59Z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "9315"
+										},
+										{
+											"key": "elementType",
+											"value": "EKS"
+										},
+										{
+											"key": "query",
+											"value": "node_event_logs_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "json"
+										},
+										{
+											"key": "startTime",
+											"value": "2024-02-28T00:00:00Z"
+										},
+										{
+											"key": "endTime",
+											"value": "2024-02-28T23:59:59Z"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "service_availability_panel",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=9315&elementType=EKS&query=cpu_usage_idle_panel&responseType=json&startTime=2024-02-28T00:00:00Z&endTime=2024-02-28T23:59:59Z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "9315"
+										},
+										{
+											"key": "elementType",
+											"value": "EKS"
+										},
+										{
+											"key": "query",
+											"value": "cpu_usage_idle_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "json"
+										},
+										{
+											"key": "startTime",
+											"value": "2024-02-28T00:00:00Z"
+										},
+										{
+											"key": "endTime",
+											"value": "2024-02-28T23:59:59Z"
+										}
+									]
+								}
+							},
+							"response": []
 						}
 					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "ec2cpu_utilization_panel",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
 				},
-				"url": {
-					"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=9321&elementType=EC2&query=cpu_utilization_panel",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "7000",
-					"path": [
-						"awsx-api",
-						"getQueryOutput"
-					],
-					"query": [
+				{
+					"name": "ECS",
+					"item": [
 						{
-							"key": "elementId",
-							"value": "9321"
+							"name": "cpu_reservation_panel",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=900001&elementType=ECS&query=cpu_reservation_panel&responseType=json&startTime=2024-01-01T00:00:00Z&endTime=2024-02-28T23:59:59Z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "900001"
+										},
+										{
+											"key": "elementType",
+											"value": "ECS"
+										},
+										{
+											"key": "query",
+											"value": "cpu_reservation_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "json"
+										},
+										{
+											"key": "startTime",
+											"value": "2024-01-01T00:00:00Z"
+										},
+										{
+											"key": "endTime",
+											"value": "2024-02-28T23:59:59Z"
+										}
+									]
+								}
+							},
+							"response": []
 						},
 						{
-							"key": "elementType",
-							"value": "EC2"
+							"name": "cpu_utilization_panel",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=900001&elementType=ECS&query=cpu_utilization_panel&responseType=json&startTime=2024-01-01T00:00:00Z&endTime=2024-02-28T23:59:59Z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "900001"
+										},
+										{
+											"key": "elementType",
+											"value": "ECS"
+										},
+										{
+											"key": "query",
+											"value": "cpu_utilization_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "json"
+										},
+										{
+											"key": "startTime",
+											"value": "2024-01-01T00:00:00Z"
+										},
+										{
+											"key": "endTime",
+											"value": "2024-02-28T23:59:59Z"
+										}
+									]
+								}
+							},
+							"response": []
 						},
 						{
-							"key": "query",
-							"value": "cpu_utilization_panel"
-						},
+							"name": "memory_reservation_panel",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "LAMBDA",
+					"item": [
 						{
-							"key": "responseType",
-							"value": "json",
-							"disabled": true
+							"name": "cpu_utilization",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
 						}
 					]
 				}
-			},
-			"response": []
-		},
-		{
-			"name": "eksCpuUtilization_panel",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:7000/awsx-api/getQueryOutput?zone=us-east-1&externalId=<>&crossAccountRoleArn=<>&elementType=ContainerInsights&clusterName=myclustTT&query=cpu_utilization_panel&responseType=frame",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "7000",
-					"path": [
-						"awsx-api",
-						"getQueryOutput"
-					],
-					"query": [
-						{
-							"key": "zone",
-							"value": "us-east-1"
-						},
-						{
-							"key": "externalId",
-							"value": "<>"
-						},
-						{
-							"key": "crossAccountRoleArn",
-							"value": "<>"
-						},
-						{
-							"key": "elementType",
-							"value": "ContainerInsights"
-						},
-						{
-							"key": "clusterName",
-							"value": "myclustTT"
-						},
-						{
-							"key": "query",
-							"value": "cpu_utilization_panel"
-						},
-						{
-							"key": "responseType",
-							"value": "frame"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "eksMemoryutilization_panel",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": ""
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "eksCpuGraph",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": ""
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "eksMemoryUtilization",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": ""
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "eksStorageUtilization",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": ""
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "eksNetworkUtilization",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": ""
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "eksCpuRequests",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": ""
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "eksAllocatableCpu",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": ""
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "eksCpuLimits",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": ""
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "ec2NetworkUtilization",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": ""
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "ec2StorageUtilization",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": ""
-				}
-			},
-			"response": []
+			]
 		}
 	]
 }
