@@ -170,5 +170,8 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	if elementType == "EC2" && query == "net_outpackets_panel" {
 		EC2.GetNetworkOutPacketsPanel(w, r)
 	}
+	if elementType == "EC2" && query == "net_throughput_panel" {
+		EC2.GetNetworkThroughputPanel(w, r)
+	}
 
 }
