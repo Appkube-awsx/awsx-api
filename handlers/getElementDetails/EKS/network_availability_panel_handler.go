@@ -25,8 +25,8 @@ var (
 
 // TimeSeriesDataPoint represents a single data point in a time series
 type TimeSeriesDataPoint struct {
-	Timestamp    time.Time `json:"timestamp"`
-	Availability float64   `json:"availability"`
+	Timestamp    time.Time `json:"Timestamp"`
+	Availability float64   `json:"Availability"`
 }
 
 // GetEKSNetworkAvailabilityPanel handles the request for the network availability panel data

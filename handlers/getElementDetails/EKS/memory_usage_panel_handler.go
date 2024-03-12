@@ -55,7 +55,7 @@ func GetEKSMemoryUsagePanel(w http.ResponseWriter, r *http.Request) {
 		RawData []struct {
 			Timestamp time.Time
 			Value     float64
-		} `json:"RawData"`
+		} `json:"MemoryUsage"`
 	}
 
 	// Authenticate and get client authentication details

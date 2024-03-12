@@ -20,9 +20,9 @@ var (
 )
 
 type NodeCapacityMetrics struct {
-	CPUUsage     float64 `json:"cpu_usage"`
-	MemoryUsage  float64 `json:"memory_usage"`
-	StorageAvail float64 `json:"storage_avail"`
+	CPUUsage     float64 `json:"Cpu_Usage"`
+	MemoryUsage  float64 `json:"Memory_Usage"`
+	StorageAvail float64 `json:"Storage_Avail"`
 }
 
 type NodeCapacityPanel struct {

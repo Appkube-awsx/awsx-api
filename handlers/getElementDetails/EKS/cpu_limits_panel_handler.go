@@ -55,7 +55,7 @@ func GetEKSCPULimitsPanel(w http.ResponseWriter, r *http.Request) {
 		RawData []struct {
 			Timestamp time.Time
 			Value     float64
-		} `json:"RawData"`
+		} `json:"CpuLimits"`
 	}
 
 	// Authenticate and get client authentication details

@@ -99,9 +99,9 @@ func GetEKSNetworkUtilizationPanel(w http.ResponseWriter, r *http.Request) {
 			log.Infof("creating response json")
 
 			type NetworkResult struct {
-				InboundTraffic  float64 `json:"inboundTraffic"`
-				OutboundTraffic float64 `json:"outboundTraffic"`
-				DataTransferred float64 `json:"dataTransferred"`
+				InboundTraffic  float64 `json:"InboundTraffic"`
+				OutboundTraffic float64 `json:"OutboundTraffic"`
+				DataTransferred float64 `json:"DataTransferred"`
 			}
 
 			var data NetworkResult

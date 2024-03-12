@@ -28,7 +28,7 @@ type MemoryUtilizationResult struct {
 	RawData []struct {
 		Timestamp time.Time
 		Value     float64
-	} `json:"RawData"`
+	} `json:"MemoryUtilizationGraph"`
 }
 
 // GetEKSMemoryUtilizationGraphPanel handles the request for the memory utilization graph panel data

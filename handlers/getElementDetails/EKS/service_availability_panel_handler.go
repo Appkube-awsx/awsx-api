@@ -24,8 +24,8 @@ var (
 )
 
 type ServiceTimeSeriesDataPoint struct {
-	Timestamp    time.Time `json:"timestamp"`
-	Availability float64   `json:"availability"`
+	Timestamp    time.Time `json:"Timestamp"`
+	Availability float64   `json:"Availability"`
 }
 
 func GetEKSServiceAvailabilityPanel(w http.ResponseWriter, r *http.Request) {

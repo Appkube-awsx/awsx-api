@@ -17,8 +17,8 @@ import (
 
 // NodeDowntimeDataPoint represents a node downtime data point.
 type NodeDowntimeDataPoint struct {
-	Timestamp    time.Time `json:"timestamp"`
-	NodeDowntime float64   `json:"nodeDowntime"`
+	Timestamp    time.Time `json:"Timestamp"`
+	NodeDowntime float64   `json:"NodeDowntime"`
 }
 
 var (

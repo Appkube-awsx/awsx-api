@@ -52,10 +52,10 @@ func GetEKSAllocatableCPUPanel(w http.ResponseWriter, r *http.Request) {
 	}
 
 	type allocatableResult struct {
-		RawData []struct {
+		AllocatableCPU []struct {
 			Timestamp time.Time `json:"Timestamp"`
 			Value     float64   `json:"AllocatableCPU"`
-		} `json:"RawData"`
+		} `json:"AllocatableCPU"`
 	}
 
 	// Authenticate and get client authentication details

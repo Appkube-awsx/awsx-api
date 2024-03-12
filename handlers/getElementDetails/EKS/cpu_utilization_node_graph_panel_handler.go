@@ -27,7 +27,7 @@ type CPUUtilizationNodeResult struct {
 	RawData []struct {
 		Timestamp time.Time
 		Value     float64
-	} `json:"RawData"`
+	} `json:"CpuUtilizationNodeGraph"`
 }
 
 func GetEKSCPUUtilizationNodeGraphPanel(w http.ResponseWriter, r *http.Request) {

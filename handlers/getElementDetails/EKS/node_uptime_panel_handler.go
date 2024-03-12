@@ -25,8 +25,8 @@ var (
 
 // NodeUptimeDataPoint represents each data point in the node uptime panel
 type NodeUptimeDataPoint struct {
-	Timestamp  time.Time `json:"timestamp"`
-	UptimeDays float64   `json:"uptimeDays"`
+	Timestamp  time.Time `json:"Timestamp"`
+	UptimeDays float64   `json:"UptimeDays"`
 }
 
 // NodeUptimePanelHandler handles the request for the node uptime panel data

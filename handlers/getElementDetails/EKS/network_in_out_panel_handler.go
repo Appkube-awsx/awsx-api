@@ -26,9 +26,9 @@ var (
 // NetworkInOutResult represents the result for network in/out panel
 type NetworkInOutResult struct {
 	RawData []struct {
-		Timestamp time.Time `json:"timestamp"`
-		Value     float64   `json:"value"`
-	} `json:"RawData"`
+		Timestamp time.Time `json:"Timestamp"`
+		Value     float64   `json:"Value"`
+	} `json:"NetworkInOut"`
 }
 
 // GetEKSNetworkInOutPanel handles the request for the network in/out panel data
