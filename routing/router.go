@@ -104,7 +104,20 @@ func NewRoutes() (r *Routes) {
 		//	handlers.GetEc2,
 		//	true,
 		//},
-
+		{
+			"readiness",
+			"GET",
+			"/readiness",
+			handlers.Readiness,
+			false,
+		},
+		{
+			"liveness",
+			"GET",
+			"/liveness",
+			handlers.Liveness,
+			false,
+		},
 		{
 			"AwsxCloudWatchQueryApi",
 			"GET",

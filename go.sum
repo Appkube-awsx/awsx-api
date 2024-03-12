@@ -18,6 +18,8 @@ github.com/Appkube-awsx/awsx-getelementdetails v1.2.7 h1:4zlIqBoc8TsaftEfIQD12/O
 github.com/Appkube-awsx/awsx-getelementdetails v1.2.7/go.mod h1:nUpu6sN+Z8phPjnjFIxAKmMEiEHgSyrY4KmiL0dAXbs=
 github.com/Appkube-awsx/awsx-getlandingzonedetails v1.0.1 h1:aE0EZNLUHNbo/AyNrfxYlPI/t3Ewt2d10Pee9Nm40gE=
 github.com/Appkube-awsx/awsx-getlandingzonedetails v1.0.1/go.mod h1:8RqnSCioulmXv3HrEvBkuEwTX3i6y1DDbOi/gVEPIlY=
+github.com/Appkube-awsx/awsx-getlandingzonedetails v1.0.2 h1:IH8/qydxHnvAJB5DoeYqOx/evExl5Sjr2wD6FocNMMQ=
+github.com/Appkube-awsx/awsx-getlandingzonedetails v1.0.2/go.mod h1:8RqnSCioulmXv3HrEvBkuEwTX3i6y1DDbOi/gVEPIlY=
 github.com/aws/aws-sdk-go v1.50.10 h1:H3NQvqRUKG+9oysCKTIyylpkqfPA7MiBtzTnu/cIGqE=
 github.com/aws/aws-sdk-go v1.50.10/go.mod h1:LF8svs817+Nz+DmiMQKTO3ubZ/6IaTpq3TjupRn3Eqk=
 github.com/beorn7/perks v1.0.1 h1:VlbKKnNfV8bJzeqoa4cOKqO6bYr3WgKZxO8Z16+hsOM=
