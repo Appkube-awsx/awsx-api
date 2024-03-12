@@ -73,7 +73,7 @@ func GetAlertsAndNotificationsPanel(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		log.Infof("response type :" + responseType)
-		if responseType == "frame" {
+		if responseType == "json" {
 			err = json.NewEncoder(w).Encode(notifications)
 			if err != nil {
 				http.Error(w, fmt.Sprintf("Exception: %s ", err), http.StatusInternalServerError)
