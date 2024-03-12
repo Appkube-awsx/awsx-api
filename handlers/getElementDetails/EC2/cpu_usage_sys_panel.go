@@ -20,7 +20,7 @@ type cpusysusagesys struct {
 	RawData []struct {
 		Timestamp time.Time
 		Value     float64
-	} `json:"RawData"`
+	} `json:"CPU_Sys"`
 }
 
 var (
