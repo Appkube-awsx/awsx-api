@@ -90,9 +90,23 @@ func GetNetworkUtilizationPanel(w http.ResponseWriter, r *http.Request) {
 					return
 				}
 			} else if filter == "DataTransferred" {
-				err = json.NewEncoder(w).Encode(cloudwatchMetricData["DataTransferred"])
-				if err != nil {
-					http.Error(w, fmt.Sprintf("Exception: %s ", err), http.StatusInternalServerError)
+				// Calculate Data Transferred (sum of inbound and outbound)
+				if cloudwatchMetricData["InboundTraffic"] != nil && cloudwatchMetricData["OutboundTraffic"] != nil {
+					inbound := extractMetricData(cloudwatchMetricData["InboundTraffic"])
+					outbound := extractMetricData(cloudwatchMetricData["OutboundTraffic"])
+
+					dataTransferred := make(map[string]float64)
+					for timestamp, value := range inbound {
+						dataTransferred[timestamp] = value + outbound[timestamp]
+					}
+					err = json.NewEncoder(w).Encode(dataTransferred)
+					if err != nil {
+						http.Error(w, fmt.Sprintf("Exception: %s ", err), http.StatusInternalServerError)
+						return
+					}
+				} else {
+					// Handle case where one or both metrics are missing
+					http.Error(w, "Inbound or Outbound traffic metrics are not available", http.StatusInternalServerError)
 					return
 				}
 			} else {
@@ -105,9 +119,9 @@ func GetNetworkUtilizationPanel(w http.ResponseWriter, r *http.Request) {
 		} else {
 			log.Infof("creating response json")
 			type UsageData struct {
-				InboundTraffic float64 `json:"InboundTraffic"`
-				OutboundTraffic float64 `json:"OutboundTraffic"`
-				DataTransferred float64 `json:"DataTrasferred"`
+				InboundTraffic  float64 `json:"inboundTraffic"`
+				OutboundTraffic float64 `json:"outboundTraffic"`
+				DataTransferred float64 `json:"dataTransferred"`
 			}
 			var data UsageData
 			err := json.Unmarshal([]byte(jsonString), &data)
@@ -134,6 +148,19 @@ func GetNetworkUtilizationPanel(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
+}
+
+// Function to extract metric data from GetMetricDataOutput
+func extractMetricData(metricData *cloudwatch.GetMetricDataOutput) map[string]float64 {
+	data := make(map[string]float64)
+	for i := range metricData.MetricDataResults {
+		for j := range metricData.MetricDataResults[i].Timestamps {
+			timestamp := metricData.MetricDataResults[i].Timestamps[j].String()
+			value := *metricData.MetricDataResults[i].Values[j]
+			data[timestamp] = value
+		}
+	}
+	return data
 }
 
 func netauthenticateAndCache(commandParam model.CommandParam) (*model.Auth, error) {
@@ -164,13 +191,13 @@ func netcloudwatchClientCache(clientAuth model.Auth) (*cloudwatch.CloudWatch, er
 
 	netclientCacheLock.Lock()
 	if client, ok := netclientCache.Load(cacheKey); ok {
-		log.Infof("cloudwatch client found in cache for given cross acount role: %s", cacheKey)
+		log.Infof("cloudwatch client found in cache for given cross account role: %s", cacheKey)
 		netclientCacheLock.Unlock()
 		return client.(*cloudwatch.CloudWatch), nil
 	}
 
 	// If not in cache, create new cloud watch client
-	log.Infof("creating new cloudwatch client for given cross acount role: %s", cacheKey)
+	log.Infof("creating new cloudwatch client for given cross account role: %s", cacheKey)
 	cloudWatchClient := awsclient.GetClient(clientAuth, awsclient.CLOUDWATCH).(*cloudwatch.CloudWatch)
 
 	netclientCache.Store(cacheKey, cloudWatchClient)
