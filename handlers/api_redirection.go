@@ -176,5 +176,8 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	if elementType == "EC2" && query == "latency_panel" {
 		EC2.GetLatencyPanel(w, r)
 	}
+	if elementType == "EC2" && query == "alerts_and_notifications_panel" {
+		EC2.GetAlertsAndNotificationsPanel(w, r)
+	}
 
 }
