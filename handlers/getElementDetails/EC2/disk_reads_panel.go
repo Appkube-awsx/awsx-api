@@ -20,7 +20,7 @@ type diskread struct {
 	RawData []struct {
 		Timestamp time.Time
 		Value     float64
-	} `json:"RawData"`
+	} `json:"DiskRead"`
 }
 
 var (

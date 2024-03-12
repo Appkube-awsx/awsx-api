@@ -20,7 +20,7 @@ type memusageused struct {
 	RawData []struct {
 		Timestamp time.Time
 		Value     float64
-	} `json:"RawData"`
+	} `json:"MemUsageUsed"`
 }
 
 var (

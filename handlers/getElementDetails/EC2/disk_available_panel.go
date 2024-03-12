@@ -20,7 +20,7 @@ type diskavailable struct {
 	RawData []struct {
 		Timestamp time.Time
 		Value     float64
-	} `json:"RawData"`
+	} `json:"DiskAvailable"`
 }
 
 var (

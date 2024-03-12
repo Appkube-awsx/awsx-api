@@ -20,7 +20,7 @@ type diskUsed struct {
 	RawData []struct {
 		Timestamp time.Time
 		Value     float64
-	} `json:"RawData"`
+	} `json:"DiskUsed"`
 }
 
 var (

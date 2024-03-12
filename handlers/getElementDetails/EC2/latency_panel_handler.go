@@ -23,7 +23,7 @@ type Ec2Latency struct {
 }
 
 type LatencyData struct {
-	Latency float64 `json:"latency"`
+	Latency float64 `json:"Latency"`
 }
 
 var (

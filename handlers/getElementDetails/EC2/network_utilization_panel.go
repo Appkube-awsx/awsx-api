@@ -119,9 +119,9 @@ func GetNetworkUtilizationPanel(w http.ResponseWriter, r *http.Request) {
 		} else {
 			log.Infof("creating response json")
 			type UsageData struct {
-				InboundTraffic  float64 `json:"inboundTraffic"`
-				OutboundTraffic float64 `json:"outboundTraffic"`
-				DataTransferred float64 `json:"dataTransferred"`
+				InboundTraffic  float64 `json:"InboundTraffic"`
+				OutboundTraffic float64 `json:"OutboundTraffic"`
+				DataTransferred float64 `json:"DataTransferred"`
 			}
 			var data UsageData
 			err := json.Unmarshal([]byte(jsonString), &data)
