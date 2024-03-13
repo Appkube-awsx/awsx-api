@@ -179,5 +179,13 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	if elementType == "EC2" && query == "alerts_and_notifications_panel" {
 		EC2.GetAlertsAndNotificationsPanel(w, r)
 	}
-
+	// if elementType == "EC2" && query == "instance_running_hour_panel" {
+	// 	EC2.GetInstanceRunningHoursPanelHandler(w, r)
+	// }
+	if elementType == "EC2" && query == "network_inbound_panel" {
+		EC2.GetNetworkInboundPanell(w, r)
+	}
+	if elementType == "EC2" && query == "network_outbound_panel" {
+		EC2.GetNetworkOutboundPanell(w, r)
+	}
 }
