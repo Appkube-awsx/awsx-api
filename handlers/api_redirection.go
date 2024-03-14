@@ -67,9 +67,9 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	if elementType == "EKS" && query == "network_throughput_single_panel" {
 		EKS.GetNetworkThroughputSinglePanel(w, r)
 	}
-	// if elementType == "EKS" && query == "node_capacity_panel" {
-	// 	EKS.NodeCapacityPanelHandler(w, r)
-	// }
+	if elementType == "EKS" && query == "node_capacity_panel" {
+		EKS.GetEKSNodeCapacityPanel(w, r)
+	}
 	if elementType == "EKS" && query == "node_downtime_panel" {
 		EKS.GetEKSDowntimePanel(w, r)
 	}
@@ -179,8 +179,8 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	if elementType == "EC2" && query == "alerts_and_notifications_panel" {
 		EC2.GetAlertsAndNotificationsPanel(w, r)
 	}
-	// if elementType == "EC2" && query == "instance_running_hour_panel" {
-	// 	EC2.GetInstanceRunningHoursPanelHandler(w, r)
+	// if elementType == "EC2" && query == "instance_start_count_panel" {
+	// 	EC2.InstanceStartPanelHandler(w, r)
 	// }
 	if elementType == "EC2" && query == "network_inbound_panel" {
 		EC2.GetNetworkInboundPanell(w, r)
