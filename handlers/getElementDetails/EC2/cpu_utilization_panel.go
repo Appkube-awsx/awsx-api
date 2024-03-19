@@ -4,11 +4,12 @@ import (
 	"awsx-api/log"
 	"encoding/json"
 	"fmt"
+	"net/http"
+	"sync"
+
 	"github.com/Appkube-awsx/awsx-common/authenticate"
 	"github.com/Appkube-awsx/awsx-common/awsclient"
 	"github.com/aws/aws-sdk-go/service/cloudwatch"
-	"net/http"
-	"sync"
 
 	"github.com/Appkube-awsx/awsx-common/model"
 	"github.com/Appkube-awsx/awsx-getelementdetails/handler/EC2"
@@ -78,6 +79,11 @@ func GetCpuUtilizationPanel(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		log.Infof("response type :" + responseType)
+		if jsonString == "null" {
+			// Return "null" response if data is not available
+			w.Write([]byte("null"))
+			return
+		}
 		if responseType == "frame" {
 			log.Infof("creating response frame")
 			log.Infof("response type :" + responseType)
