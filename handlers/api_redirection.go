@@ -192,4 +192,10 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	if elementType == "EC2" && query == "network_outbound_panel" {
 		EC2.GetNetworkOutboundPanell(w, r)
 	}
+	if elementType == "EC2" && query == "instance_status_panel" {
+		EC2.GetInstanceStatus(w, r)
+	}
+	if elementType == "EC2" && query == "error_rate_panel" {
+		EC2.GetInstanceErrorRatePanel(w, r)
+	}
 }
