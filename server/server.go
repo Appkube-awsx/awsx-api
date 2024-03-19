@@ -80,8 +80,8 @@ func NewServer() *Server {
 		// Addr:         fmt.Sprintf("%v:%v", conf.Server.Address, conf.Server.Port),
 		Addr: fmt.Sprintf("%v:%v", conf.Server.Address, conf.Server.Port),
 		// TLSConfig:    tlsConfig,
-		ReadTimeout:  30 * time.Second,
-		WriteTimeout: 30 * time.Second,
+		ReadTimeout:  120 * time.Second,
+		WriteTimeout: 120 * time.Second,
 	}
 
 	// return our new Server

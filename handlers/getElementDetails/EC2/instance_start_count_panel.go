@@ -96,21 +96,19 @@ func InstanceStartCountPanelHandler(w http.ResponseWriter, r *http.Request) {
 		sendErrorResponse(w, "Failed to get instance start count metrics data", http.StatusInternalServerError)
 		return
 	}
-
-	log.Println("Instance start count metrics data retrieved successfully")
-
-	// Marshal the data to JSON
-	responseJSON, err := json.Marshal(cloudwatchMetricData)
+	data, err := json.Marshal(cloudwatchMetricData)
 	if err != nil {
-		sendErrorResponse(w, fmt.Sprintf("Failed to marshal response data: %s", err), http.StatusInternalServerError)
+		sendErrorResponse(w, fmt.Sprintf("Failed to encode data: %s", err), http.StatusInternalServerError)
 		return
 	}
 
-	log.Println("Response data marshaled successfully")
-
 	// Write the JSON response
 	w.WriteHeader(http.StatusOK)
-	w.Write(responseJSON)
+	if _, err := w.Write(data); err != nil {
+		sendErrorResponse(w, fmt.Sprintf("Failed to write response: %s", err), http.StatusInternalServerError)
+		return
+	}
+
 }
 
 func authenticateAndCacheInstanceStartPanel(commandParam model.CommandParam) (*model.Auth, error) {
