@@ -79,11 +79,7 @@ func GetCpuUtilizationPanel(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		log.Infof("response type :" + responseType)
-		if jsonString == "null" {
-			// Return "null" response if data is not available
-			w.Write([]byte("null"))
-			return
-		}
+
 		if responseType == "frame" {
 			log.Infof("creating response frame")
 			log.Infof("response type :" + responseType)
