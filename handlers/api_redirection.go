@@ -183,6 +183,9 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	if elementType == "EC2" && query == "instance_start_count_panel" {
 		EC2.InstanceStartCountPanelHandler(w, r)
 	}
+	if elementType == "EC2" && query == "instance_stop_count_panel" {
+		EC2.InstanceStopCountPanelHandler(w, r)
+	}
 	// if elementType == "EC2" && query == "instance_running_hour_panel" {
 	// 	EC2.InstanceStartPanelHandler(w, r)
 	// }
@@ -203,5 +206,3 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	}
 
 }
-
-
