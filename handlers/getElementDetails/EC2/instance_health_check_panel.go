@@ -1,50 +1,48 @@
 package EC2
 
 import (
-	"awsx-api/log"
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 	"sync"
-	"time"
 
 	"github.com/Appkube-awsx/awsx-common/authenticate"
 	"github.com/Appkube-awsx/awsx-common/awsclient"
 	"github.com/Appkube-awsx/awsx-common/model"
 	"github.com/Appkube-awsx/awsx-getelementdetails/handler/EC2"
-	"github.com/aws/aws-sdk-go/service/cloudwatch"
+	"github.com/aws/aws-sdk-go/service/cloudwatchlogs"
 	"github.com/spf13/cobra"
 )
 
-type InstancHealthCheckPanel struct {
-	RawData []struct {
-		Timestamp time.Time
-		Value     float64
-	} `json:"InstanceHealthCheckPanel"`
-}
-
 var (
-	authHealthCacheStatus       sync.Map
-	clientHealthCacheStatus     sync.Map
-	authHealthCacheLockStatus   sync.RWMutex
-	clientHealthCacheLockStatus sync.RWMutex
+	authCacheHealth       sync.Map
+	clientCacheHealth     sync.Map
+	authCacheLockHealth   sync.RWMutex
+	clientCacheLockHealth sync.RWMutex
 )
 
 func GetInstanceHealthCheck(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
-	region := r.URL.Query().Get("zone")
-	elementId := r.URL.Query().Get("elementId")
-	elementApiUrl := r.URL.Query().Get("cmdbApiUrl")
-	elementType := r.URL.Query().Get("elementType")
-	crossAccountRoleArn := r.URL.Query().Get("crossAccountRoleArn")
-	externalId := r.URL.Query().Get("externalId")
-	responseType := r.URL.Query().Get("responseType")
-	instanceId := r.URL.Query().Get("instanceId")
-	startTime := r.URL.Query().Get("startTime")
-	endTime := r.URL.Query().Get("endTime")
-	commandParam := model.CommandParam{}
+	// Extract parameters from the URL query
+	queries := r.URL.Query()
+	region := queries.Get("zone")
+	elementId := queries.Get("elementId")
+	elementApiUrl := queries.Get("cmdbApiUrl")
+	crossAccountRoleArn := queries.Get("crossAccountRoleArn")
+	externalId := queries.Get("externalId")
+	responseType := queries.Get("responseType")
+	instanceId := queries.Get("instanceId")
+	startTime := queries.Get("startTime")
+	endTime := queries.Get("endTime")
+	logGroupName := queries.Get("logGroupName")
 
+	log.Printf("Received request with parameters: region=%s, elementId=%s, elementApiUrl=%s, crossAccountRoleArn=%s, externalId=%s, responseType=%s, instanceId=%s, startTime=%s, endTime=%s, logGroupName=%s\n",
+		region, elementId, elementApiUrl, crossAccountRoleArn, externalId, responseType, instanceId, startTime, endTime, logGroupName)
+
+	// Prepare command parameters
+	commandParam := model.CommandParam{}
 	if elementId != "" {
 		commandParam.CloudElementId = elementId
 		commandParam.CloudElementApiUrl = elementApiUrl
@@ -56,84 +54,97 @@ func GetInstanceHealthCheck(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Authenticate and get client credentials
-	clientAuth, err := authenticateHealthAndCacheStatus(commandParam)
+	clientAuth, err := authenticateAndCacheHealth(commandParam)
 	if err != nil {
-		http.Error(w, fmt.Sprintf("Authentication failed: %s", err), http.StatusInternalServerError)
+		sendErrorresponse(w, fmt.Sprintf("Authentication failed: %s", err), http.StatusInternalServerError)
 		return
 	}
 
-	// Prepare the command for fetching instance status
+	log.Println("Authentication successful")
+
+	// Create CloudWatch Logs client
+	cloudWatchLogs, err := cloudwatchClientCacheHealth(*clientAuth)
+	if err != nil {
+		senderrorresponse(w, fmt.Sprintf("Failed to create CloudWatch client: %s", err), http.StatusInternalServerError)
+		return
+	}
+
+	log.Println("CloudWatch client created successfully", cloudWatchLogs)
+
+	// Create Cobra command for passing flags
 	cmd := &cobra.Command{}
-	cmd.PersistentFlags().StringVar(&elementId, "elementId", r.URL.Query().Get("elementId"), "Description of the elementId flag")
-	cmd.PersistentFlags().StringVar(&instanceId, "instanceId", r.URL.Query().Get("instanceId"), "Description of the instanceId flag")
-	cmd.PersistentFlags().StringVar(&elementType, "elementType", r.URL.Query().Get("elementType"), "Description of the elementType flag")
-	cmd.PersistentFlags().StringVar(&startTime, "startTime", r.URL.Query().Get("startTime"), "Description of the startTime flag")
-	cmd.PersistentFlags().StringVar(&endTime, "endTime", r.URL.Query().Get("endTime"), "Description of the endTime flag")
-	cmd.PersistentFlags().StringVar(&responseType, "responseType", r.URL.Query().Get("responseType"), "responseType flag - json/frame")
+	cmd.PersistentFlags().String("elementId", elementId, "Description of the elementId flag")
+	cmd.PersistentFlags().String("instanceId", instanceId, "Description of the instanceId flag")
+	cmd.PersistentFlags().String("elementType", queries.Get("elementType"), "Description of the elementType flag")
+	cmd.PersistentFlags().String("startTime", startTime, "Description of the startTime flag")
+	cmd.PersistentFlags().String("endTime", endTime, "Description of the endTime flag")
+	cmd.PersistentFlags().String("responseType", responseType, "responseType flag - json/frame")
+	cmd.PersistentFlags().String("logGroupName", logGroupName, "logGroupName flag - json/frame")
 
-	// Fetch instance status notifications
-	notifications := EC2.GetInstanceHealthCheck(clientAuth)
-	if err != nil {
-		http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
+	// Parse flags
+	if err := cmd.ParseFlags(nil); err != nil {
+		sendErrorresponse(w, fmt.Sprintf("Failed to parse flags: %s", err), http.StatusInternalServerError)
 		return
 	}
 
-	// Encode the notifications into JSON format
-	jsonBytes, err := json.Marshal(notifications)
+	log.Println("Flags parsed successfully")
+
+	// Call the function to get instance error rate metrics data
+	cloudwatchMetricData, err := EC2.GetInstanceHealthCheck()
+
+	data, err := json.Marshal(cloudwatchMetricData)
 	if err != nil {
-		http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
+		sendErrorresponse(w, fmt.Sprintf("Failed to encode data: %s", err), http.StatusInternalServerError)
 		return
 	}
 
-	// Set response headers
-	w.Header().Set("Content-Type", "application/json")
-
-	// Write JSON response
-	_, err = w.Write(jsonBytes)
-	if err != nil {
-		http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
+	// Write the JSON response
+	w.WriteHeader(http.StatusOK)
+	if _, err := w.Write(data); err != nil {
+		senderrorresponse(w, fmt.Sprintf("Failed to write response: %s", err), http.StatusInternalServerError)
 		return
 	}
-	return
 }
 
-func authenticateHealthAndCacheStatus(commandParam model.CommandParam) (*model.Auth, error) {
+func authenticateAndCacheHealth(commandParam model.CommandParam) (*model.Auth, error) {
 	cacheKey := commandParam.CloudElementId
 
-	authHealthCacheLockStatus.Lock()
-	defer authHealthCacheLockStatus.Unlock()
+	authCacheLockHealth.Lock()
+	defer authCacheLockHealth.Unlock()
 
-	if auth, ok := authHealthCacheStatus.Load(cacheKey); ok {
-		log.Infof("client credentials found in cache")
+	if auth, ok := authCacheHealth.Load(cacheKey); ok {
 		return auth.(*model.Auth), nil
 	}
 
-	// If not in cache, perform authentication
-	log.Infof("getting client credentials from vault/db")
 	_, clientAuth, err := authenticate.DoAuthenticate(commandParam)
 	if err != nil {
 		return nil, err
 	}
 
-	authHealthCacheStatus.Store(cacheKey, clientAuth)
+	authCacheHealth.Store(cacheKey, clientAuth)
+
 	return clientAuth, nil
 }
-func cloudwatchHealthClientCacheStatus(clientAuth model.Auth) (*cloudwatch.CloudWatch, error) {
+
+func cloudwatchClientCacheHealth(clientAuth model.Auth) (*cloudwatchlogs.CloudWatchLogs, error) {
 	cacheKey := clientAuth.CrossAccountRoleArn
 
-	clientHealthCacheLockStatus.Lock()
-	if client, ok := clientHealthCacheStatus.Load(cacheKey); ok {
-		log.Infof("cloudwatch client found in cache for given cross acount role: %s", cacheKey)
-		clientHealthCacheLockStatus.Unlock()
-		return client.(*cloudwatch.CloudWatch), nil
+	clientCacheLockHealth.Lock()
+	defer clientCacheLockHealth.Unlock()
+
+	if client, ok := clientCacheHealth.Load(cacheKey); ok {
+		return client.(*cloudwatchlogs.CloudWatchLogs), nil
 	}
 
-	// If not in cache, create new cloud watch client
-	log.Infof("creating new cloudwatch client for given cross acount role: %s", cacheKey)
-	cloudWatchClient := awsclient.GetClient(clientAuth, awsclient.CLOUDWATCH).(*cloudwatch.CloudWatch)
-
-	clientHealthCacheStatus.Store(cacheKey, cloudWatchClient)
-	clientHealthCacheLockStatus.Unlock()
+	cloudWatchClient := awsclient.GetClient(clientAuth, awsclient.CLOUDWATCH_LOG).(*cloudwatchlogs.CloudWatchLogs)
+	clientCacheHealth.Store(cacheKey, cloudWatchClient)
 
 	return cloudWatchClient, nil
+}
+
+func senderrorresponse(w http.ResponseWriter, message string, statusCode int) {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(statusCode)
+	response := map[string]string{"error": message}
+	json.NewEncoder(w).Encode(response)
 }

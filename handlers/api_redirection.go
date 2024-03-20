@@ -199,7 +199,7 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 		EC2.GetInstanceStatus(w, r)
 	}
 	if elementType == "EC2" && query == "instance_health_check_panel" {
-		EC2.GetInstanceHealthCheck(w, r)
+		EC2.GetInstanceHealthCheck(w,r)
 	}
 	if elementType == "EC2" && query == "error_rate_panel" {
 		EC2.GetInstanceErrorRatePanel(w, r)
