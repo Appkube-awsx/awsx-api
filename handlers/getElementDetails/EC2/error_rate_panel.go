@@ -3,10 +3,9 @@ package EC2
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 	"sync"
-
-	"log"
 
 	"github.com/Appkube-awsx/awsx-common/authenticate"
 	"github.com/Appkube-awsx/awsx-common/awsclient"
@@ -90,12 +89,9 @@ func GetInstanceErrorRatePanel(w http.ResponseWriter, r *http.Request) {
 
 	log.Println("Flags parsed successfully")
 
-	// Call the function to get instance start count metrics data
-	cloudwatchMetricData := EC2.GetInstanceStartCountPanel(cmd, clientAuth, cloudWatchLogs)
-	if cloudwatchMetricData == nil {
-		sendErrorresponse(w, "Failed to get instance start count metrics data", http.StatusInternalServerError)
-		return
-	}
+	// Call the function to get instance error rate metrics data
+	cloudwatchMetricData := EC2.GetInstanceErrorRatePanel(cmd, clientAuth, cloudWatchLogs)
+
 	data, err := json.Marshal(cloudwatchMetricData)
 	if err != nil {
 		sendErrorresponse(w, fmt.Sprintf("Failed to encode data: %s", err), http.StatusInternalServerError)
@@ -108,7 +104,6 @@ func GetInstanceErrorRatePanel(w http.ResponseWriter, r *http.Request) {
 		sendErrorresponse(w, fmt.Sprintf("Failed to write response: %s", err), http.StatusInternalServerError)
 		return
 	}
-
 }
 
 func authenticateAndCacheError(commandParam model.CommandParam) (*model.Auth, error) {
@@ -142,7 +137,7 @@ func cloudwatchClientCacheError(clientAuth model.Auth) (*cloudwatchlogs.CloudWat
 	}
 
 	cloudWatchClient := awsclient.GetClient(clientAuth, awsclient.CLOUDWATCH_LOG).(*cloudwatchlogs.CloudWatchLogs)
-	clientCacheInstanceStartPanel.Store(cacheKey, cloudWatchClient)
+	clientCacheError.Store(cacheKey, cloudWatchClient)
 
 	return cloudWatchClient, nil
 }
