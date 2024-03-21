@@ -39,7 +39,7 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 		EKS.GetEKSAllocatableCPUPanel(w, r)
 	}
 	if elementType == "EKS" && query == "allocatable_memory_panel" {
-		EKS.GetEKSAllocatableMemoryPanel(w, r)	
+		EKS.GetEKSAllocatableMemoryPanel(w, r)
 	}
 	if elementType == "EKS" && query == "cpu_limits_panel" {
 		EKS.GetEKSCPULimitsPanel(w, r)
@@ -215,5 +215,8 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	}
 	if elementType == "EC2" && query == "hosted_services_overview_panel" {
 		EC2.HostedServicesOverviewHandler(w, r)
+	}
+	if elementType == "EKS" && query == "node_stability_index_panel" {
+		EKS.GetNodeStabilityIndexPanel(w, r)
 	}
 }
