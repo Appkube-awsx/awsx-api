@@ -38,6 +38,9 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	if elementType == "EKS" && query == "allocatable_cpu_panel" {
 		EKS.GetEKSAllocatableCPUPanel(w, r)
 	}
+	if elementType == "EKS" && query == "allocatable_memory_panel" {
+		EKS.GetEKSAllocatableMemoryPanel(w, r)	
+	}
 	if elementType == "EKS" && query == "cpu_limits_panel" {
 		EKS.GetEKSCPULimitsPanel(w, r)
 	}
