@@ -16,6 +16,8 @@ github.com/Appkube-awsx/awsx-getelementdetails v1.6.0 h1:OJkWF8RcCuNvbZ29p6u6mlb
 github.com/Appkube-awsx/awsx-getelementdetails v1.6.0/go.mod h1:y2FNy6NCyF7Ol1+SQ0BY2xleSo4++/z80hN4hQJDlMk=
 github.com/Appkube-awsx/awsx-getelementdetails v1.6.1 h1:tP/SIVj/4G3a4JwXnvx/T5/VFb3G2Q/r9kP19mfi5zo=
 github.com/Appkube-awsx/awsx-getelementdetails v1.6.1/go.mod h1:y2FNy6NCyF7Ol1+SQ0BY2xleSo4++/z80hN4hQJDlMk=
+github.com/Appkube-awsx/awsx-getelementdetails v1.6.2 h1:wmrSTVhrMCH5E+dn+x9AM/8lwyiX9OYCU8iolF6AR4g=
+github.com/Appkube-awsx/awsx-getelementdetails v1.6.2/go.mod h1:y2FNy6NCyF7Ol1+SQ0BY2xleSo4++/z80hN4hQJDlMk=
 github.com/Appkube-awsx/awsx-getlandingzonedetails v1.0.2 h1:IH8/qydxHnvAJB5DoeYqOx/evExl5Sjr2wD6FocNMMQ=
 github.com/Appkube-awsx/awsx-getlandingzonedetails v1.0.2/go.mod h1:8RqnSCioulmXv3HrEvBkuEwTX3i6y1DDbOi/gVEPIlY=
 github.com/aws/aws-sdk-go v1.51.0 h1:EA6GlEYMT3ouCO+v+oTWzKB/vcoHD2T9H9qulRx3lPg=
