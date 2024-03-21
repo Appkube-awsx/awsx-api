@@ -17,7 +17,7 @@ import (
 )
 
 type InstanceStatusPanel struct {
-	RawData []struct {
+	RawData []struct {   
 		Timestamp time.Time
 		Value     float64
 	} `json:"InstanceStatusPanel"`
