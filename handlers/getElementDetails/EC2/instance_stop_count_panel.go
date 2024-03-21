@@ -91,7 +91,7 @@ func InstanceStopCountPanelHandler(w http.ResponseWriter, r *http.Request) {
 	log.Println("Flags parsed successfully")
 
 	// Call the function to get instance start count metrics data
-	cloudwatchMetricData := EC2.GetInstanceStopCountPanel(cmd, clientAuth, cloudWatchLogs)
+	cloudwatchMetricData, err := EC2.GetInstanceStopCountPanel(cmd, clientAuth, cloudWatchLogs)
 	if cloudwatchMetricData == nil {
 		sendErrResponse(w, "Failed to get instance start count metrics data", http.StatusInternalServerError)
 		return
