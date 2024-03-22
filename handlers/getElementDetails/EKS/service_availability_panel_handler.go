@@ -4,16 +4,14 @@ import (
 	"awsx-api/log"
 	"encoding/json"
 	"fmt"
-	"net/http"
-	"sync"
-	"time"
-
 	"github.com/Appkube-awsx/awsx-common/authenticate"
 	"github.com/Appkube-awsx/awsx-common/awsclient"
 	"github.com/Appkube-awsx/awsx-common/model"
 	"github.com/Appkube-awsx/awsx-getelementdetails/handler/EKS"
 	"github.com/aws/aws-sdk-go/service/cloudwatch"
 	"github.com/spf13/cobra"
+	"net/http"
+	"sync"
 )
 
 var (
@@ -24,8 +22,8 @@ var (
 )
 
 type ServiceTimeSeriesDataPoint struct {
-	Timestamp    time.Time `json:"Timestamp"`
-	Availability float64   `json:"Availability"`
+	Timestamp    string  `json:"Timestamp"`
+	Availability float64 `json:"Availability"`
 }
 
 func GetEKSServiceAvailabilityPanel(w http.ResponseWriter, r *http.Request) {
@@ -75,39 +73,51 @@ func GetEKSServiceAvailabilityPanel(w http.ResponseWriter, r *http.Request) {
 		cmd.PersistentFlags().StringVar(&endTime, "endTime", r.URL.Query().Get("endTime"), "Description of the endTime flag")
 		cmd.PersistentFlags().StringVar(&responseType, "responseType", r.URL.Query().Get("responseType"), "responseType flag - json/frame")
 
-		jsonString, serviceAvailabilityData, err := EKS.GetServiceAvailabilityData(cmd, clientAuth, cloudwatchClient)
+		jsonString, _, err := EKS.GetServiceAvailabilityData(cmd, clientAuth, cloudwatchClient)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
 			return
 		}
 		log.Infof("response type: %s", responseType)
 
-		if responseType == "frame" {
-			err = json.NewEncoder(w).Encode(serviceAvailabilityData)
-			if err != nil {
-				http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
-				return
-			}
-		} else {
-			var data []ServiceTimeSeriesDataPoint
-			err := json.Unmarshal([]byte(jsonString), &data)
-			if err != nil {
-				http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
-				return
-			}
-
-			jsonBytes, err := json.Marshal(data)
-			if err != nil {
-				http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
-				return
-			}
-			w.Header().Set("Content-Type", "application/json")
-			_, err = w.Write(jsonBytes)
-			if err != nil {
-				http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
-				return
-			}
+		var data []ServiceTimeSeriesDataPoint
+		if err := json.Unmarshal([]byte(jsonString), &data); err != nil {
+			fmt.Println("Error:", err)
+			return
 		}
+		formattedData := map[string]interface{}{
+			"Service Availability": map[string]interface{}{
+				"Messages": nil,
+				"MetricDataResults": []map[string]interface{}{
+					{
+						"Id":         "",
+						"Label":      "",
+						"Messages":   nil,
+						"StatusCode": "Complete",
+						"Timestamps": getTimestampsService(data),
+						"Values":     getValueService(data),
+					},
+				},
+			},
+		}
+
+		// Convert the formatted data to JSON
+		formattedJson, err := json.MarshalIndent(formattedData, "", "    ")
+		if err != nil {
+			fmt.Println("Error:", err)
+			return
+		}
+
+		fmt.Println(string(formattedJson))
+
+		// Handle JSON response
+		w.Header().Set("Content-Type", "application/json")
+		write, err := w.Write([]byte(formattedJson))
+		if err != nil {
+			http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
+			return
+		}
+		fmt.Println(write)
 	}
 }
 
@@ -143,4 +153,18 @@ func serviceCloudwatchClientCache(clientAuth model.Auth) (*cloudwatch.CloudWatch
 	cloudWatchClient := awsclient.GetClient(clientAuth, awsclient.CLOUDWATCH).(*cloudwatch.CloudWatch)
 	serviceClientCache.Store(cacheKey, cloudWatchClient)
 	return cloudWatchClient, nil
+}
+func getTimestampsService(data []ServiceTimeSeriesDataPoint) []string {
+	timestamps := make([]string, len(data))
+	for i, d := range data {
+		timestamps[i] = d.Timestamp
+	}
+	return timestamps
+}
+func getValueService(data []ServiceTimeSeriesDataPoint) []float64 {
+	values := make([]float64, len(data))
+	for i, d := range data {
+		values[i] = d.Availability
+	}
+	return values
 }

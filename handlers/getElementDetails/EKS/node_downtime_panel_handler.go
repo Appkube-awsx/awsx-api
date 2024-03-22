@@ -3,22 +3,19 @@ package EKS
 import (
 	"encoding/json"
 	"fmt"
-	"net/http"
-	"sync"
-	"time"
-
 	"github.com/Appkube-awsx/awsx-common/authenticate"
 	"github.com/Appkube-awsx/awsx-common/awsclient"
 	"github.com/Appkube-awsx/awsx-common/model"
 	"github.com/Appkube-awsx/awsx-getelementdetails/handler/EKS"
 	"github.com/aws/aws-sdk-go/service/cloudwatch"
 	"github.com/spf13/cobra"
+	"net/http"
+	"sync"
 )
 
-// NodeDowntimeDataPoint represents a node downtime data point.
-type NodeDowntimeDataPoint struct {
-	Timestamp    time.Time `json:"Timestamp"`
-	NodeDowntime float64   `json:"NodeDowntime"`
+type NodeDownData struct {
+	Timestamp    string  `json:"Timestamp"`
+	NodeDowntime float64 `json:"NodeDowntime"`
 }
 
 var (
@@ -81,27 +78,46 @@ func GetEKSDowntimePanel(w http.ResponseWriter, r *http.Request) {
 		cmd.PersistentFlags().StringVar(&responseType, "responseType", r.URL.Query().Get("responseType"), "responseType flag - json/frame")
 
 		// Get node downtime panel data
-		jsonString, rawDowntimeData, err := EKS.GetNodeDowntimePanel(cmd, clientAuth, cloudWatchClient)
+		jsonData, _, err := EKS.GetNodeDowntimePanel(cmd, clientAuth, cloudWatchClient)
+
+		var data []NodeDownData
+		if err := json.Unmarshal([]byte(jsonData), &data); err != nil {
+			fmt.Println("Error:", err)
+			return
+		}
+		formattedData := map[string]interface{}{
+			"Node Downtime": map[string]interface{}{
+				"Messages": nil,
+				"MetricDataResults": []map[string]interface{}{
+					{
+						"Id":         "",
+						"Label":      "",
+						"Messages":   nil,
+						"StatusCode": "Complete",
+						"Timestamps": getTimestampNodeDowntimePanel(data),
+						"Values":     getValuesNodeDowntimePanel(data),
+					},
+				},
+			},
+		}
+
+		// Convert the formatted data to JSON
+		formattedJson, err := json.MarshalIndent(formattedData, "", "    ")
+		if err != nil {
+			fmt.Println("Error:", err)
+			return
+		}
+
+		fmt.Println(string(formattedJson))
+
+		// Handle JSON response
+		w.Header().Set("Content-Type", "application/json")
+		write, err := w.Write([]byte(formattedJson))
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
 			return
 		}
-
-		if responseType == "frame" {
-			//frameData := convertToFrameData(rawDowntimeData)
-			err = json.NewEncoder(w).Encode(rawDowntimeData)
-			if err != nil {
-				http.Error(w, fmt.Sprintf("Exception: %s ", err), http.StatusInternalServerError)
-				return
-			}
-		} else {
-			w.Header().Set("Content-Type", "application/json")
-			_, err := w.Write([]byte(jsonString))
-			if err != nil {
-				http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
-				return
-			}
-		}
+		fmt.Println(write)
 	}
 }
 
@@ -139,4 +155,19 @@ func downtimeCloudwatchClientCache(clientAuth model.Auth) (*cloudwatch.CloudWatc
 	cloudWatchClient := awsclient.GetClient(clientAuth, awsclient.CLOUDWATCH).(*cloudwatch.CloudWatch)
 	downtimeClientCache.Store(cacheKey, cloudWatchClient)
 	return cloudWatchClient, nil
+}
+
+func getTimestampNodeDowntimePanel(data []NodeDownData) []string {
+	timestamps := make([]string, len(data))
+	for i, d := range data {
+		timestamps[i] = d.Timestamp
+	}
+	return timestamps
+}
+func getValuesNodeDowntimePanel(data []NodeDownData) []float64 {
+	values := make([]float64, len(data))
+	for i, d := range data {
+		values[i] = d.NodeDowntime
+	}
+	return values
 }

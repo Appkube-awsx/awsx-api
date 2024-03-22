@@ -1,19 +1,16 @@
 package EKS
 
 import (
-	"awsx-api/log"
 	"encoding/json"
 	"fmt"
-	"net/http"
-	"sync"
-	"time"
-
 	"github.com/Appkube-awsx/awsx-common/authenticate"
 	"github.com/Appkube-awsx/awsx-common/awsclient"
 	"github.com/Appkube-awsx/awsx-common/model"
 	"github.com/Appkube-awsx/awsx-getelementdetails/handler/EKS"
 	"github.com/aws/aws-sdk-go/service/cloudwatch"
 	"github.com/spf13/cobra"
+	"net/http"
+	"sync"
 )
 
 var (
@@ -23,14 +20,34 @@ var (
 	networkThroughputSingleClientCacheLock sync.RWMutex
 )
 
-type NetworkThroughputSingleResult struct {
-	Throughput []struct {
-		Timestamp time.Time
-		Value     float64
-	} `json:"Throughput"`
+type OriginalResponse struct {
+	Messages          interface{} `json:"Messages"`
+	MetricDataResults []struct {
+		ID         string      `json:"Id"`
+		Label      string      `json:"Label"`
+		Messages   interface{} `json:"Messages"`
+		StatusCode string      `json:"StatusCode"`
+		Timestamps interface{} `json:"Timestamps"`
+		Values     interface{} `json:"Values"`
+	} `json:"MetricDataResults"`
+	NextToken interface{} `json:"NextToken"`
 }
 
-// GetNetworkThroughputSinglePanel handles the request for the network throughput single panel data
+type TransformedResponse struct {
+	NetworkThroughput struct {
+		Messages          interface{} `json:"Messages"`
+		MetricDataResults []struct {
+			ID         string      `json:"Id"`
+			Label      string      `json:"Label"`
+			Messages   interface{} `json:"Messages"`
+			StatusCode string      `json:"StatusCode"`
+			Timestamps interface{} `json:"Timestamps"`
+			Values     interface{} `json:"Values"`
+		} `json:"MetricDataResults"`
+		NextToken interface{} `json:"NextToken"`
+	} `json:"Network Throughput"`
+}
+
 func GetNetworkThroughputSinglePanel(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
@@ -83,41 +100,24 @@ func GetNetworkThroughputSinglePanel(w http.ResponseWriter, r *http.Request) {
 		cmd.PersistentFlags().StringVar(&responseType, "responseType", r.URL.Query().Get("responseType"), "responseType flag - json/frame")
 
 		// Get network throughput single panel data
-		jsonString, networkThroughputSingleData, err := EKS.GetNetworkThroughputSinglePanel(cmd, clientAuth, cloudwatchClient)
+		jsonString, _, err := EKS.GetNetworkThroughputSinglePanel(cmd, clientAuth, cloudwatchClient)
+		if err != nil {
+			http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
+			return
+		}
+		transformedData, err := transformResponse(jsonString)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
 			return
 		}
 
-		log.Infof("response type: %s", responseType)
-
-		if responseType == "frame" {
-			err = json.NewEncoder(w).Encode(jsonString)
-			if err != nil {
-				http.Error(w, fmt.Sprintf("Exception: %s ", err), http.StatusInternalServerError)
-				return
-			}
-		} else {
-			var data NetworkThroughputSingleResult
-			err := json.Unmarshal([]byte(networkThroughputSingleData), &data)
-			if err != nil {
-				http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
-				return
-			}
-
-			jsonBytes, err := json.Marshal(data)
-			if err != nil {
-				http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
-				return
-			}
-
-			w.Header().Set("Content-Type", "application/json")
-			_, err = w.Write(jsonBytes)
-			if err != nil {
-				http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
-				return
-			}
+		// Write response
+		w.Header().Set("Content-Type", "application/json")
+		if _, err := w.Write(transformedData); err != nil {
+			http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
+			return
 		}
+
 	}
 }
 
@@ -155,4 +155,26 @@ func networkThroughputSingleCloudwatchClientCache(clientAuth model.Auth) (*cloud
 	cloudWatchClient := awsclient.GetClient(clientAuth, awsclient.CLOUDWATCH).(*cloudwatch.CloudWatch)
 	networkThroughputSingleClientCache.Store(cacheKey, cloudWatchClient)
 	return cloudWatchClient, nil
+}
+func transformResponse(jsonString *cloudwatch.GetMetricDataOutput) ([]byte, error) {
+
+	newJson, err := json.Marshal(jsonString)
+	if err != nil {
+		return nil, err
+	}
+
+	var originalResp OriginalResponse
+	if err := json.Unmarshal(newJson, &originalResp); err != nil {
+		return nil, err
+	}
+
+	transformedResp := TransformedResponse{
+		NetworkThroughput: originalResp,
+	}
+	transformedData, err := json.MarshalIndent(transformedResp, "", "    ")
+	if err != nil {
+		return nil, err
+	}
+
+	return transformedData, nil
 }
