@@ -90,7 +90,7 @@ func GetInstanceErrorRatePanel(w http.ResponseWriter, r *http.Request) {
 	log.Println("Flags parsed successfully")
 
 	// Call the function to get instance error rate metrics data
-	cloudwatchMetricData := EC2.GetInstanceErrorRatePanel(cmd, clientAuth, cloudWatchLogs)
+	cloudwatchMetricData, err := EC2.GetInstanceErrorRatePanel(cmd, clientAuth, cloudWatchLogs)
 
 	data, err := json.Marshal(cloudwatchMetricData)
 	if err != nil {
