@@ -74,7 +74,7 @@ func GetCustomAlert(w http.ResponseWriter, r *http.Request) {
 	cmd.PersistentFlags().String("logGroupName", logGroupName, "logGroupName flag - json/frame")
 
 	// Fetch instance status notifications
-	notifications, err := EC2.GetEc2CustomAlertPanel(cmd, clientAuth)
+	notifications, err := EC2.GetEc2CustomAlertPanel(cmd, clientAuth, nil)
 	if err != nil {
 		http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
 		return
