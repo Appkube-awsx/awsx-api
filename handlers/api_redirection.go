@@ -219,4 +219,7 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	if elementType == "EKS" && query == "node_stability_index_panel" {
 		EKS.GetNodeStabilityIndexPanel(w, r)
 	}
+	if elementType == "EKS" && query == "disk_utilization_panel" {
+		EKS.GetEKSDiskUtilizationPanel(w, r)
+	}
 }
