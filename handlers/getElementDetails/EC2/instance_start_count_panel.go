@@ -3,10 +3,9 @@ package EC2
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 	"sync"
-
-	"log"
 
 	"github.com/Appkube-awsx/awsx-common/authenticate"
 	"github.com/Appkube-awsx/awsx-common/awsclient"
