@@ -93,7 +93,7 @@ func InstanceHourStoppedPanel(w http.ResponseWriter, r *http.Request) {
 	// Call the function to get instance start count metrics data
 	cloudwatchMetricData, err := EC2.GetInstanceStoppedCountPanel(cmd, clientAuth, cloudWatchLogs)
 	if cloudwatchMetricData == nil {
-		sendErrorrResponse(w, "Failed to get instance start count metrics data", http.StatusInternalServerError)
+		sendErrorrResponse(w, "Failed to get instance hours stopped metrics data", http.StatusInternalServerError)
 		return
 	}
 	data, err := json.Marshal(cloudwatchMetricData)
@@ -114,10 +114,10 @@ func InstanceHourStoppedPanel(w http.ResponseWriter, r *http.Request) {
 func authenticateAndCacheInstanceHourStoppedPanel(commandParam model.CommandParam) (*model.Auth, error) {
 	cacheKey := commandParam.CloudElementId
 
-	authCacheLockInstanceStartPanel.Lock()
-	defer authCacheLockInstanceStartPanel.Unlock()
+	authCacheLockInstancehourStoppedPanel.Lock()
+	defer authCacheLockInstancehourStoppedPanel.Unlock()
 
-	if auth, ok := authCacheInstanceStartPanel.Load(cacheKey); ok {
+	if auth, ok := authCacheInstancehourStoppedPanel.Load(cacheKey); ok {
 		return auth.(*model.Auth), nil
 	}
 
@@ -126,7 +126,7 @@ func authenticateAndCacheInstanceHourStoppedPanel(commandParam model.CommandPara
 		return nil, err
 	}
 
-	authCacheInstanceStartPanel.Store(cacheKey, clientAuth)
+	authCacheInstancehourStoppedPanel.Store(cacheKey, clientAuth)
 
 	return clientAuth, nil
 }
@@ -134,15 +134,15 @@ func authenticateAndCacheInstanceHourStoppedPanel(commandParam model.CommandPara
 func cloudwatchClientCacheInstanceHourStoppedPanel(clientAuth model.Auth) (*cloudwatchlogs.CloudWatchLogs, error) {
 	cacheKey := clientAuth.CrossAccountRoleArn
 
-	clientCacheLockInstanceStartPanel.Lock()
-	defer clientCacheLockInstanceStartPanel.Unlock()
+	clientCacheLockInstancehourStoppedPanel.Lock()
+	defer clientCacheLockInstancehourStoppedPanel.Unlock()
 
-	if client, ok := clientCacheInstanceStartPanel.Load(cacheKey); ok {
+	if client, ok := clientCacheInstancehourStoppedPanel.Load(cacheKey); ok {
 		return client.(*cloudwatchlogs.CloudWatchLogs), nil
 	}
 
 	cloudWatchClient := awsclient.GetClient(clientAuth, awsclient.CLOUDWATCH_LOG).(*cloudwatchlogs.CloudWatchLogs)
-	clientCacheInstanceStartPanel.Store(cacheKey, cloudWatchClient)
+	clientCacheInstancehourStoppedPanel.Store(cacheKey, cloudWatchClient)
 
 	return cloudWatchClient, nil
 }
