@@ -223,10 +223,19 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	if elementType == "EC2" && query == "hosted_services_overview_panel" {
 		EC2.HostedServicesOverviewHandler(w, r)
 	}
+	if elementType == "EC2" && query == "storage_utilization_panel" {
+		EC2.GetStorageUtilizationPanel(w, r)
+	}
 	if elementType == "EKS" && query == "node_stability_index_panel" {
 		EKS.GetNodeStabilityIndexPanel(w, r)
 	}
 	if elementType == "EKS" && query == "disk_utilization_panel" {
 		EKS.GetEKSDiskUtilizationPanel(w, r)
+	}
+	if elementType == "EKS" && query == "node_condition_panel" {
+		EKS.GetEKSNodeConditionPanel(w, r)
+	}
+	if elementType == "EKS" && query == "storage_utilization_panel" {
+		EKS.GetStorageUtilizationPanell(w, r)
 	}
 }
