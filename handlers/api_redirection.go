@@ -226,6 +226,9 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	if elementType == "EC2" && query == "storage_utilization_panel" {
 		EC2.GetStorageUtilizationPanel(w, r)
 	}
+	if elementType == "EC2" && query == "disk_io_panel" {
+		EC2.GetDiskIOPanel(w, r)
+	}
 	if elementType == "EKS" && query == "node_stability_index_panel" {
 		EKS.GetNodeStabilityIndexPanel(w, r)
 	}
