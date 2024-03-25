@@ -229,6 +229,12 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	if elementType == "EC2" && query == "disk_io_panel" {
 		EC2.GetDiskIOPanel(w, r)
 	}
+	if elementType == "EC2" && query == "cpu_utilization_graph_panel" {
+		EC2.GetCPUUtilizationPanel(w, r)
+	}
+	if elementType == "EC2" && query == "memory_utilization_graph_panel" {
+		EC2.GetMemoryUtilizationPaneel(w, r)
+	}
 	if elementType == "EKS" && query == "node_stability_index_panel" {
 		EKS.GetNodeStabilityIndexPanel(w, r)
 	}
