@@ -235,6 +235,9 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	if elementType == "EC2" && query == "memory_utilization_graph_panel" {
 		EC2.GetMemoryUtilizationPaneel(w, r)
 	}
+	if elementType == "EKS" && query == "resource_utilization_patterns_panel" {
+		EKS.GetResourceUtilizationPanel(w, r)
+	}
 	if elementType == "EKS" && query == "node_stability_index_panel" {
 		EKS.GetNodeStabilityIndexPanel(w, r)
 	}
@@ -246,5 +249,8 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	}
 	if elementType == "EKS" && query == "storage_utilization_panel" {
 		EKS.GetStorageUtilizationPanell(w, r)
+	}
+	if elementType == "EKS" && query == "node_failure_panel" {
+		EKS.GetNodeFailurePanel(w, r)
 	}
 }
