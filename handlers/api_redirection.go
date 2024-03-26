@@ -4,6 +4,8 @@ import (
 	"awsx-api/handlers/getElementDetails/EC2"
 	"awsx-api/handlers/getElementDetails/ECS"
 	"awsx-api/handlers/getElementDetails/EKS"
+	"awsx-api/handlers/getElementDetails/RDS"
+
 	"awsx-api/handlers/getLandingZoneDetails"
 	"awsx-api/log"
 	"net/http"
@@ -255,5 +257,17 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	}
 	if elementType == "EKS" && query == "incident_response_time_panel" {
 		EKS.GetIncidentResponseTimePanel(w, r)
+	}
+	if elementType == "RDS" && query == "cpu_utilization_panel" {
+		RDS.GetCpuUtilizationPanel(w, r)
+	}
+	if elementType == "RDS" && query == "network_utilization_panel" {
+		RDS.GetNetworkUtilizationPanel(w, r)
+	}
+	if elementType == "RDS" && query == "cpu_utilization_graph_panel" {
+		RDS.GetCPUUtilizationPanel(w, r)
+	}
+	if elementType == "RDS" && query == "alert_and_notification_panel" {
+		RDS.GetAlertsAndNotificationsPanel(w, r)
 	}
 }
