@@ -253,4 +253,7 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	if elementType == "EKS" && query == "node_failure_panel" {
 		EKS.GetNodeFailurePanel(w, r)
 	}
+	if elementType == "EKS" && query == "incident_response_time_panel" {
+		EKS.GetIncidentResponseTimePanel(w, r)
+	}
 }
