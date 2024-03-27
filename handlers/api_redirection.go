@@ -270,4 +270,50 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	if elementType == "RDS" && query == "alert_and_notification_panel" {
 		RDS.GetAlertsAndNotificationsPanel(w, r)
 	}
+	if elementType == "RDS" && query == "instance_health_check_panel" {
+		RDS.GetInstanceHealthCheck(w, r)
+	}
+	if elementType == "RDS" && query == "freeable_memory_panel" {
+		RDS.GetFreeableMemoryPanel(w, r)
+	}
+	if elementType == "RDS" && query == "cpu_credit_balance_panel" {
+		RDS.GetCpuCreditBalancePanel(w, r)
+	}
+	if elementType == "RDS" && query == "cpu_credit_usage_panel" {
+		RDS.GetCpuCreditUsagePanel(w, r)
+	}
+	if elementType == "RDS" && query == "cpu_surplus_credit_balance_panel" {
+		RDS.GetCPUSurplusCreditBalancePanel(w, r)
+	}
+	if elementType == "RDS" && query == "cpu_surplus_credits_charged_panel" {
+		RDS.GetCPUSurplusCreditChargedPanel(w, r)
+	}
+	if elementType == "RDS" && query == "database_connections_panel" {
+		RDS.GetDatabaseConnectionPanel(w, r)
+	}
+	if elementType == "RDS" && query == "database_workload_overview_panel" {
+		RDS.GetDatabaseWorkloadOverviewPanel(w, r)
+	}
+	if elementType == "RDS" && query == "db_load_cpu_panel" {
+		RDS.GetDBLoadCPULoadPanel(w, r)
+	}
+	if elementType == "RDS" && query == "db_load_non_cpu_panel" {
+		RDS.GetDBLoadNonCPUPanel(w, r)
+	}
+	if elementType == "RDS" && query == "disk_queue_depth_panel" {
+		RDS.GetDiskQueueDepthPanel(w, r)
+	}
+	if elementType == "RDS" && query == "free_storage_space_panel" {
+		RDS.GetFreeStorageSpacePanel(w, r)
+	}
+	if elementType == "RDS" && query == "index_size_panel" {
+		RDS.GetIndexSizePanel(w, r)
+	}
+	if elementType == "RDS" && query == "iops_panel" {
+		RDS.GetIOPPanel(w, r)
+	}
+	if elementType == "RDS" && query == "network_receive_throughput_panel" {
+		RDS.GetNetworkReceiveThroughputPanel(w, r)
+	}
+
 }
