@@ -238,6 +238,9 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	if elementType == "EC2" && query == "memory_utilization_graph_panel" {
 		EC2.GetMemoryUtilizationPaneel(w, r)
 	}
+	// if elementType == "EC2" && query == "network_traffic_panel" {
+	// 	EC2.GetNetworkTrafficPanel(w, r)
+	// }
 	if elementType == "EKS" && query == "resource_utilization_patterns_panel" {
 		EKS.GetResourceUtilizationPanel(w, r)
 	}
@@ -322,5 +325,25 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	if elementType == "RDS" && query == "network_receive_throughput_panel" {
 		RDS.GetNetworkReceiveThroughputPanel(w, r)
 	}
-
+	if elementType == "RDS" && query == "network_traffic_panel" {
+		RDS.GetNetworkTrafficPanel(w, r)
+	}
+	if elementType == "RDS" && query == "network_transmit_throughput_panel" {
+		RDS.GetNetworkTransmitThroughputPanel(w, r)
+	}
+	if elementType == "RDS" && query == "replication_slot_disk_usage" {
+		RDS.GetReplicationSlotDiskUsagePanel(w, r)
+	}
+	if elementType == "RDS" && query == "read_iops_panel" {
+		RDS.GetReadIOPSPanel(w, r)
+	}
+	if elementType == "RDS" && query == "storage_utilization_panel" {
+		RDS.GetStorageUtilizationPanel(w, r)
+	}
+	if elementType == "RDS" && query == "latency_analysis_panel" {
+		RDS.GetLatencyAnalysisPanel(w, r)
+	}
+	// if elementType == "RDS" && query == "write_iops_panel" {
+	// 	RDS.GetWriteIOPSPanel(w, r)
+	// }
 }
