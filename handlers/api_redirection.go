@@ -268,6 +268,9 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	if elementType == "Lambda" && query == "max_memory_used_panel" {
 		Lambda.GetMaxMemoryUsedPanel(w, r)
 	}
+	if elementType == "Lambda" && query == "execution_time_panel" {
+		Lambda.GetExecutionTimePanel(w, r)
+	}
 	if elementType == "RDS" && query == "cpu_utilization_panel" {
 		RDS.GetCpuUtilizationPanel(w, r)
 	}
