@@ -4,6 +4,7 @@ import (
 	"awsx-api/handlers/getElementDetails/EC2"
 	"awsx-api/handlers/getElementDetails/ECS"
 	"awsx-api/handlers/getElementDetails/EKS"
+	"awsx-api/handlers/getElementDetails/Lambda"
 	"awsx-api/handlers/getElementDetails/RDS"
 
 	"awsx-api/handlers/getLandingZoneDetails"
@@ -257,6 +258,12 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	}
 	if elementType == "EKS" && query == "incident_response_time_panel" {
 		EKS.GetIncidentResponseTimePanel(w, r)
+	}
+	if elementType == "Lambda" && query == "used_and_unused_memory_data_panel" {
+		Lambda.GetUsedAndUnusedMemoryDataPanel(w, r)
+	}
+	if elementType == "Lambda" && query == "max_memory_used_panel" {
+		Lambda.GetMaxMemoryUsedPanel(w, r)
 	}
 	if elementType == "RDS" && query == "cpu_utilization_panel" {
 		RDS.GetCpuUtilizationPanel(w, r)
