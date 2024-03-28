@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "95e4a6f5-6d4a-40ff-ba45-38f42b5cb2bd",
+		"_postman_id": "83355c43-8862-473f-98b1-1bf9a1de2e55",
 		"name": "awsx-api",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "24280300",
-		"_collection_link": "https://cloudy-crater-160851.postman.co/workspace/shahrukh~365b6eca-9bce-488c-ad7c-5102f5faca3c/collection/24280300-95e4a6f5-6d4a-40ff-ba45-38f42b5cb2bd?action=share&source=collection_link&creator=24280300"
+		"_collection_link": "https://cloudy-crater-160851.postman.co/workspace/shahrukh~365b6eca-9bce-488c-ad7c-5102f5faca3c/collection/24280300-83355c43-8862-473f-98b1-1bf9a1de2e55?action=share&source=collection_link&creator=24280300"
 	},
 	"item": [
 		{
@@ -1104,7 +1104,10 @@
 							"name": "instance_running_hour_panel",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": ""
+								}
 							},
 							"response": []
 						},
@@ -1112,7 +1115,10 @@
 							"name": "instance_start_count_panel",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": ""
+								}
 							},
 							"response": []
 						},
@@ -1120,7 +1126,10 @@
 							"name": "instance_status_panel",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": ""
+								}
 							},
 							"response": []
 						},
@@ -1128,7 +1137,10 @@
 							"name": "alerts_and_notifications_panel",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": ""
+								}
 							},
 							"response": []
 						},
@@ -1136,7 +1148,10 @@
 							"name": "instance_health_check_panel",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": ""
+								}
 							},
 							"response": []
 						},
@@ -1144,7 +1159,10 @@
 							"name": "error_rate_panel",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": ""
+								}
 							},
 							"response": []
 						},
@@ -1152,7 +1170,10 @@
 							"name": "error_tracking_panel",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": ""
+								}
 							},
 							"response": []
 						},
@@ -1160,7 +1181,10 @@
 							"name": "hosted_services_overview_panel",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": ""
+								}
 							},
 							"response": []
 						},
@@ -1216,7 +1240,10 @@
 							"name": "custom_alert_panel",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": ""
+								}
 							},
 							"response": []
 						},
@@ -1275,7 +1302,10 @@
 							"name": "disk_io_panel",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": ""
+								}
 							},
 							"response": []
 						},
@@ -1283,7 +1313,10 @@
 							"name": "cpu_utilization_graph_panel",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": ""
+								}
 							},
 							"response": []
 						},
@@ -1291,7 +1324,10 @@
 							"name": "memory_utilization_graph_panel",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": ""
+								}
 							},
 							"response": []
 						},
@@ -1299,7 +1335,10 @@
 							"name": "network_traffic_panel",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": ""
+								}
 							},
 							"response": []
 						}
@@ -2324,7 +2363,10 @@
 							"name": "node_condition_panel",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": ""
+								}
 							},
 							"response": []
 						},
@@ -2332,7 +2374,10 @@
 							"name": "storage_utilization_panel",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": ""
+								}
 							},
 							"response": []
 						},
@@ -2340,7 +2385,10 @@
 							"name": "resource_utilization_patterns_panel",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": ""
+								}
 							},
 							"response": []
 						},
@@ -2348,7 +2396,10 @@
 							"name": "node_failure_panel",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": ""
+								}
 							},
 							"response": []
 						},
@@ -2356,7 +2407,10 @@
 							"name": "incident_response_time_panel",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": ""
+								}
 							},
 							"response": []
 						}
@@ -2461,7 +2515,10 @@
 							"name": "memory_reservation_panel",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": ""
+								}
 							},
 							"response": []
 						}
@@ -2474,7 +2531,10 @@
 							"name": "cpu_utilization",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": ""
+								}
 							},
 							"response": []
 						}
@@ -2487,7 +2547,37 @@
 							"name": "cpu_utilization_panel",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=900000&elementType=RDS&query=cpu_utilization_panel&responseType=json",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "900000"
+										},
+										{
+											"key": "elementType",
+											"value": "RDS"
+										},
+										{
+											"key": "query",
+											"value": "cpu_utilization_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "json"
+										}
+									]
+								}
 							},
 							"response": []
 						},
@@ -2495,7 +2585,45 @@
 							"name": "network_utilization_panel",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=900000&elementType=RDS&query=network_utilization_panel&responseType=json&startTime=2023-03-23T00:00:00Z&endTime=2024-03-24T23:59:59Z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "900000"
+										},
+										{
+											"key": "elementType",
+											"value": "RDS"
+										},
+										{
+											"key": "query",
+											"value": "network_utilization_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "json"
+										},
+										{
+											"key": "startTime",
+											"value": "2023-03-23T00:00:00Z"
+										},
+										{
+											"key": "endTime",
+											"value": "2024-03-24T23:59:59Z"
+										}
+									]
+								}
 							},
 							"response": []
 						},
@@ -2503,7 +2631,47 @@
 							"name": "freeable_memory_panel",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=900000&elementType=RDS&query=freeable_memory_panel&responseType=frame",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "900000"
+										},
+										{
+											"key": "elementType",
+											"value": "RDS"
+										},
+										{
+											"key": "query",
+											"value": "freeable_memory_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "frame"
+										},
+										{
+											"key": "startTime",
+											"value": "2023-03-23T00:00:00Z",
+											"disabled": true
+										},
+										{
+											"key": "endTime",
+											"value": "2024-03-24T23:59:59Z",
+											"disabled": true
+										}
+									]
+								}
 							},
 							"response": []
 						},
@@ -2511,7 +2679,45 @@
 							"name": "alert_and_notification_panel",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=900000&elementType=RDS&query=alert_and_notification_panel&responseType=json&startTime=2019-03-23T00:00:00Z&endTime=2024-03-24T23:59:59Z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "900000"
+										},
+										{
+											"key": "elementType",
+											"value": "RDS"
+										},
+										{
+											"key": "query",
+											"value": "alert_and_notification_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "json"
+										},
+										{
+											"key": "startTime",
+											"value": "2019-03-23T00:00:00Z"
+										},
+										{
+											"key": "endTime",
+											"value": "2024-03-24T23:59:59Z"
+										}
+									]
+								}
 							},
 							"response": []
 						},
@@ -2519,7 +2725,47 @@
 							"name": "instance_health_check_panel",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=900000&elementType=RDS&query=instance_health_check_panel&responseType=json",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "900000"
+										},
+										{
+											"key": "elementType",
+											"value": "RDS"
+										},
+										{
+											"key": "query",
+											"value": "instance_health_check_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "json"
+										},
+										{
+											"key": "startTime",
+											"value": "2019-03-23T00:00:00Z",
+											"disabled": true
+										},
+										{
+											"key": "endTime",
+											"value": "2024-03-24T23:59:59Z",
+											"disabled": true
+										}
+									]
+								}
 							},
 							"response": []
 						},
@@ -2527,7 +2773,37 @@
 							"name": "cpu_credit_balance_panel",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=900000&elementType=RDS&query=cpu_credit_balance_panel&responseType=frame",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "900000"
+										},
+										{
+											"key": "elementType",
+											"value": "RDS"
+										},
+										{
+											"key": "query",
+											"value": "cpu_credit_balance_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "frame"
+										}
+									]
+								}
 							},
 							"response": []
 						},
@@ -2535,7 +2811,37 @@
 							"name": "cpu_credit_usage_panel",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=900000&elementType=RDS&query=cpu_credit_usage_panel&responseType=frame",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "900000"
+										},
+										{
+											"key": "elementType",
+											"value": "RDS"
+										},
+										{
+											"key": "query",
+											"value": "cpu_credit_usage_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "frame"
+										}
+									]
+								}
 							},
 							"response": []
 						},
@@ -2543,7 +2849,37 @@
 							"name": "cpu_surplus_credit_balance_panel",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=900000&elementType=RDS&query=cpu_surplus_credit_balance_panel&responseType=frame",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "900000"
+										},
+										{
+											"key": "elementType",
+											"value": "RDS"
+										},
+										{
+											"key": "query",
+											"value": "cpu_surplus_credit_balance_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "frame"
+										}
+									]
+								}
 							},
 							"response": []
 						},
@@ -2551,7 +2887,37 @@
 							"name": "cpu_surplus_credits_charged_panel",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=900000&elementType=RDS&query=cpu_surplus_credits_charged_panel&responseType=frame",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "900000"
+										},
+										{
+											"key": "elementType",
+											"value": "RDS"
+										},
+										{
+											"key": "query",
+											"value": "cpu_surplus_credits_charged_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "frame"
+										}
+									]
+								}
 							},
 							"response": []
 						},
@@ -2559,7 +2925,37 @@
 							"name": "database_connections_panel",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=900000&elementType=RDS&query=database_connections_panel&responseType=frame",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "900000"
+										},
+										{
+											"key": "elementType",
+											"value": "RDS"
+										},
+										{
+											"key": "query",
+											"value": "database_connections_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "frame"
+										}
+									]
+								}
 							},
 							"response": []
 						},
@@ -2567,7 +2963,37 @@
 							"name": "database_workload_overview_panel",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=900000&elementType=RDS&query=database_workload_overview_panel&responseType=frame",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "900000"
+										},
+										{
+											"key": "elementType",
+											"value": "RDS"
+										},
+										{
+											"key": "query",
+											"value": "database_workload_overview_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "frame"
+										}
+									]
+								}
 							},
 							"response": []
 						},
@@ -2575,7 +3001,37 @@
 							"name": "db_load_cpu_panel",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=900000&elementType=RDS&query=db_load_cpu_panel&responseType=frame",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "900000"
+										},
+										{
+											"key": "elementType",
+											"value": "RDS"
+										},
+										{
+											"key": "query",
+											"value": "db_load_cpu_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "frame"
+										}
+									]
+								}
 							},
 							"response": []
 						},
@@ -2583,7 +3039,37 @@
 							"name": "db_load_non_cpu_panel",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=900000&elementType=RDS&query=db_load_non_cpu_panel&responseType=frame",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "900000"
+										},
+										{
+											"key": "elementType",
+											"value": "RDS"
+										},
+										{
+											"key": "query",
+											"value": "db_load_non_cpu_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "frame"
+										}
+									]
+								}
 							},
 							"response": []
 						},
@@ -2591,7 +3077,37 @@
 							"name": "disk_queue_depth_panel",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=900000&elementType=RDS&query=disk_queue_depth_panel&responseType=frame",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "900000"
+										},
+										{
+											"key": "elementType",
+											"value": "RDS"
+										},
+										{
+											"key": "query",
+											"value": "disk_queue_depth_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "frame"
+										}
+									]
+								}
 							},
 							"response": []
 						},
@@ -2599,7 +3115,37 @@
 							"name": "free_storage_space_panel",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=900000&elementType=RDS&query=free_storage_space_panel&responseType=frame",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "900000"
+										},
+										{
+											"key": "elementType",
+											"value": "RDS"
+										},
+										{
+											"key": "query",
+											"value": "free_storage_space_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "frame"
+										}
+									]
+								}
 							},
 							"response": []
 						},
@@ -2607,7 +3153,37 @@
 							"name": "index_size_panel",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=900000&elementType=RDS&query=index_size_panel&responseType=frame",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "900000"
+										},
+										{
+											"key": "elementType",
+											"value": "RDS"
+										},
+										{
+											"key": "query",
+											"value": "index_size_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "frame"
+										}
+									]
+								}
 							},
 							"response": []
 						},
@@ -2615,7 +3191,37 @@
 							"name": "iops_panel",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=900000&elementType=RDS&query=iops_panel&responseType=frame",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "900000"
+										},
+										{
+											"key": "elementType",
+											"value": "RDS"
+										},
+										{
+											"key": "query",
+											"value": "iops_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "frame"
+										}
+									]
+								}
 							},
 							"response": []
 						},
@@ -2623,7 +3229,37 @@
 							"name": "network_receive_throughput_panel",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=900000&elementType=RDS&query=network_receive_throughput_panel&responseType=frame",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "900000"
+										},
+										{
+											"key": "elementType",
+											"value": "RDS"
+										},
+										{
+											"key": "query",
+											"value": "network_receive_throughput_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "frame"
+										}
+									]
+								}
 							},
 							"response": []
 						},
@@ -2631,7 +3267,37 @@
 							"name": "network_traffic_panel",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=900000&elementType=RDS&query=network_traffic_panel&responseType=frame",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "900000"
+										},
+										{
+											"key": "elementType",
+											"value": "RDS"
+										},
+										{
+											"key": "query",
+											"value": "network_traffic_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "frame"
+										}
+									]
+								}
 							},
 							"response": []
 						},
@@ -2639,7 +3305,37 @@
 							"name": "network_transmit_throughput_panel",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=900000&elementType=RDS&query=network_transmit_throughput_panel&responseType=frame",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "900000"
+										},
+										{
+											"key": "elementType",
+											"value": "RDS"
+										},
+										{
+											"key": "query",
+											"value": "network_transmit_throughput_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "frame"
+										}
+									]
+								}
 							},
 							"response": []
 						},
@@ -2647,7 +3343,37 @@
 							"name": "replication_slot_disk_usage",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=900000&elementType=RDS&query=replication_slot_disk_usage&responseType=frame",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "900000"
+										},
+										{
+											"key": "elementType",
+											"value": "RDS"
+										},
+										{
+											"key": "query",
+											"value": "replication_slot_disk_usage"
+										},
+										{
+											"key": "responseType",
+											"value": "frame"
+										}
+									]
+								}
 							},
 							"response": []
 						},
@@ -2655,7 +3381,37 @@
 							"name": "read_iops_panel",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=900000&elementType=RDS&query=read_iops_panel&responseType=json",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "900000"
+										},
+										{
+											"key": "elementType",
+											"value": "RDS"
+										},
+										{
+											"key": "query",
+											"value": "read_iops_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "json"
+										}
+									]
+								}
 							},
 							"response": []
 						},
@@ -2663,7 +3419,37 @@
 							"name": "storage_utilization_panel",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=900000&elementType=RDS&query=storage_utilization_panel&responseType=json",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "900000"
+										},
+										{
+											"key": "elementType",
+											"value": "RDS"
+										},
+										{
+											"key": "query",
+											"value": "storage_utilization_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "json"
+										}
+									]
+								}
 							},
 							"response": []
 						},
@@ -2671,7 +3457,37 @@
 							"name": "latency_analysis_panel",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=900000&elementType=RDS&query=latency_analysis_panel&responseType=json",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "900000"
+										},
+										{
+											"key": "elementType",
+											"value": "RDS"
+										},
+										{
+											"key": "query",
+											"value": "latency_analysis_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "json"
+										}
+									]
+								}
 							},
 							"response": []
 						},
@@ -2679,7 +3495,37 @@
 							"name": "write_iops_panel",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=900000&elementType=RDS&query=write_iops_panel&responseType=json",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "900000"
+										},
+										{
+											"key": "elementType",
+											"value": "RDS"
+										},
+										{
+											"key": "query",
+											"value": "write_iops_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "json"
+										}
+									]
+								}
 							},
 							"response": []
 						}
