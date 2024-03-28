@@ -250,6 +250,9 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	if elementType == "EKS" && query == "disk_utilization_panel" {
 		EKS.GetEKSDiskUtilizationPanel(w, r)
 	}
+	if elementType == "EKS" && query == "disk_io_performance_panel" {
+		EKS.GetEKSDiskIoPerformancePanel(w, r)
+	}
 	if elementType == "EKS" && query == "node_condition_panel" {
 		EKS.GetEKSNodeConditionPanel(w, r)
 	}
