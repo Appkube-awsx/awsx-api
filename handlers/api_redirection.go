@@ -274,6 +274,18 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	if elementType == "Lambda" && query == "execution_time_panel" {
 		Lambda.GetExecutionTimePanel(w, r)
 	}
+	if elementType == "Lambda" && query == "max_memory_used_graph_panel" {
+		Lambda.GetMaxMemoryUsedPanell(w, r)
+	}
+	if elementType == "Lambda" && query == "cold_start_duration_panel" {
+		Lambda.GetColdStartDurationPanel(w, r)
+	}
+	if elementType == "Lambda" && query == "concurrency_panel" {
+		Lambda.GetConcurrencyPanel(w, r)
+	}
+	// if elementType == "Lambda" && query == "functions_by_region_panel" {
+	// 	Lambda.GetFunctionByRegionPanel(w, r)
+	// }
 	if elementType == "RDS" && query == "cpu_utilization_panel" {
 		RDS.GetCpuUtilizationPanel(w, r)
 	}
