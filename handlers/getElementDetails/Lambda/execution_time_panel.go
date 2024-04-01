@@ -90,15 +90,8 @@ func GetExecutionTimePanel(w http.ResponseWriter, r *http.Request) {
 				return
 			}
 		} else {
-			var data ExecutionTimeData
-			err := json.Unmarshal([]byte(jsonString), &data)
-			if err != nil {
-				http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
-				return
-			}
 
-			// Marshal the struct back to JSON
-			jsonBytes, err := json.Marshal(data)
+			jsonBytes, err := json.Marshal(jsonString)
 			if err != nil {
 				http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
 				return
