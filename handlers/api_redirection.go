@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"awsx-api/handlers/getElementDetails/ApiGateway"
 	"awsx-api/handlers/getElementDetails/EC2"
 	"awsx-api/handlers/getElementDetails/ECS"
 	"awsx-api/handlers/getElementDetails/EKS"
@@ -363,5 +364,8 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	}
 	if elementType == "RDS" && query == "write_iops_panel" {
 		RDS.GetWriteIOPSPanel(w, r)
+	}
+	if elementType == "ApiGateway" && query == "uptime_percentage_panel" {
+		ApiGateway.GetUptimePercentagePanel(w, r)
 	}
 }
