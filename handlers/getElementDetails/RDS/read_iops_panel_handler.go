@@ -144,7 +144,7 @@ func cloudwatchClientCacher(clientAuth model.Auth) (*cloudwatch.CloudWatch, erro
 	clientCacheLockr.Lock()
 	defer clientCacheLockr.Unlock()
 
-	if client, ok := clientCache.Load(cacheKey); ok {
+	if client, ok := clientCacher.Load(cacheKey); ok {
 		log.Infof("cloudwatch client found in cache for given cross account role: %s", cacheKey)
 		return client.(*cloudwatch.CloudWatch), nil
 	}

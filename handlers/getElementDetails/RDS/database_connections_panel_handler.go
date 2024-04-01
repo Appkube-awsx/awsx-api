@@ -25,10 +25,10 @@ type DBResult struct {
 }
 
 var (
-	authDatabase       sync.Map
-	clientDatabase     sync.Map
-	authDatabaseLock   sync.RWMutex
-	clientDatabaseLock sync.RWMutex
+	authDatabas       sync.Map
+	clientDatabas     sync.Map
+	authDatabasLock   sync.RWMutex
+	clientDatabasLock sync.RWMutex
 )
 
 func GetDatabaseConnectionPanel(w http.ResponseWriter, r *http.Request) {
@@ -120,10 +120,10 @@ func GetDatabaseConnectionPanel(w http.ResponseWriter, r *http.Request) {
 func authnticateAndCache(commandParam model.CommandParam) (*model.Auth, error) {
 	cacheKey := commandParam.CloudElementId
 
-	authDatabaseLock.Lock()
-	defer authDatabaseLock.Unlock()
+	authDatabasLock.Lock()
+	defer authDatabasLock.Unlock()
 
-	if auth, ok := authDatabase.Load(cacheKey); ok {
+	if auth, ok := authDatabas.Load(cacheKey); ok {
 		log.Infof("client credentials found in cache")
 		return auth.(*model.Auth), nil
 	}
@@ -135,17 +135,17 @@ func authnticateAndCache(commandParam model.CommandParam) (*model.Auth, error) {
 		return nil, err
 	}
 
-	authDatabase.Store(cacheKey, clientAuth)
+	authDatabas.Store(cacheKey, clientAuth)
 	return clientAuth, nil
 }
 
 func cloudwatchClientCahe(clientAuth model.Auth) (*cloudwatch.CloudWatch, error) {
 	cacheKey := clientAuth.CrossAccountRoleArn
 
-	clientDatabaseLock.Lock()
-	defer clientDatabaseLock.Unlock()
+	clientDatabasLock.Lock()
+	defer clientDatabasLock.Unlock()
 
-	if client, ok := clientDatabase.Load(cacheKey); ok {
+	if client, ok := clientDatabas.Load(cacheKey); ok {
 		log.Infof("cloudwatch client found in cache for given cross account role: %s", cacheKey)
 		return client.(*cloudwatch.CloudWatch), nil
 	}
@@ -154,6 +154,6 @@ func cloudwatchClientCahe(clientAuth model.Auth) (*cloudwatch.CloudWatch, error)
 	log.Infof("creating new cloudwatch client for given cross account role: %s", cacheKey)
 	cloudWatchClient := awsclient.GetClient(clientAuth, awsclient.CLOUDWATCH).(*cloudwatch.CloudWatch)
 
-	clientDatabase.Store(cacheKey, cloudWatchClient)
+	clientDatabas.Store(cacheKey, cloudWatchClient)
 	return cloudWatchClient, nil
 }

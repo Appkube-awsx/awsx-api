@@ -62,13 +62,13 @@ func GetIOPPanel(w http.ResponseWriter, r *http.Request) {
 		commandParam.Region = region
 	}
 
-	clientAuth, err := authenticateAndCache(commandParam)
+	clientAuth, err := authenticateAndCacheiops(commandParam)
 	if err != nil {
 		http.Error(w, fmt.Sprintf("Authentication failed: %s", err), http.StatusInternalServerError)
 		return
 	}
 
-	cloudwatchClient, err := cloudwatchClientCache(*clientAuth)
+	cloudwatchClient, err := cloudwatchClientCacheiops(*clientAuth)
 	if err != nil {
 		http.Error(w, fmt.Sprintf("Cloudwatch client creation/store in cache failed: %s", err), http.StatusInternalServerError)
 		return
@@ -158,6 +158,6 @@ func cloudwatchClientCacheiops(clientAuth model.Auth) (*cloudwatch.CloudWatch, e
 	log.Infof("creating new cloudwatch client for given cross account role: %s", cacheKey)
 	cloudWatchClient := awsclient.GetClient(clientAuth, awsclient.CLOUDWATCH).(*cloudwatch.CloudWatch)
 
-	clientCache.Store(cacheKey, cloudWatchClient)
+	clientCacheiops.Store(cacheKey, cloudWatchClient)
 	return cloudWatchClient, nil
 }

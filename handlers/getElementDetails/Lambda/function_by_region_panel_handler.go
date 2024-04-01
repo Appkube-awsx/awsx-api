@@ -1,4 +1,4 @@
-package RDS
+package Lambda
 
 import (
 	"awsx-api/log"
@@ -10,19 +10,19 @@ import (
 	"github.com/Appkube-awsx/awsx-common/authenticate"
 	"github.com/Appkube-awsx/awsx-common/awsclient"
 	"github.com/Appkube-awsx/awsx-common/model"
-	"github.com/Appkube-awsx/awsx-getelementdetails/handler/RDS"
+	"github.com/Appkube-awsx/awsx-getelementdetails/handler/Lambda"
 	"github.com/aws/aws-sdk-go/service/cloudwatch"
 	"github.com/spf13/cobra"
 )
 
 var (
-	authDatabasecpu       sync.Map
-	clientDatabasecpu     sync.Map
-	authDatabaseLockcpu   sync.RWMutex
-	clientDatabaseLockcpu sync.RWMutex
+	authCacheFR       sync.Map
+	clientCacheFR     sync.Map
+	authCacheLockFR   sync.RWMutex
+	clientCacheLockFR sync.RWMutex
 )
 
-func GetDBLoadNonCPUPanel(w http.ResponseWriter, r *http.Request) {
+func GetFunctionByRegionPanel(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	region := r.URL.Query().Get("zone")
@@ -49,17 +49,17 @@ func GetDBLoadNonCPUPanel(w http.ResponseWriter, r *http.Request) {
 		commandParam.Region = region
 	}
 
-	clientAuth, err := autenticateAndCache(commandParam)
+	clientAuth, err := authenticateAndCacheFR(commandParam)
 	if err != nil {
 		http.Error(w, fmt.Sprintf("Authentication failed: %s", err), http.StatusInternalServerError)
 		return
 	}
 
-	cloudwatchClient, err := cloudwatchlientCache(*clientAuth)
-	if err != nil {
-		http.Error(w, fmt.Sprintf("Cloudwatch client creation/store in cache failed: %s", err), http.StatusInternalServerError)
-		return
-	}
+	// cloudwatchClient, err := cloudwatchClientCacheFR(*clientAuth)
+	// if err != nil {
+	// 	http.Error(w, fmt.Sprintf("Cloudwatch client creation/store in cache failed: %s", err), http.StatusInternalServerError)
+	// 	return
+	// }
 
 	if clientAuth != nil {
 		cmd := &cobra.Command{}
@@ -70,36 +70,22 @@ func GetDBLoadNonCPUPanel(w http.ResponseWriter, r *http.Request) {
 		cmd.PersistentFlags().StringVar(&endTime, "endTime", r.URL.Query().Get("endTime"), "Description of the endTime flag")
 		cmd.PersistentFlags().StringVar(&responseType, "responseType", r.URL.Query().Get("responseType"), "responseType flag - json/frame")
 
-		_, jsonString, cloudwatchMetricData, err := RDS.GetRDSDBLoadNonCPU(cmd, clientAuth, cloudwatchClient)
+		jsonString, functionCounts, totalFunctions, err := Lambda.GetLambdaFunctionsByRegion(clientAuth)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
 			return
 		}
 
 		if responseType == "frame" {
-			err = json.NewEncoder(w).Encode(cloudwatchMetricData)
+			err = json.NewEncoder(w).Encode(functionCounts)
 			if err != nil {
 				http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
 				return
 			}
 		} else {
-			var data interface{}
-			err := json.Unmarshal([]byte(jsonString), &data)
-			if err != nil {
-				http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
-				return
-			}
-
-			// Marshal the data back to JSON
-			jsonBytes, err := json.Marshal(data)
-			if err != nil {
-				http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
-				return
-			}
-
-			// Set Content-Type header and write the JSON response
+			// Marshal the JSON string directly
 			w.Header().Set("Content-Type", "application/json")
-			_, err = w.Write(jsonBytes)
+			_, err := w.Write([]byte(fmt.Sprintf("Function By Region : %d %s ", totalFunctions, jsonString)))
 			if err != nil {
 				http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
 				return
@@ -108,13 +94,13 @@ func GetDBLoadNonCPUPanel(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func autenticateAndCache(commandParam model.CommandParam) (*model.Auth, error) {
+func authenticateAndCacheFR(commandParam model.CommandParam) (*model.Auth, error) {
 	cacheKey := commandParam.CloudElementId
 
-	authDatabaseLockcpu.Lock()
-	defer authDatabaseLockcpu.Unlock()
+	authCacheLockFR.Lock()
+	defer authCacheLockFR.Unlock()
 
-	if auth, ok := authDatabasecpu.Load(cacheKey); ok {
+	if auth, ok := authCacheFR.Load(cacheKey); ok {
 		log.Infof("client credentials found in cache")
 		return auth.(*model.Auth), nil
 	}
@@ -126,17 +112,17 @@ func autenticateAndCache(commandParam model.CommandParam) (*model.Auth, error) {
 		return nil, err
 	}
 
-	authDatabasecpu.Store(cacheKey, clientAuth)
+	authCacheFR.Store(cacheKey, clientAuth)
 	return clientAuth, nil
 }
 
-func cloudwatchlientCache(clientAuth model.Auth) (*cloudwatch.CloudWatch, error) {
+func cloudwatchClientCacheFR(clientAuth model.Auth) (*cloudwatch.CloudWatch, error) {
 	cacheKey := clientAuth.CrossAccountRoleArn
 
-	clientDatabaseLockcpu.Lock()
-	defer clientDatabaseLockcpu.Unlock()
+	clientCacheLockFR.Lock()
+	defer clientCacheLockFR.Unlock()
 
-	if client, ok := clientDatabasecpu.Load(cacheKey); ok {
+	if client, ok := clientCacheFR.Load(cacheKey); ok {
 		log.Infof("cloudwatch client found in cache for given cross account role: %s", cacheKey)
 		return client.(*cloudwatch.CloudWatch), nil
 	}
@@ -145,6 +131,6 @@ func cloudwatchlientCache(clientAuth model.Auth) (*cloudwatch.CloudWatch, error)
 	log.Infof("creating new cloudwatch client for given cross account role: %s", cacheKey)
 	cloudWatchClient := awsclient.GetClient(clientAuth, awsclient.CLOUDWATCH).(*cloudwatch.CloudWatch)
 
-	clientDatabasecpu.Store(cacheKey, cloudWatchClient)
+	clientCacheFR.Store(cacheKey, cloudWatchClient)
 	return cloudWatchClient, nil
 }

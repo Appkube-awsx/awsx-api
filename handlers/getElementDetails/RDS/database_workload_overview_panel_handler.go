@@ -152,6 +152,6 @@ func cloudwatcClientCache(clientAuth model.Auth) (*cloudwatch.CloudWatch, error)
 	log.Infof("creating new cloudwatch client for given cross account role: %s", cacheKey)
 	cloudWatchClient := awsclient.GetClient(clientAuth, awsclient.CLOUDWATCH).(*cloudwatch.CloudWatch)
 
-	clientDatabase.Store(cacheKey, cloudWatchClient)
+	clientDatabasew.Store(cacheKey, cloudWatchClient)
 	return cloudWatchClient, nil
 }

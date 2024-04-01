@@ -284,9 +284,9 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	if elementType == "Lambda" && query == "concurrency_panel" {
 		Lambda.GetConcurrencyPanel(w, r)
 	}
-	// if elementType == "Lambda" && query == "functions_by_region_panel" {
-	// 	Lambda.GetFunctionByRegionPanel(w, r)
-	// }
+	if elementType == "Lambda" && query == "functions_by_region_panel" {
+		Lambda.GetFunctionByRegionPanel(w, r)
+	}
 	if elementType == "RDS" && query == "cpu_utilization_panel" {
 		RDS.GetCpuUtilizationPanel(w, r)
 	}

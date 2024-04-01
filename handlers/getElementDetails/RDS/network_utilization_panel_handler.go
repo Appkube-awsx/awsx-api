@@ -120,8 +120,8 @@ func GetNetworkUtilizationPanel(w http.ResponseWriter, r *http.Request) {
 		} else {
 			log.Infof("creating response json")
 			type UsageData struct {
-				InboundTraffic  float64 `json:"Network RX"`
-				OutboundTraffic float64 `json:"Network TX"`
+				InboundTraffic  float64 `json:"Inbound Traffic"`
+				OutboundTraffic float64 `json:"Outbound Traffic"`
 				DataTransferred float64 `json:"DataTransferred"`
 			}
 			var data UsageData
