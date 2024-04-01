@@ -1,28 +1,17 @@
 package EC2
 
 import (
+	"awsx-api/cache"
 	"awsx-api/log"
 	"encoding/json"
 	"fmt"
-	"net/http"
-	"sync"
-
-	"github.com/Appkube-awsx/awsx-common/authenticate"
 	"github.com/Appkube-awsx/awsx-common/awsclient"
-	"github.com/aws/aws-sdk-go/service/cloudwatch"
-
 	"github.com/Appkube-awsx/awsx-common/model"
 	"github.com/Appkube-awsx/awsx-getelementdetails/handler/EC2"
+	"github.com/aws/aws-sdk-go/aws/awserr"
+	"github.com/aws/aws-sdk-go/service/cloudwatch"
 	"github.com/spf13/cobra"
-)
-
-// var authCache = make(map[string]*model.Auth)
-var (
-	authCache       sync.Map
-	clientCache     sync.Map
-	authCacheLock   sync.RWMutex
-	clientCacheLock sync.RWMutex
-	//authCacheLock sync.Mutex
+	"net/http"
 )
 
 func GetCpuUtilizationPanel(w http.ResponseWriter, r *http.Request) {
@@ -55,16 +44,18 @@ func GetCpuUtilizationPanel(w http.ResponseWriter, r *http.Request) {
 		commandParam.ExternalId = externalId
 		commandParam.Region = region
 	}
-	clientAuth, err := authenticateAndCache(commandParam)
-	if err != nil {
-		http.Error(w, fmt.Sprintf("Authentication failed: %s", err), http.StatusInternalServerError)
-		return
-	}
-	cloudwatchClient, err := cloudwatchClientCache(*clientAuth)
+	//clientAuth, err := authenticateAndCache(commandParam)
+	//if err != nil {
+	//	http.Error(w, fmt.Sprintf("Authentication failed: %s", err), http.StatusInternalServerError)
+	//	return
+	//}
+	//cloudwatchClient, err := cloudwatchClientCache(*clientAuth)
+	clientAuth, awsClient, err := cache.GetAwsCredsAndClient(commandParam, awsclient.CLOUDWATCH)
 	if err != nil {
 		http.Error(w, fmt.Sprintf("Cloudwatch client creation/store in cache failed: %s", err), http.StatusInternalServerError)
 		return
 	}
+	cloudwatchClient := awsClient.(*cloudwatch.CloudWatch)
 	if clientAuth != nil {
 		cmd := &cobra.Command{}
 		cmd.PersistentFlags().StringVar(&elementId, "elementId", r.URL.Query().Get("elementId"), "Description of the elementId flag")
@@ -75,8 +66,16 @@ func GetCpuUtilizationPanel(w http.ResponseWriter, r *http.Request) {
 		cmd.PersistentFlags().StringVar(&responseType, "responseType", r.URL.Query().Get("responseType"), "responseType flag - json/frame")
 		jsonString, cloudwatchMetricData, err := EC2.GetCpuUtilizationPanel(cmd, clientAuth, cloudwatchClient)
 		if err != nil {
-			http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
-			return
+			log.Infof("error found in GetCpuUtilizationPanel: ", err)
+			if awsErr, ok := err.(awserr.Error); ok {
+				if awsErr.Code() == "ExpiredToken" {
+					log.Infof("aws session expired. resetting cache")
+					clientAuth, awsClient, err = cache.SetAwsCredsAndClientInCache(commandParam, awsclient.CLOUDWATCH)
+				}
+			} else {
+				http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
+				return
+			}
 		}
 		log.Infof("response type :" + responseType)
 
@@ -141,102 +140,3 @@ func GetCpuUtilizationPanel(w http.ResponseWriter, r *http.Request) {
 	}
 
 }
-
-func authenticateAndCache(commandParam model.CommandParam) (*model.Auth, error) {
-	cacheKey := commandParam.CloudElementId
-
-	authCacheLock.Lock()
-	if auth, ok := authCache.Load(cacheKey); ok {
-		log.Infof("client credentials found in cache")
-		authCacheLock.Unlock()
-		return auth.(*model.Auth), nil
-	}
-
-	// If not in cache, perform authentication
-	log.Infof("getting client credentials from vault/db")
-	_, clientAuth, err := authenticate.DoAuthenticate(commandParam)
-	if err != nil {
-		return nil, err
-	}
-
-	authCache.Store(cacheKey, clientAuth)
-	authCacheLock.Unlock()
-
-	return clientAuth, nil
-}
-
-func cloudwatchClientCache(clientAuth model.Auth) (*cloudwatch.CloudWatch, error) {
-	cacheKey := clientAuth.CrossAccountRoleArn
-
-	clientCacheLock.Lock()
-	if client, ok := clientCache.Load(cacheKey); ok {
-		log.Infof("cloudwatch client found in cache for given cross acount role: %s", cacheKey)
-		clientCacheLock.Unlock()
-		return client.(*cloudwatch.CloudWatch), nil
-	}
-
-	// If not in cache, create new cloud watch client
-	log.Infof("creating new cloudwatch client for given cross acount role: %s", cacheKey)
-	cloudWatchClient := awsclient.GetClient(clientAuth, awsclient.CLOUDWATCH).(*cloudwatch.CloudWatch)
-
-	clientCache.Store(cacheKey, cloudWatchClient)
-	clientCacheLock.Unlock()
-
-	return cloudWatchClient, nil
-}
-
-//func generateCacheKey(commandParam model.CommandParam) string {
-//	return commandParam.CloudElementId
-//}
-
-//
-//func authenticateAndCache(commandParam model.CommandParam) (*model.Auth, error) {
-//	cacheKey := generateCacheKey(commandParam)
-//
-//	// Check cache
-//	if auth, ok := authCache.Load(cacheKey); ok {
-//		return auth.(*model.Auth), nil // Return cached authentication result
-//	}
-//
-//	// If not in cache, perform authentication
-//	_, clientAuth, err := authenticate.DoAuthenticate(commandParam)
-//	if err != nil {
-//		return nil, err // Return error if authentication fails
-//	}
-//
-//	// Store authentication result in cache
-//	authCacheLock.Lock()
-//	authCache.Store(cacheKey, clientAuth)
-//	authCacheLock.Unlock()
-//
-//	return clientAuth, nil
-//}
-//
-//func generateCacheKey(commandParam model.CommandParam) string {
-//	return commandParam.Region + "-" + commandParam.CloudElementId
-//}
-
-//func authenticateAndCache(commandParam model.CommandParam) (*model.Auth, error) {
-//	// Generate cache key
-//	cacheKey := generateCacheKey(commandParam)
-//
-//	// Check if authentication result already exists in cache
-//	if auth, ok := authCache[cacheKey]; ok {
-//		return auth, nil // Return cached authentication result
-//	}
-//
-//	// Authenticate and get result
-//	_, clientAuth, err := authenticate.DoAuthenticate(commandParam)
-//	if err != nil {
-//		return nil, err // Return error if authentication fails
-//	}
-//
-//	// Store authentication result in cache
-//	authCache[cacheKey] = clientAuth
-//	return clientAuth, nil
-//}
-//
-//func generateCacheKey(commandParam model.CommandParam) string {
-//
-//	return commandParam.Region + "-" + commandParam.CloudElementId // Adjust as per your requirement
-//}
