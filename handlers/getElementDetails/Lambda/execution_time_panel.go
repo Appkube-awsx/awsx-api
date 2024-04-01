@@ -7,26 +7,29 @@ import (
 	"net/http"
 	"sync"
 
+	"github.com/Appkube-awsx/awsx-getelementdetails/handler/Lambda"
+
 	"github.com/Appkube-awsx/awsx-common/authenticate"
 	"github.com/Appkube-awsx/awsx-common/awsclient"
-	"github.com/aws/aws-sdk-go/service/cloudwatch"
-
 	"github.com/Appkube-awsx/awsx-common/model"
-	"github.com/Appkube-awsx/awsx-getelementdetails/handler/Lambda"
+	"github.com/aws/aws-sdk-go/service/cloudwatch"
 	"github.com/spf13/cobra"
 )
 
-// var authCache = make(map[string]*model.Auth)
+type ExecutionTimeData struct {
+	FunctionName string
+	ResponseTime float64
+	Duration     float64
+}
+
 var (
 	authCache       sync.Map
 	clientCache     sync.Map
 	authCacheLock   sync.RWMutex
 	clientCacheLock sync.RWMutex
-	//authCacheLock sync.Mutex
 )
 
 func GetExecutionTimePanel(w http.ResponseWriter, r *http.Request) {
-
 	w.Header().Set("Content-Type", "application/json")
 
 	region := r.URL.Query().Get("zone")
@@ -37,12 +40,9 @@ func GetExecutionTimePanel(w http.ResponseWriter, r *http.Request) {
 	crossAccountRoleArn := r.URL.Query().Get("crossAccountRoleArn")
 	externalId := r.URL.Query().Get("externalId")
 	responseType := r.URL.Query().Get("responseType")
-	//filter := r.URL.Query().Get("filter")
 	instanceId := r.URL.Query().Get("instanceId")
 	startTime := r.URL.Query().Get("startTime")
 	endTime := r.URL.Query().Get("endTime")
-
-	//var err error
 
 	commandParam := model.CommandParam{}
 
@@ -55,16 +55,19 @@ func GetExecutionTimePanel(w http.ResponseWriter, r *http.Request) {
 		commandParam.ExternalId = externalId
 		commandParam.Region = region
 	}
-	clientAuth, err := executionTimeauthenticateAndCache(commandParam)
+
+	clientAuth, err := authenticateAndCache(commandParam)
 	if err != nil {
 		http.Error(w, fmt.Sprintf("Authentication failed: %s", err), http.StatusInternalServerError)
 		return
 	}
-	cloudwatchClient, err := executionTimecloudwatchClientCache(*clientAuth)
+
+	cloudwatchClient, err := cloudwatchClientCache(*clientAuth)
 	if err != nil {
 		http.Error(w, fmt.Sprintf("Cloudwatch client creation/store in cache failed: %s", err), http.StatusInternalServerError)
 		return
 	}
+
 	if clientAuth != nil {
 		cmd := &cobra.Command{}
 		cmd.PersistentFlags().StringVar(&elementId, "elementId", r.URL.Query().Get("elementId"), "Description of the elementId flag")
@@ -73,40 +76,29 @@ func GetExecutionTimePanel(w http.ResponseWriter, r *http.Request) {
 		cmd.PersistentFlags().StringVar(&startTime, "startTime", r.URL.Query().Get("startTime"), "Description of the startTime flag")
 		cmd.PersistentFlags().StringVar(&endTime, "endTime", r.URL.Query().Get("endTime"), "Description of the endTime flag")
 		cmd.PersistentFlags().StringVar(&responseType, "responseType", r.URL.Query().Get("responseType"), "responseType flag - json/frame")
-		jsonString, cloudwatchMetricData, err := Lambda.GetLambdaExecutionTimePanel(cmd, clientAuth, cloudwatchClient)
+
+		jsonString, executionTimeData, err := Lambda.GetLambdaExecutionTimePanel(cmd, clientAuth, cloudwatchClient)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
 			return
 		}
-		log.Infof("response type :" + responseType)
 
 		if responseType == "frame" {
-			log.Infof("creating response frame")
-			log.Infof("response type :" + responseType)
-			if responseType == "frame" {
-				err = json.NewEncoder(w).Encode(cloudwatchMetricData)
-				if err != nil {
-					http.Error(w, fmt.Sprintf("Exception: %s ", err), http.StatusInternalServerError)
-					log.Infof("Response type: %s", responseType)
-					return
-				}
+			err = json.NewEncoder(w).Encode(executionTimeData)
+			if err != nil {
+				http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
+				return
 			}
 		} else {
-			log.Infof("creating response json")
-			type ExecutionTimeData struct {
-				FunctionName string
-				ResponseTime float64
-				Duration     float64
-			}
-			var dataList []ExecutionTimeData
-			err := json.Unmarshal([]byte(jsonString), &dataList)
+			var data ExecutionTimeData
+			err := json.Unmarshal([]byte(jsonString), &data)
 			if err != nil {
 				http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
 				return
 			}
 
 			// Marshal the struct back to JSON
-			jsonBytes, err := json.Marshal(dataList)
+			jsonBytes, err := json.Marshal(data)
 			if err != nil {
 				http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
 				return
@@ -119,19 +111,18 @@ func GetExecutionTimePanel(w http.ResponseWriter, r *http.Request) {
 				http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
 				return
 			}
-
 		}
 	}
-
 }
 
-func executionTimeauthenticateAndCache(commandParam model.CommandParam) (*model.Auth, error) {
+func authenticateAndCache(commandParam model.CommandParam) (*model.Auth, error) {
 	cacheKey := commandParam.CloudElementId
 
 	authCacheLock.Lock()
+	defer authCacheLock.Unlock()
+
 	if auth, ok := authCache.Load(cacheKey); ok {
 		log.Infof("client credentials found in cache")
-		authCacheLock.Unlock()
 		return auth.(*model.Auth), nil
 	}
 
@@ -143,27 +134,24 @@ func executionTimeauthenticateAndCache(commandParam model.CommandParam) (*model.
 	}
 
 	authCache.Store(cacheKey, clientAuth)
-	authCacheLock.Unlock()
-
 	return clientAuth, nil
 }
 
-func executionTimecloudwatchClientCache(clientAuth model.Auth) (*cloudwatch.CloudWatch, error) {
+func cloudwatchClientCache(clientAuth model.Auth) (*cloudwatch.CloudWatch, error) {
 	cacheKey := clientAuth.CrossAccountRoleArn
 
 	clientCacheLock.Lock()
+	defer clientCacheLock.Unlock()
+
 	if client, ok := clientCache.Load(cacheKey); ok {
-		log.Infof("cloudwatch client found in cache for given cross acount role: %s", cacheKey)
-		clientCacheLock.Unlock()
+		log.Infof("cloudwatch client found in cache for given cross account role: %s", cacheKey)
 		return client.(*cloudwatch.CloudWatch), nil
 	}
 
 	// If not in cache, create new cloud watch client
-	log.Infof("creating new cloudwatch client for given cross acount role: %s", cacheKey)
+	log.Infof("creating new cloudwatch client for given cross account role: %s", cacheKey)
 	cloudWatchClient := awsclient.GetClient(clientAuth, awsclient.CLOUDWATCH).(*cloudwatch.CloudWatch)
 
 	clientCache.Store(cacheKey, cloudWatchClient)
-	clientCacheLock.Unlock()
-
 	return cloudWatchClient, nil
 }
