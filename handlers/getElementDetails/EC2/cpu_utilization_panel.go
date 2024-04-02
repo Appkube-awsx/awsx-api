@@ -4,6 +4,7 @@ import (
 	"awsx-api/cache"
 	"awsx-api/log"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"github.com/Appkube-awsx/awsx-common/awsclient"
 	"github.com/Appkube-awsx/awsx-common/model"
@@ -67,14 +68,13 @@ func GetCpuUtilizationPanel(w http.ResponseWriter, r *http.Request) {
 		jsonString, cloudwatchMetricData, err := EC2.GetCpuUtilizationPanel(cmd, clientAuth, cloudwatchClient)
 		if err != nil {
 			log.Infof("error found in GetCpuUtilizationPanel: ", err)
-			if awsErr, ok := err.(awserr.Error); ok {
+			var awsErr awserr.Error
+			if errors.As(err, &awsErr) {
 				if awsErr.Code() == "ExpiredToken" {
-					log.Infof("aws session expired. resetting cache")
+					log.Infof("aws session expired. resetting connection cache")
 					clientAuth, awsClient, err = cache.SetAwsCredsAndClientInCache(commandParam, awsclient.CLOUDWATCH)
+					jsonString, cloudwatchMetricData, err = EC2.GetCpuUtilizationPanel(cmd, clientAuth, cloudwatchClient)
 				}
-			} else {
-				http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
-				return
 			}
 		}
 		log.Infof("response type :" + responseType)
