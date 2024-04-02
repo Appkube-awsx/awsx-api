@@ -290,6 +290,12 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	if elementType == "Lambda" && query == "throttles_panel" {
 		Lambda.GetThrottlesPanel(w, r)
 	}
+	if elementType == "Lambda" && query == "number_of_calls_panel" {
+		Lambda.GetNumberOfCallsPanel(w, r)
+	}
+	if elementType == "Lambda" && query == "error_messages_count_panel" {
+		Lambda.GetErrorMsgCountPanel(w, r)
+	}
 	if elementType == "RDS" && query == "cpu_utilization_panel" {
 		RDS.GetCpuUtilizationPanel(w, r)
 	}
