@@ -305,6 +305,9 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	if elementType == "Lambda" && query == "error_and_warning_events_panel" {
 		Lambda.GetErrorAndWarningEventsPanel(w, r)
 	}
+	if elementType == "Lambda" && query == "success_and_failed_function_panel" {
+		Lambda.GetSuccessAndFailedFunctionPanel(w, r)
+	}
 	if elementType == "RDS" && query == "cpu_utilization_panel" {
 		RDS.GetCpuUtilizationPanel(w, r)
 	}
