@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "83355c43-8862-473f-98b1-1bf9a1de2e55",
+		"_postman_id": "ca05f62e-0303-4d38-9953-83e20ae39441",
 		"name": "awsx-api",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "24280300",
-		"_collection_link": "https://cloudy-crater-160851.postman.co/workspace/shahrukh~365b6eca-9bce-488c-ad7c-5102f5faca3c/collection/24280300-83355c43-8862-473f-98b1-1bf9a1de2e55?action=share&source=collection_link&creator=24280300"
+		"_collection_link": "https://cloudy-crater-160851.postman.co/workspace/shahrukh~365b6eca-9bce-488c-ad7c-5102f5faca3c/collection/24280300-ca05f62e-0303-4d38-9953-83e20ae39441?action=share&source=collection_link&creator=24280300"
 	},
 	"item": [
 		{
@@ -2413,6 +2413,22 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "disk_utilization_panel",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						},
+						{
+							"name": "allocatable_memory_panel",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
 						}
 					]
 				},
@@ -2521,6 +2537,57 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "resource_deleted_panel",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=900000&elementType=ECS&query=resource_deleted_panel&responseType=frame&startTime=2024-01-26T00:00:00Z&endTime=2024-03-26T23:59:59Z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "900000"
+										},
+										{
+											"key": "elementType",
+											"value": "ECS"
+										},
+										{
+											"key": "query",
+											"value": "resource_deleted_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "frame"
+										},
+										{
+											"key": "startTime",
+											"value": "2024-01-26T00:00:00Z"
+										},
+										{
+											"key": "endTime",
+											"value": "2024-03-26T23:59:59Z"
+										},
+										{
+											"key": "logGroupName",
+											"value": "CloudTrail/DefaultLogGroup ",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
@@ -2535,6 +2602,210 @@
 								"url": {
 									"raw": ""
 								}
+							},
+							"response": []
+						},
+						{
+							"name": "max_memory_used_graph_panel",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=9387&elementType=Lambda&query=max_memory_used_graph_panel&responseType=frame&startTime=2024-03-26T00:00:00Z&endTime=2024-03-26T23:59:59Z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "9387"
+										},
+										{
+											"key": "elementType",
+											"value": "Lambda"
+										},
+										{
+											"key": "query",
+											"value": "max_memory_used_graph_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "frame"
+										},
+										{
+											"key": "startTime",
+											"value": "2024-03-26T00:00:00Z"
+										},
+										{
+											"key": "endTime",
+											"value": "2024-03-26T23:59:59Z"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "cold_start_duration_panel",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=9387&elementType=Lambda&query=cold_start_duration_panel&responseType=frame&startTime=2024-03-26T00:00:00Z&endTime=2024-03-26T23:59:59Z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "9387"
+										},
+										{
+											"key": "elementType",
+											"value": "Lambda"
+										},
+										{
+											"key": "query",
+											"value": "cold_start_duration_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "frame"
+										},
+										{
+											"key": "startTime",
+											"value": "2024-03-26T00:00:00Z"
+										},
+										{
+											"key": "endTime",
+											"value": "2024-03-26T23:59:59Z"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "concurrency_panel",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=9387&elementType=Lambda&query=concurrency_panel&responseType=frame",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "9387"
+										},
+										{
+											"key": "elementType",
+											"value": "Lambda"
+										},
+										{
+											"key": "query",
+											"value": "concurrency_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "frame"
+										},
+										{
+											"key": "startTime",
+											"value": "2024-03-26T00:00:00Z",
+											"disabled": true
+										},
+										{
+											"key": "endTime",
+											"value": "2024-03-26T23:59:59Z",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "functions_by_region_panel",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=9387&elementType=Lambda&query=functions_by_region_panel&responseType=json",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "9387"
+										},
+										{
+											"key": "elementType",
+											"value": "Lambda"
+										},
+										{
+											"key": "query",
+											"value": "functions_by_region_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "json"
+										},
+										{
+											"key": "startTime",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "endTime",
+											"value": "",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "execution_time_panel",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						},
+						{
+							"name": "throttles_panel",
+							"request": {
+								"method": "GET",
+								"header": []
 							},
 							"response": []
 						}
@@ -3526,6 +3797,89 @@
 										}
 									]
 								}
+							},
+							"response": []
+						},
+						{
+							"name": "maintenance_schedule_overview_panel",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "ApiGateway",
+					"item": [
+						{
+							"name": "uptime_of_deployment_stages",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						},
+						{
+							"name": "4xx_errors_panel",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						},
+						{
+							"name": "5xx_errors_panel",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7000/awsx-api/getQueryOutput?elementId=10940&elementType=ApiGateway&query=5xx_errors_panel&responseType=frame&startTime=2024-03-25T03:25:00Z&endTime=2024-03-26T05:10:00Z",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7000",
+									"path": [
+										"awsx-api",
+										"getQueryOutput"
+									],
+									"query": [
+										{
+											"key": "elementId",
+											"value": "10940"
+										},
+										{
+											"key": "elementType",
+											"value": "ApiGateway"
+										},
+										{
+											"key": "query",
+											"value": "5xx_errors_panel"
+										},
+										{
+											"key": "responseType",
+											"value": "frame"
+										},
+										{
+											"key": "startTime",
+											"value": "2024-03-25T03:25:00Z"
+										},
+										{
+											"key": "endTime",
+											"value": "2024-03-26T05:10:00Z"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "cache_hit_count_panel",
+							"request": {
+								"method": "GET",
+								"header": []
 							},
 							"response": []
 						}
