@@ -115,6 +115,15 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	if elementType == "ECS" || elementType == "AWS/ECS" && query == "volume_write_bytes_panel" {
 		ECS.GetECSWriteBytesPanel(w, r)
 	}
+	if elementType == "ECS" || elementType == "AWS/ECS" && query == "top_events_panel" {
+		ECS.GetTopEventsPanel(w, r)
+	}
+	if elementType == "ECS" || elementType == "AWS/ECS" && query == "registration_events_panel" {
+		ECS.GetRegistrationEventsPanel(w, r)
+	}
+	if elementType == "ECS" || elementType == "AWS/ECS" && query == "deregistration_events_panel" {
+		ECS.GetDeRegistrationEventsPanel(w, r)
+	}
 	if elementType == "EC2" && query == "memory_utilization_panel" {
 		EC2.GetMemoryUtilizationPanel(w, r)
 	}
