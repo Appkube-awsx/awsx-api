@@ -398,4 +398,7 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	if elementType == "ApiGateway" && query == "uptime_percentage_panel" {
 		ApiGateway.GetUptimePercentagePanel(w, r)
 	}
+	if elementType == "ApiGateway" && query == "uptime_of_deployment_stages" {
+		ApiGateway.GetUptimeOfDeploymentPanel(w, r)
+	}
 }
