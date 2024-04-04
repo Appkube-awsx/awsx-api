@@ -1,18 +1,19 @@
 package Lambda
 
 import (
+	"awsx-api/cache"
 	"awsx-api/log"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"net/http"
-	"sync"
 	"time"
 
 	"github.com/Appkube-awsx/awsx-getelementdetails/handler/Lambda"
 
-	"github.com/Appkube-awsx/awsx-common/authenticate"
 	"github.com/Appkube-awsx/awsx-common/awsclient"
 	"github.com/Appkube-awsx/awsx-common/model"
+	"github.com/aws/aws-sdk-go/aws/awserr"
 	"github.com/aws/aws-sdk-go/service/cloudwatch"
 	"github.com/spf13/cobra"
 )
@@ -23,13 +24,6 @@ type ConcurrencyData struct {
 		Value     float64
 	} `json:"RawData"`
 }
-
-var (
-	authCachecon       sync.Map
-	clientCachecon     sync.Map
-	authCacheLockcon   sync.RWMutex
-	clientCacheLockcon sync.RWMutex
-)
 
 func GetConcurrencyPanel(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
@@ -58,13 +52,13 @@ func GetConcurrencyPanel(w http.ResponseWriter, r *http.Request) {
 		commandParam.Region = region
 	}
 
-	clientAuth, err := authenticateAndCachecon(commandParam)
+	clientAuth, awsClient, err := cache.GetAwsCredsAndClient(commandParam, awsclient.CLOUDWATCH)
 	if err != nil {
 		http.Error(w, fmt.Sprintf("Authentication failed: %s", err), http.StatusInternalServerError)
 		return
 	}
 
-	cloudwatchClient, err := cloudwatchClientCachecon(*clientAuth)
+	cloudwatchClient := awsClient.(*cloudwatch.CloudWatch)
 	if err != nil {
 		http.Error(w, fmt.Sprintf("Cloudwatch client creation/store in cache failed: %s", err), http.StatusInternalServerError)
 		return
@@ -81,9 +75,16 @@ func GetConcurrencyPanel(w http.ResponseWriter, r *http.Request) {
 
 		jsonString, cloudwatchMetricData, err := Lambda.GetLambdaConcurrencyData(cmd, clientAuth, cloudwatchClient)
 		if err != nil {
-			http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
-			return
+			log.Infof("error found in GetColdStartDurationPanel: ", err)
+			var awsErr awserr.Error
+			if errors.As(err, &awsErr) {
+				if awsErr.Code() == "ExpiredToken" {
+					log.Infof("aws session expired. resetting connection cache")
+					clientAuth, awsClient, err = cache.SetAwsCredsAndClientInCache(commandParam, awsclient.CLOUDWATCH)
+				}
+			}
 		}
+		log.Infof("response type :" + responseType)
 
 		if responseType == "frame" {
 			err = json.NewEncoder(w).Encode(cloudwatchMetricData)
@@ -115,45 +116,4 @@ func GetConcurrencyPanel(w http.ResponseWriter, r *http.Request) {
 			}
 		}
 	}
-}
-
-func authenticateAndCachecon(commandParam model.CommandParam) (*model.Auth, error) {
-	cacheKey := commandParam.CloudElementId
-
-	authCacheLockcon.Lock()
-	defer authCacheLockcon.Unlock()
-
-	if auth, ok := authCachecon.Load(cacheKey); ok {
-		log.Infof("client credentials found in cache")
-		return auth.(*model.Auth), nil
-	}
-
-	// If not in cache, perform authentication
-	log.Infof("getting client credentials from vault/db")
-	_, clientAuth, err := authenticate.DoAuthenticate(commandParam)
-	if err != nil {
-		return nil, err
-	}
-
-	authCachecon.Store(cacheKey, clientAuth)
-	return clientAuth, nil
-}
-
-func cloudwatchClientCachecon(clientAuth model.Auth) (*cloudwatch.CloudWatch, error) {
-	cacheKey := clientAuth.CrossAccountRoleArn
-
-	clientCacheLockcon.Lock()
-	defer clientCacheLockcon.Unlock()
-
-	if client, ok := clientCachecon.Load(cacheKey); ok {
-		log.Infof("cloudwatch client found in cache for given cross account role: %s", cacheKey)
-		return client.(*cloudwatch.CloudWatch), nil
-	}
-
-	// If not in cache, create new cloud watch client
-	log.Infof("creating new cloudwatch client for given cross account role: %s", cacheKey)
-	cloudWatchClient := awsclient.GetClient(clientAuth, awsclient.CLOUDWATCH).(*cloudwatch.CloudWatch)
-
-	clientCachecon.Store(cacheKey, cloudWatchClient)
-	return cloudWatchClient, nil
 }
