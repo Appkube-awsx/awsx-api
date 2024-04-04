@@ -404,6 +404,9 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	if elementType == "RDS" && query == "maintenance_schedule_overview_panel" {
 		RDS.ScheduleOverviewPanel(w, r)
 	}
+	if elementType == "RDS" && query == "uptime_percentage_panel" {
+		RDS.GetRDSUptimeData(w, r)
+	}
 	if elementType == "ApiGateway" && query == "uptime_percentage_panel" {
 		ApiGateway.GetUptimePercentagePanel(w, r)
 	}
