@@ -410,4 +410,13 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	if elementType == "ApiGateway" && query == "uptime_of_deployment_stages" {
 		ApiGateway.GetUptimeOfDeploymentPanel(w, r)
 	}
+	if elementType == "ApiGateway" && query == "4xx_errors_panel" {
+		ApiGateway.Get4XXErrorsPanel(w, r)
+	}
+	if elementType == "ApiGateway" && query == "5xx_errors_panel" {
+		ApiGateway.GetApi5xxErrorsPanel(w, r)
+	}
+	// if elementType == "ApiGateway" && query == "downtime_incident_panel" {
+	// 	ApiGateway.GetDowntimeIncidentPanel(w, r)
+	// }
 }
