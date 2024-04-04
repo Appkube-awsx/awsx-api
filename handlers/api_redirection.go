@@ -416,6 +416,21 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	if elementType == "ApiGateway" && query == "5xx_errors_panel" {
 		ApiGateway.GetApi5xxErrorsPanel(w, r)
 	}
+	if elementType == "ApiGateway" && query == "total_api_calls_panel" {
+		ApiGateway.GetTotalApiCallsPanel(w, r)
+	}
+	if elementType == "ApiGateway" && query == "latency_panel" {
+		ApiGateway.GetLatencyPanel(w, r)
+	}
+	if elementType == "ApiGateway" && query == "integration_latency_panel" {
+		ApiGateway.GetIntegrationLatencyPanel(w, r)
+	}
+	if elementType == "ApiGateway" && query == "cache_hit_count_panel" {
+		ApiGateway.GetCacheHitsPanel(w, r)
+	}
+	if elementType == "ApiGateway" && query == "cache_miss_count_panel" {
+		ApiGateway.GetCacheMissPanel(w, r)
+	}
 	// if elementType == "ApiGateway" && query == "downtime_incident_panel" {
 	// 	ApiGateway.GetDowntimeIncidentPanel(w, r)
 	// }
