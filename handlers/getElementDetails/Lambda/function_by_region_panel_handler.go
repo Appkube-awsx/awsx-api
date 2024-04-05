@@ -71,6 +71,7 @@ func GetFunctionByRegionPanel(w http.ResponseWriter, r *http.Request) {
 		cmd.PersistentFlags().StringVar(&responseType, "responseType", r.URL.Query().Get("responseType"), "responseType flag - json/frame")
 
 		jsonString, functionCounts, totalFunctions, err := Lambda.GetLambdaFunctionsByRegion(clientAuth)
+		fmt.Println(totalFunctions)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
 			return
@@ -85,7 +86,7 @@ func GetFunctionByRegionPanel(w http.ResponseWriter, r *http.Request) {
 		} else {
 			// Marshal the JSON string directly
 			w.Header().Set("Content-Type", "application/json")
-			_, err := w.Write([]byte(fmt.Sprintf("Function By Region : %d %s ", totalFunctions, jsonString)))
+			_, err := w.Write([]byte(fmt.Sprintf(jsonString)))
 			if err != nil {
 				http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
 				return
