@@ -84,6 +84,8 @@ github.com/Appkube-awsx/awsx-getelementdetails v1.10.0 h1:JzIHWQQJo4axRxcUW3mlaY
 github.com/Appkube-awsx/awsx-getelementdetails v1.10.0/go.mod h1:y2FNy6NCyF7Ol1+SQ0BY2xleSo4++/z80hN4hQJDlMk=
 github.com/Appkube-awsx/awsx-getelementdetails v1.10.1 h1:9rwHh0SPTNzG8Rn4470Pat2EzN/fFimVNP3tV2s59Gk=
 github.com/Appkube-awsx/awsx-getelementdetails v1.10.1/go.mod h1:y2FNy6NCyF7Ol1+SQ0BY2xleSo4++/z80hN4hQJDlMk=
+github.com/Appkube-awsx/awsx-getelementdetails v1.10.2 h1:2C8bR9TLyXpocWmmKbu76R935qI6aX+YsHBmWr2nz58=
+github.com/Appkube-awsx/awsx-getelementdetails v1.10.2/go.mod h1:y2FNy6NCyF7Ol1+SQ0BY2xleSo4++/z80hN4hQJDlMk=
 github.com/Appkube-awsx/awsx-getlandingzonedetails v1.0.2 h1:IH8/qydxHnvAJB5DoeYqOx/evExl5Sjr2wD6FocNMMQ=
 github.com/Appkube-awsx/awsx-getlandingzonedetails v1.0.2/go.mod h1:8RqnSCioulmXv3HrEvBkuEwTX3i6y1DDbOi/gVEPIlY=
 github.com/Appkube-awsx/awsx-getlandingzonedetails v1.0.3 h1:RSYs+naG/th1w55gSzXS/RtIcrmhmn3HZ3gBxlmRV5w=
