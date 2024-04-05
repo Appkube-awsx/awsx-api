@@ -90,7 +90,9 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	if elementType == "EKS" && query == "service_availability_panel" {
 		EKS.GetEKSServiceAvailabilityPanel(w, r)
 	}
-
+	if elementType == "ECS" && query == "network_utilization_panel" {
+		ECS.GetECSNetworkUtilizationPanel(w, r)
+	}
 	if elementType == "ECS" && query == "cpu_utilization_panel" {
 		ECS.GetECScpuUtilizationPanel(w, r)
 	}
@@ -103,27 +105,27 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	if elementType == "ECS" && query == "memory_reservation_panel" {
 		ECS.GetMemoryReservationData(w, r)
 	}
-	if elementType == "ECS" || elementType == "AWS/ECS" && query == "net_rxinbytes_panel" {
-		ECS.GetECSNetworkRxInBytesPanel(w, r)
-	}
-	if elementType == "ECS" || elementType == "AWS/ECS" && query == "net_txinbytes_panel" {
-		ECS.GetECSNetworkTxInBytesPanel(w, r)
-	}
-	if elementType == "ECS" || elementType == "AWS/ECS" && query == "volume_read_bytes_panel" {
-		ECS.GetECSReadBytesPanel(w, r)
-	}
-	if elementType == "ECS" || elementType == "AWS/ECS" && query == "volume_write_bytes_panel" {
-		ECS.GetECSWriteBytesPanel(w, r)
-	}
-	if elementType == "ECS" || elementType == "AWS/ECS" && query == "top_events_panel" {
-		ECS.GetTopEventsPanel(w, r)
-	}
-	if elementType == "ECS" || elementType == "AWS/ECS" && query == "registration_events_panel" {
-		ECS.GetRegistrationEventsPanel(w, r)
-	}
-	if elementType == "ECS" || elementType == "AWS/ECS" && query == "deregistration_events_panel" {
-		ECS.GetDeRegistrationEventsPanel(w, r)
-	}
+	// if elementType == "ECS" || elementType == "AWS/ECS" && query == "net_rxinbytes_panel" {
+	// 	ECS.GetECSNetworkRxInBytesPanel(w, r)
+	// }
+	// if elementType == "ECS" || elementType == "AWS/ECS" && query == "net_txinbytes_panel" {
+	// 	ECS.GetECSNetworkTxInBytesPanel(w, r)
+	// }
+	// if elementType == "ECS" || elementType == "AWS/ECS" && query == "volume_read_bytes_panel" {
+	// 	ECS.GetECSReadBytesPanel(w, r)
+	// }
+	// if elementType == "ECS" || elementType == "AWS/ECS" && query == "volume_write_bytes_panel" {
+	// 	ECS.GetECSWriteBytesPanel(w, r)
+	// }
+	// if elementType == "ECS" || elementType == "AWS/ECS" && query == "top_events_panel" {
+	// 	ECS.GetTopEventsPanel(w, r)
+	// }
+	// if elementType == "ECS" || elementType == "AWS/ECS" && query == "registration_events_panel" {
+	// 	ECS.GetRegistrationEventsPanel(w, r)
+	// }
+	// if elementType == "ECS" || elementType == "AWS/ECS" && query == "deregistration_events_panel" {
+	// 	ECS.GetDeRegistrationEventsPanel(w, r)
+	// }
 	if elementType == "EC2" && query == "memory_utilization_panel" {
 		EC2.GetMemoryUtilizationPanel(w, r)
 	}

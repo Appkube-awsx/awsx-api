@@ -77,21 +77,30 @@ func GetExecutionTimePanel(w http.ResponseWriter, r *http.Request) {
 		cmd.PersistentFlags().StringVar(&endTime, "endTime", r.URL.Query().Get("endTime"), "Description of the endTime flag")
 		cmd.PersistentFlags().StringVar(&responseType, "responseType", r.URL.Query().Get("responseType"), "responseType flag - json/frame")
 
-		jsonString, executionTimeData, err := Lambda.GetLambdaExecutionTimePanel(cmd, clientAuth, cloudwatchClient)
+		jsonString, _, err := Lambda.GetLambdaExecutionTimePanel(cmd, clientAuth, cloudwatchClient)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
 			return
 		}
 
 		if responseType == "frame" {
-			err = json.NewEncoder(w).Encode(executionTimeData)
+			// Responding with raw JSON string
+			_, err = w.Write([]byte(jsonString))
 			if err != nil {
 				http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
 				return
 			}
 		} else {
+			// Unmarshal the JSON array into a slice of ExecutionTimeData
+			var dataSlice []ExecutionTimeData
+			err := json.Unmarshal([]byte(jsonString), &dataSlice)
+			if err != nil {
+				http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
+				return
+			}
 
-			jsonBytes, err := json.Marshal(jsonString)
+			// Marshal the slice back to JSON
+			jsonBytes, err := json.Marshal(dataSlice)
 			if err != nil {
 				http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
 				return
