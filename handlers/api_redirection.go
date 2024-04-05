@@ -275,46 +275,46 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	if elementType == "EKS" && query == "incident_response_time_panel" {
 		EKS.GetIncidentResponseTimePanel(w, r)
 	}
-	if elementType == "Lambda" && query == "used_and_unused_memory_data_panel" {
+	if elementType == "LAMBDA" && query == "used_and_unused_memory_data_panel" {
 		Lambda.GetUsedAndUnusedMemoryDataPanel(w, r)
 	}
-	if elementType == "Lambda" && query == "max_memory_used_panel" {
+	if elementType == "LAMBDA" && query == "max_memory_used_panel" {
 		Lambda.GetMaxMemoryUsedPanel(w, r)
 	}
-	if elementType == "Lambda" && query == "execution_time_panel" {
+	if elementType == "LAMBDA" && query == "execution_time_panel" {
 		Lambda.GetExecutionTimePanel(w, r)
 	}
-	if elementType == "Lambda" && query == "max_memory_used_graph_panel" {
+	if elementType == "LAMBDA" && query == "max_memory_used_graph_panel" {
 		Lambda.GetMaxMemoryUsedPanell(w, r)
 	}
-	if elementType == "Lambda" && query == "cold_start_duration_panel" {
+	if elementType == "LAMBDA" && query == "cold_start_duration_panel" {
 		Lambda.GetColdStartDurationPanel(w, r)
 	}
-	if elementType == "Lambda" && query == "concurrency_panel" {
+	if elementType == "LAMBDA" && query == "concurrency_panel" {
 		Lambda.GetConcurrencyPanel(w, r)
 	}
-	if elementType == "Lambda" && query == "functions_by_region_panel" {
+	if elementType == "LAMBDA" && query == "functions_by_region_panel" {
 		Lambda.GetFunctionByRegionPanel(w, r)
 	}
-	if elementType == "Lambda" && query == "throttles_panel" {
+	if elementType == "LAMBDA" && query == "throttles_panel" {
 		Lambda.GetThrottlesPanel(w, r)
 	}
-	if elementType == "Lambda" && query == "number_of_calls_panel" {
+	if elementType == "LAMBDA" && query == "number_of_calls_panel" {
 		Lambda.GetNumberOfCallsPanel(w, r)
 	}
-	if elementType == "Lambda" && query == "error_messages_count_panel" {
+	if elementType == "LAMBDA" && query == "error_messages_count_panel" {
 		Lambda.GetErrorMsgCountPanel(w, r)
 	}
-	if elementType == "Lambda" && query == "throttling_trends_panel" {
+	if elementType == "LAMBDA" && query == "throttling_trends_panel" {
 		Lambda.GetThrottlingTrendsPanel(w, r)
 	}
-	if elementType == "Lambda" && query == "invocation_trend_panel" {
+	if elementType == "LAMBDA" && query == "invocation_trend_panel" {
 		Lambda.GetInvocationTrendPanel(w, r)
 	}
-	if elementType == "Lambda" && query == "error_and_warning_events_panel" {
+	if elementType == "LAMBDA" && query == "error_and_warning_events_panel" {
 		Lambda.GetErrorAndWarningEventsPanel(w, r)
 	}
-	if elementType == "Lambda" && query == "success_and_failed_function_panel" {
+	if elementType == "LAMBDA" && query == "success_and_failed_function_panel" {
 		Lambda.GetSuccessAndFailedFunctionPanel(w, r)
 	}
 	if elementType == "RDS" && query == "cpu_utilization_panel" {
