@@ -446,4 +446,10 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	if elementType == "ApiGateway" && query == "top_events_panel" {
 		ApiGateway.GetTopEventsPanel(w, r)
 	}
+	if elementType == "ApiGateway" && query == "failed_event_details_panel" {
+		ApiGateway.GetFailedEventDetailsPanel(w, r)
+	}
+	if elementType == "ApiGateway" && query == "successful_event_details_panel" {
+		ApiGateway.GetSuccessfulEventDetailsPanel(w, r)
+	}
 }
