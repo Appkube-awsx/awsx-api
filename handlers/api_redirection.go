@@ -412,6 +412,12 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	if elementType == "RDS" && query == "error_analysis_panel" {
 		RDS.GetErrorAnalysisData(w, r)
 	}
+	if elementType == "RDS" && query == "recent_event_log_panel" {
+		RDS.GetRecentEventLogsPanel(w, r)
+	}
+	if elementType == "RDS" && query == "recent_error_log_panel" {
+		RDS.GetRdsErrorLogsPanel(w, r)
+	}
 	if elementType == "ApiGateway" && query == "uptime_percentage_panel" {
 		ApiGateway.GetUptimePercentagePanel(w, r)
 	}
