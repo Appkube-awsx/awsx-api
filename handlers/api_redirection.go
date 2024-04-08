@@ -412,52 +412,52 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	if elementType == "RDS" && query == "error_analysis_panel" {
 		RDS.GetErrorAnalysisData(w, r)
 	}
-	if elementType == "ApiGateway" && query == "uptime_percentage_panel" {
+	if elementType == "APIGATEWAY" && query == "uptime_percentage_panel" {
 		ApiGateway.GetUptimePercentagePanel(w, r)
 	}
-	if elementType == "ApiGateway" && query == "uptime_of_deployment_stages" {
+	if elementType == "APIGATEWAY" && query == "uptime_of_deployment_stages" {
 		ApiGateway.GetUptimeOfDeploymentPanel(w, r)
 	}
-	if elementType == "ApiGateway" && query == "4xx_errors_panel" {
+	if elementType == "APIGATEWAY" && query == "4xx_errors_panel" {
 		ApiGateway.Get4XXErrorsPanel(w, r)
 	}
-	if elementType == "ApiGateway" && query == "5xx_errors_panel" {
+	if elementType == "APIGATEWAY" && query == "5xx_errors_panel" {
 		ApiGateway.GetApi5xxErrorsPanel(w, r)
 	}
-	if elementType == "ApiGateway" && query == "total_api_calls_panel" {
+	if elementType == "APIGATEWAY" && query == "total_api_calls_panel" {
 		ApiGateway.GetTotalApiCallsPanel(w, r)
 	}
 	if elementType == "ApiGateway" && query == "latency_panel" {
 		ApiGateway.GetLatencyPanel(w, r)
 	}
-	if elementType == "ApiGateway" && query == "integration_latency_panel" {
+	if elementType == "APIGATEWAY" && query == "integration_latency_panel" {
 		ApiGateway.GetIntegrationLatencyPanel(w, r)
 	}
 	if elementType == "ApiGateway" && query == "cache_hit_count_panel" {
 		ApiGateway.GetCacheHitsPanel(w, r)
 	}
-	if elementType == "ApiGateway" && query == "cache_miss_count_panel" {
+	if elementType == "APIGATEWAY" && query == "cache_miss_count_panel" {
 		ApiGateway.GetCacheMissPanel(w, r)
 	}
-	if elementType == "ApiGateway" && query == "downtime_incident_panel" {
+	if elementType == "APIGATEWAY" && query == "downtime_incident_panel" {
 		ApiGateway.GetDowntimeIncidentPanel(w, r)
 	}
-	if elementType == "ApiGateway" && query == "error_logs_panel" {
+	if elementType == "APIGATEWAY" && query == "error_logs_panel" {
 		ApiGateway.GetErrorLogsPanel(w, r)
 	}
-	if elementType == "ApiGateway" && query == "response_time_panel" {
+	if elementType == "APIGATEWAY" && query == "response_time_panel" {
 		ApiGateway.GetResponseTimePanel(w, r)
 	}
-	if elementType == "ApiGateway" && query == "top_events_panel" {
+	if elementType == "APIGATEWAY" && query == "top_events_panel" {
 		ApiGateway.GetTopEventsPanel(w, r)
 	}
-	if elementType == "ApiGateway" && query == "failed_event_details_panel" {
+	if elementType == "APIGATEWAY" && query == "failed_event_details_panel" {
 		ApiGateway.GetFailedEventDetailsPanel(w, r)
 	}
-	if elementType == "ApiGateway" && query == "successful_event_details_panel" {
+	if elementType == "APIGATEWAY" && query == "successful_event_details_panel" {
 		ApiGateway.GetSuccessfulEventDetailsPanel(w, r)
 	}
-	if elementType == "ApiGateway" && query == "successful_and_failed_events_panel" {
+	if elementType == "APIGATEWAY" && query == "successful_and_failed_events_panel" {
 		ApiGateway.GetSuccessAndFailedEventsPanel(w, r)
 	}
 }
