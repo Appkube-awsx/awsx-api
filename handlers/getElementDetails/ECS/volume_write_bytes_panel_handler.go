@@ -16,7 +16,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-type writebytes struct {
+type WriteBytes struct {
 	RawData []struct {
 		Timestamp time.Time
 		Value     float64
@@ -54,7 +54,7 @@ func GetECSWriteBytesPanel(w http.ResponseWriter, r *http.Request) {
 		commandParam.ExternalId = externalId
 		commandParam.Region = region
 	}
-	clientAuth, err := readBytesAuthenticateAndCache(commandParam)
+	clientAuth, err := writeBytesAuthenticateAndCache(commandParam)
 	if err != nil {
 		http.Error(w, fmt.Sprintf("Authentication failed: %s", err), http.StatusInternalServerError)
 		return
@@ -72,7 +72,7 @@ func GetECSWriteBytesPanel(w http.ResponseWriter, r *http.Request) {
 		cmd.PersistentFlags().StringVar(&startTime, "startTime", r.URL.Query().Get("startTime"), "Description of the startTime flag")
 		cmd.PersistentFlags().StringVar(&endTime, "endTime", r.URL.Query().Get("endTime"), "Description of the endTime flag")
 		cmd.PersistentFlags().StringVar(&responseType, "responseType", r.URL.Query().Get("responseType"), "responseType flag - json/frame")
-		jsonString, cloudwatchMetricData, err := ECS.GetECSReadBytesPanel(cmd, clientAuth, cloudwatchClient)
+		jsonString, cloudwatchMetricData, err := ECS.GetECSWriteBytesPanel(cmd, clientAuth, cloudwatchClient)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
 			return
@@ -85,7 +85,7 @@ func GetECSWriteBytesPanel(w http.ResponseWriter, r *http.Request) {
 				return
 			}
 		} else {
-			var data writebytes
+			var data WriteBytes
 			err := json.Unmarshal([]byte(jsonString), &data)
 			if err != nil {
 				http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
