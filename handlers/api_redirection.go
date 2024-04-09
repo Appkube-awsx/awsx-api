@@ -460,4 +460,7 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	if elementType == "APIGATEWAY" && query == "successful_and_failed_events_panel" {
 		ApiGateway.GetSuccessAndFailedEventsPanel(w, r)
 	}
+	if elementType == "ApiGateway" || elementType == "AWS/ApiGateway" && query == "total_api_calls_panel" {
+		ApiGateway.GetTotalApiCallsPanel(w, r)
+	}
 }
