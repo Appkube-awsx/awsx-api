@@ -6,6 +6,7 @@ import (
 	"awsx-api/handlers/getElementDetails/ECS"
 	"awsx-api/handlers/getElementDetails/EKS"
 	"awsx-api/handlers/getElementDetails/Lambda"
+	"awsx-api/handlers/getElementDetails/NLB"
 	"awsx-api/handlers/getElementDetails/RDS"
 
 	"awsx-api/handlers/getLandingZoneDetails"
@@ -462,5 +463,8 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	}
 	if elementType == "ApiGateway" || elementType == "AWS/ApiGateway" && query == "total_api_calls_panel" {
 		ApiGateway.GetTotalApiCallsPanel(w, r)
+	}
+	if elementType == "AWS/NetworkELB" || elementType == "AWS/NLB" && query == "active_connections_panel" {
+		NLB.GetNLBActiveConnectionsPanel(w, r)
 	}
 }
