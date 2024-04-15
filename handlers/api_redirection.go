@@ -92,7 +92,7 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 		EKS.GetEKSServiceAvailabilityPanel(w, r)
 	}
 	if elementType == "ECS" && query == "network_utilization_panel" {
-		ECS.GetECSNetworkUtilizationPanel(w, r)
+		ECS.GetNetworkUtilizationPanel(w, r)
 	}
 	if elementType == "ECS" && query == "cpu_utilization_panel" {
 		ECS.GetECScpuUtilizationPanel(w, r)
