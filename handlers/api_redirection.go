@@ -105,6 +105,10 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	if elementType == "ECS" && query == "memory_reservation_panel" {
 		ECS.GetMemoryReservationData(w, r)
 	}
+	if elementType == "ECS" && query == "storage_utilization_panel" {
+		ECS.GetStorageUtilizationPanel(w, r)
+	}
+
 	// if elementType == "ECS" || elementType == "AWS/ECS" && query == "net_rxinbytes_panel" {
 	// 	ECS.GetECSNetworkRxInBytesPanel(w, r)
 	// }
