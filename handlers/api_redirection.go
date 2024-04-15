@@ -471,4 +471,7 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	if elementType == "AWS/NetworkELB" || elementType == "AWS/NLB" && query == "active_connections_panel" {
 		NLB.GetNLBActiveConnectionsPanel(w, r)
 	}
+	if elementType == "AWS/NetworkELB" || elementType == "AWS/NLB" && query == "healthy_host_count_panel" {
+		NLB.GetNLBHealthyHostCountPanel(w, r)
+	}
 }
