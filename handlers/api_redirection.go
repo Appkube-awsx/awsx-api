@@ -468,19 +468,19 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	if elementType == "ApiGateway" || elementType == "AWS/ApiGateway" && query == "total_api_calls_panel" {
 		ApiGateway.GetTotalApiCallsPanel(w, r)
 	}
-	if elementType == "AWS/NetworkELB" || elementType == "AWS/NLB" && query == "active_connections_panel" {
+	if elementType == "AWS/NetworkELB" && query == "active_connections_panel" {
 		NLB.GetNLBActiveConnectionsPanel(w, r)
 	}
-	if elementType == "AWS/NetworkELB" || elementType == "AWS/NLB" && query == "healthy_host_count_panel" {
+	if elementType == "AWS/NetworkELB" && query == "healthy_host_count_panel" {
 		NLB.GetNLBHealthyHostCountPanel(w, r)
 	}
-	if elementType == "AWS/NetworkELB" || elementType == "AWS/NLB" && query == "new_connections_panel" {
+	if elementType == "AWS/NetworkELB" && query == "new_connections_panel" {
 		NLB.GetNLBNewConnectionsPanel(w, r)
 	}
-	if elementType == "AWS/NetworkELB" || elementType == "AWS/NLB" && query == "new_flow_count_tls_panel" {
+	if elementType == "AWS/NetworkELB" && query == "new_flow_count_tls_panel" {
 		NLB.GetNLBNewFlowCountTLSPanel(w, r)
 	}
-	if elementType == "AWS/NetworkELB" || elementType == "AWS/NLB" && query == "processed_bytes_panel" {
+	if elementType == "AWS/NetworkELB" && query == "processed_bytes_panel" {
 		NLB.GetNLBProcessedBytesPanel(w, r)
 	}
 }
