@@ -474,4 +474,13 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	if elementType == "AWS/NetworkELB" || elementType == "AWS/NLB" && query == "healthy_host_count_panel" {
 		NLB.GetNLBHealthyHostCountPanel(w, r)
 	}
+	if elementType == "AWS/NetworkELB" || elementType == "AWS/NLB" && query == "new_connections_panel" {
+		NLB.GetNLBNewConnectionsPanel(w, r)
+	}
+	if elementType == "AWS/NetworkELB" || elementType == "AWS/NLB" && query == "new_flow_count_tls_panel" {
+		NLB.GetNLBNewFlowCountTLSPanel(w, r)
+	}
+	if elementType == "AWS/NetworkELB" || elementType == "AWS/NLB" && query == "processed_bytes_panel" {
+		NLB.GetNLBProcessedBytesPanel(w, r)
+	}
 }
