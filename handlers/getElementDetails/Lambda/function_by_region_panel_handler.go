@@ -70,7 +70,7 @@ func GetFunctionByRegionPanel(w http.ResponseWriter, r *http.Request) {
 		cmd.PersistentFlags().StringVar(&endTime, "endTime", r.URL.Query().Get("endTime"), "Description of the endTime flag")
 		cmd.PersistentFlags().StringVar(&responseType, "responseType", r.URL.Query().Get("responseType"), "responseType flag - json/frame")
 
-		jsonString, functionCounts, totalFunctions, err := Lambda.GetLambdaFunctionsByRegion(clientAuth)
+		jsonString, functionCounts, totalFunctions := Lambda.GetLambdaFunctionsByRegion(clientAuth)
 		fmt.Println(totalFunctions)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
