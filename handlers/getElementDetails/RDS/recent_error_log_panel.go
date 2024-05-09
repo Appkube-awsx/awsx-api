@@ -89,38 +89,57 @@ func GetRdsErrorLogsPanel(w http.ResponseWriter, r *http.Request) {
 
 	log.Println("Flags parsed successfully")
 
-	// Call the function to get instance start count metrics data
-	jsonResp, _, err := GetRecentErrorLogsPanelFromCmd(cmd, clientAuth, cloudWatchLogs)
-	if err != nil {
-		log.Printf("Failed to get error logs panel: %s\n", err)
-		sendErrorResponses(w, fmt.Sprintf("Failed to get error logs panel: %s", err), http.StatusInternalServerError)
+	cloudwatchMetricData, err := RDS.GetRdsErrorLogsPanel(cmd, clientAuth, cloudWatchLogs)
+	if cloudwatchMetricData == nil {
+		sendErrorResponse(w, "Failed to get error logs data", http.StatusInternalServerError)
 		return
 	}
-
-	// Marshal the response data to JSON
-	// data, err := json.Marshal(jsonResp)
-	// if err != nil {
-	// 	log.Printf("Failed to encode data: %s\n", err)
-	// 	sendErrorResponses(w, fmt.Sprintf("Failed to encode data: %s", err), http.StatusInternalServerError)
-	// 	return
-	// }
+	data, err := json.Marshal(cloudwatchMetricData)
+	if err != nil {
+		sendErrorResponse(w, fmt.Sprintf("Failed to encode data: %s", err), http.StatusInternalServerError)
+		return
+	}
 
 	// Write the JSON response
 	w.WriteHeader(http.StatusOK)
-	if _, err := w.Write([]byte(jsonResp)); err != nil {
-		sendErrorResponses(w, fmt.Sprintf("Failed to write response: %s", err), http.StatusInternalServerError)
+	if _, err := w.Write(data); err != nil {
+		sendErrorResponse(w, fmt.Sprintf("Failed to write response: %s", err), http.StatusInternalServerError)
 		return
 	}
 }
 
-func GetRecentErrorLogsPanelFromCmd(cmd *cobra.Command, clientAuth *model.Auth, cloudWatchLogs *cloudwatchlogs.CloudWatchLogs) (string, string, error) {
-	// Call the function to get recent event logs data
-	jsonResp, rawLogs, err := RDS.GetRdsErrorLogsPanel(cmd, clientAuth, cloudWatchLogs)
-	if err != nil {
-		return "", "", err
-	}
-	return jsonResp, rawLogs, nil
-}
+// 	// Call the function to get instance start count metrics data
+// 	jsonResp, _, err := GetRecentErrorLogsPanelFromCmd(cmd, clientAuth, cloudWatchLogs)
+// 	if err != nil {
+// 		log.Printf("Failed to get error logs panel: %s\n", err)
+// 		sendErrorResponses(w, fmt.Sprintf("Failed to get error logs panel: %s", err), http.StatusInternalServerError)
+// 		return
+// 	}
+
+// 	// Marshal the response data to JSON
+// 	// data, err := json.Marshal(jsonResp)
+// 	// if err != nil {
+// 	// 	log.Printf("Failed to encode data: %s\n", err)
+// 	// 	sendErrorResponses(w, fmt.Sprintf("Failed to encode data: %s", err), http.StatusInternalServerError)
+// 	// 	return
+// 	// }
+
+// 	// Write the JSON response
+// 	w.WriteHeader(http.StatusOK)
+// 	if _, err := w.Write([]byte(jsonResp)); err != nil {
+// 		sendErrorResponses(w, fmt.Sprintf("Failed to write response: %s", err), http.StatusInternalServerError)
+// 		return
+// 	}
+// }
+
+// func GetRecentErrorLogsPanelFromCmd(cmd *cobra.Command, clientAuth *model.Auth, cloudWatchLogs *cloudwatchlogs.CloudWatchLogs) (string, string, error) {
+// 	// Call the function to get recent event logs data
+// 	jsonResp, rawLogs, err := RDS.GetRdsErrorLogsPanel(cmd, clientAuth, cloudWatchLogs)
+// 	if err != nil {
+// 		return "", "", err
+// 	}
+// 	return jsonResp, rawLogs, nil
+// }
 
 func authenticateAndCachelog(commandParam model.CommandParam) (*model.Auth, error) {
 	cacheKey := commandParam.CloudElementId

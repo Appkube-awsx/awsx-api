@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"sync"
+
 	// "time"
 	"github.com/Appkube-awsx/awsx-getelementdetails/handler/RDS"
 
@@ -79,30 +80,43 @@ func GetRecentEventLogsPanel(w http.ResponseWriter, r *http.Request) {
 		sendErrorResponseEvent(w, fmt.Sprintf("Failed to parse flags: %s", err), http.StatusInternalServerError)
 		return
 	}
+    
+	log.Println("Flags parsed successfully")
 
-	// Call the function to get recent event logs data
-	jsonResp, _, err := GetRecentEventLogsPanelFromCmd(cmd, clientAuth, cloudWatchLogs)
+	cloudwatchMetricData, err := RDS.GetRecentEventLogsPanel(cmd, clientAuth, cloudWatchLogs)
+	if cloudwatchMetricData == nil {
+		sendErrorResponse(w, "Failed to get error logs data", http.StatusInternalServerError)
+		return
+	}
+	data, err := json.Marshal(cloudwatchMetricData)
 	if err != nil {
-		sendErrorResponseEvent(w, "Failed to get recent event logs data", http.StatusInternalServerError)
+		sendErrorResponse(w, fmt.Sprintf("Failed to encode data: %s", err), http.StatusInternalServerError)
 		return
 	}
 
+	// // Call the function to get recent event logs data
+	// jsonResp, _, err := GetRecentEventLogsPanelFromCmd(cmd, clientAuth, cloudWatchLogs)
+	// if err != nil {
+	// 	sendErrorResponseEvent(w, "Failed to get recent event logs data", http.StatusInternalServerError)
+	// 	return
+	// }
+
 	// Write the JSON response
 	w.WriteHeader(http.StatusOK)
-	if _, err := w.Write([]byte(jsonResp)); err != nil {
+	if _, err := w.Write([]byte(data)); err != nil {
 		sendErrorResponseEvent(w, fmt.Sprintf("Failed to write response: %s", err), http.StatusInternalServerError)
 		return
 	}
 }
 
-func GetRecentEventLogsPanelFromCmd(cmd *cobra.Command, clientAuth *model.Auth, cloudWatchLogs *cloudwatchlogs.CloudWatchLogs) (string, string, error) {
-	// Call the function to get recent event logs data
-	jsonResp, rawLogs, err := RDS.GetRecentEventLogsPanel(cmd, clientAuth, cloudWatchLogs)
-	if err != nil {
-		return "", "", err
-	}
-	return jsonResp, rawLogs, nil
-}
+// func GetRecentEventLogsPanelFromCmd(cmd *cobra.Command, clientAuth *model.Auth, cloudWatchLogs *cloudwatchlogs.CloudWatchLogs) (string, string, error) {
+// 	// Call the function to get recent event logs data
+// 	jsonResp, rawLogs, err:= RDS.GetRecentEventLogsPanel(cmd, clientAuth, cloudWatchLogs)
+// 	if err != nil {
+// 		return "", "", err
+// 	}
+// 	return jsonResp, rawLogs, nil
+// }
 
 func authenticateAndCacheEvent(commandParam model.CommandParam) (*model.Auth, error) {
 	cacheKey := commandParam.CloudElementId

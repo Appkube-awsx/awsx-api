@@ -77,7 +77,7 @@ func GetNetworkReceiveThroughputPanel(w http.ResponseWriter, r *http.Request) {
 		cmd.PersistentFlags().StringVar(&endTime, "endTime", r.URL.Query().Get("endTime"), "Description of the endTime flag")
 		cmd.PersistentFlags().StringVar(&responseType, "responseType", r.URL.Query().Get("responseType"), "responseType flag - json/frame")
 
-		_, jsonString, cloudwatchMetricData, err := RDS.GetRDSNetworkReceiveThroughputPanel(cmd, clientAuth, cloudwatchClient)
+		jsonString, cloudwatchMetricData, err := RDS.GetRDSNetworkReceiveThroughputPanel(cmd, clientAuth, cloudwatchClient)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("Exception: %s", err), http.StatusInternalServerError)
 			return

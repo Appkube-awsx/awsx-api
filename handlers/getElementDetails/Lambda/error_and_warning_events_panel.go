@@ -90,7 +90,7 @@ func GetErrorAndWarningEventsPanel(w http.ResponseWriter, r *http.Request) {
 	log.Println("Flags parsed successfully")
 
 	// Call the function to get instance error rate metrics data
-	cloudwatchMetricData, _, err := Lambda.GetLambdaErrorAndWarningData(cmd, clientAuth, cloudWatchLogs)
+	cloudwatchMetricData, _ := Lambda.GetLambdaErrorAndWarningData(cmd, clientAuth, cloudWatchLogs)
 
 	data, err := json.Marshal(cloudwatchMetricData)
 	if err != nil {
