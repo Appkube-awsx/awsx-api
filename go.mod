@@ -10,8 +10,8 @@ require (
 )
 
 require (
-	github.com/Appkube-awsx/awsx-common v1.3.8
-	github.com/Appkube-awsx/awsx-getelementdetails v1.10.9
+	github.com/Appkube-awsx/awsx-common v1.3.9
+	github.com/Appkube-awsx/awsx-getelementdetails v1.11.3
 	github.com/Appkube-awsx/awsx-getlandingzonedetails v1.0.3
 	github.com/prometheus/client_golang v1.18.0
 	github.com/spf13/cobra v1.8.0
