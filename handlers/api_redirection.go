@@ -327,6 +327,9 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	if elementType == "LAMBDA" && query == "top_used_functions_panel" {
 		Lambda.GetTopUsedFunctionsPanel(w, r)
 	}
+	if elementType == "LAMBDA" && query == "full_concurrency_panel" {
+		Lambda.GetFullConcurrencyPanel(w, r)
+	}
 	if elementType == "RDS" && query == "cpu_utilization_panel" {
 		RDS.GetCpuUtilizationPanel(w, r)
 	}
