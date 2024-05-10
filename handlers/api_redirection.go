@@ -324,6 +324,9 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	if elementType == "LAMBDA" && query == "success_and_failed_function_panel" {
 		Lambda.GetSuccessAndFailedFunctionPanel(w, r)
 	}
+	if elementType == "LAMBDA" && query == "top_used_functions_panel" {
+		Lambda.GetTopUsedFunctionsPanel(w, r)
+	}
 	if elementType == "LAMBDA" && query == "full_concurrency_panel" {
 		Lambda.GetFullConcurrencyPanel(w, r)
 	}
