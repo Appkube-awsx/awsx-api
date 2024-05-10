@@ -330,6 +330,9 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	if elementType == "LAMBDA" && query == "full_concurrency_panel" {
 		Lambda.GetFullConcurrencyPanel(w, r)
 	}
+	if elementType == "LAMBDA" && query == "unreserved_concurrency_panel" {
+		Lambda.GetUnreservedConcurrencyPanel(w, r)
+	}
 	if elementType == "RDS" && query == "cpu_utilization_panel" {
 		RDS.GetCpuUtilizationPanel(w, r)
 	}
