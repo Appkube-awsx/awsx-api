@@ -3,12 +3,15 @@ package EC2
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 	"sync"
 
 	"github.com/Appkube-awsx/awsx-common/authenticate"
+	"github.com/Appkube-awsx/awsx-common/awsclient"
 	"github.com/Appkube-awsx/awsx-common/model"
 	"github.com/Appkube-awsx/awsx-getelementdetails/handler/EC2"
+	"github.com/aws/aws-sdk-go/service/cloudwatchlogs"
 	"github.com/spf13/cobra"
 )
 
@@ -56,6 +59,22 @@ func ErrorTrackingHandler(w http.ResponseWriter, r *http.Request) {
 	// 	sendErrorResponse(w, fmt.Sprintf("Authentication failed: %s", err), http.StatusInternalServerError)
 	// 	return
 	// }
+	// Authenticate and get client credentials
+	clientAuth, err := authenticateAndCacheTracking(commandParam)
+	if err != nil {
+		sendErrResponse(w, fmt.Sprintf("Authentication failed: %s", err), http.StatusInternalServerError)
+		return
+	}
+
+	log.Println("Authentication successful")
+
+	// Create CloudWatch Logs client
+	cloudWatchLogs, err := cloudwatchClientCacheInstanceStopPanel(*clientAuth)
+	if err != nil {
+		sendErrResponse(w, fmt.Sprintf("Failed to create CloudWatch client: %s", err), http.StatusInternalServerError)
+		return
+	}
+
 
 	fmt.Println("Authentication successful")
 
@@ -78,7 +97,7 @@ func ErrorTrackingHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Flags parsed successfully")
 	// EC2.ListErrorEvents()
 	// Call the function to get error events data
-	errorData, err := EC2.ListErrorEvents()
+	errorData, err := EC2.GetErrorTrackingPanel(cmd, clientAuth, cloudWatchLogs)
 	if err != nil {
 		sendErrorResponse(w, fmt.Sprintf("Failed to get error events data: %s", err), http.StatusInternalServerError)
 		return
@@ -119,6 +138,21 @@ func authenticateAndCacheTracking(commandParam model.CommandParam) (*model.Auth,
 	return nil, nil
 }
 
+func cloudwatchClientCacheTracking(clientAuth model.Auth) (*cloudwatchlogs.CloudWatchLogs, error) {
+	cacheKey := clientAuth.CrossAccountRoleArn
+
+	clientCacheLockHealth.Lock()
+	defer clientCacheLockHealth.Unlock()
+
+	if client, ok := clientCacheHealth.Load(cacheKey); ok {
+		return client.(*cloudwatchlogs.CloudWatchLogs), nil
+	}
+
+	cloudWatchClient := awsclient.GetClient(clientAuth, awsclient.CLOUDWATCH_LOG).(*cloudwatchlogs.CloudWatchLogs)
+	clientCacheHealth.Store(cacheKey, cloudWatchClient)
+
+	return cloudWatchClient, nil
+}
 func isendErrorResponse(w http.ResponseWriter, message string, statusCode int) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(statusCode)

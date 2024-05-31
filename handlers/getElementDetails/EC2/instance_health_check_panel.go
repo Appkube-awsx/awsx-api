@@ -90,7 +90,7 @@ func GetInstanceHealthCheck(w http.ResponseWriter, r *http.Request) {
 	log.Println("Flags parsed successfully")
 
 	// Call the function to get instance error rate metrics data
-	cloudwatchMetricData, err := EC2.GetInstanceHealthCheck()
+	cloudwatchMetricData, err := EC2.GetEc2InstanceHealthCheckData(cmd, clientAuth, cloudWatchLogs)
 
 	data, err := json.Marshal(cloudwatchMetricData)
 	if err != nil {
