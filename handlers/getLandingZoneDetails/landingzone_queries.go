@@ -18,6 +18,7 @@ import (
 	"github.com/Appkube-awsx/awsx-getlandingzonedetails/handler/LB"
 	"github.com/Appkube-awsx/awsx-getlandingzonedetails/handler/RDS"
 	"github.com/Appkube-awsx/awsx-getlandingzonedetails/handler/S3"
+	"github.com/Appkube-awsx/awsx-getlandingzonedetails/handler/SSL"
 	"github.com/Appkube-awsx/awsx-getlandingzonedetails/handler/VPC"
 	"github.com/Appkube-awsx/awsx-getlandingzonedetails/handler/WAF"
 	"net/http"
@@ -86,6 +87,9 @@ func ExecuteLandingzoneQueries(w http.ResponseWriter, r *http.Request) {
 	}
 	if query == "getDiscoveredResourceCounts" {
 		instances, err = CONFIG_SERVICE.DiscoveredResourceCounts(clientAuth, nil)
+	}
+	if query == "getSslList" {
+		instances, err = SSL.ListSslInstances(clientAuth, nil)
 	}
 	if err != nil {
 		http.Error(w, fmt.Sprintf("api error: %s", err), http.StatusInternalServerError)
