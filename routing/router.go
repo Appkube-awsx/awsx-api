@@ -125,6 +125,13 @@ func NewRoutes() (r *Routes) {
 			handlers.ExecuteQuery,
 			true,
 		},
+		{
+			"AwsxCloudTrailEventsApi",
+			"GET",
+			"/awsx-api/getEvents",
+			handlers.GetAwsEvents,
+			true,
+		},
 		// {
 		// 	"AwsxEc2",
 		// 	"GET",
