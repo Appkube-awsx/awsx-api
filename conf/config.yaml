@@ -2,7 +2,7 @@ server:
   port: 7000
   static_content_root_directory: /home/userTests/awsx-api-static-files
   cors_allow_all: true
-  white_list_urls: http://localhost:3002
+  white_list_urls: https://appkube.synectiks.net
 vault:
   url: http://34.199.12.114:6057/api/credential/account-id
 cloudelement:
