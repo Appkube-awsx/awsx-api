@@ -7,6 +7,7 @@ import (
 	"github.com/Appkube-awsx/awsx-common/model"
 	"github.com/Appkube-awsx/awsx-getlandingzonedetails/handler/API_GW"
 	"github.com/Appkube-awsx/awsx-getlandingzonedetails/handler/CDN"
+	"github.com/Appkube-awsx/awsx-getlandingzonedetails/handler/CLOUDWATCH"
 	"github.com/Appkube-awsx/awsx-getlandingzonedetails/handler/CONFIG_SERVICE"
 	"github.com/Appkube-awsx/awsx-getlandingzonedetails/handler/DYNAMODB"
 	"github.com/Appkube-awsx/awsx-getlandingzonedetails/handler/EC2"
@@ -90,6 +91,14 @@ func ExecuteLandingzoneQueries(w http.ResponseWriter, r *http.Request) {
 	}
 	if query == "getSslList" {
 		instances, err = SSL.ListSslInstances(clientAuth, nil)
+	}
+	if query == "getCwAlarmList" {
+		instanceId := r.URL.Query().Get("instanceId")
+		if instanceId == "" {
+			http.Error(w, fmt.Sprintf("instance id missing"), http.StatusBadRequest)
+			return
+		}
+		instances, err = CLOUDWATCH.ListCwAlarms(instanceId, clientAuth, nil)
 	}
 	if err != nil {
 		http.Error(w, fmt.Sprintf("api error: %s", err), http.StatusInternalServerError)
