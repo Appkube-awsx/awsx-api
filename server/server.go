@@ -137,13 +137,13 @@ func (s *Server) Stop() {
 }
 
 func corsAllowed(next http.Handler) http.Handler {
-	conf := config.Get()
+	//conf := config.Get()
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if conf.Server.WhiteListUrls != "" {
-			w.Header().Set("Access-Control-Allow-Origin", conf.Server.WhiteListUrls)
-		} else {
-			w.Header().Set("Access-Control-Allow-Origin", "*")
-		}
+		//if conf.Server.WhiteListUrls != "" {
+		//	w.Header().Set("Access-Control-Allow-Origin", conf.Server.WhiteListUrls)
+		//} else {
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		//}
 		w.Header().Set("Access-Control-Allow-Credentials", "true")
 		w.Header().Set("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
 		next.ServeHTTP(w, r)
