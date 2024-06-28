@@ -8,6 +8,7 @@ import (
 	"awsx-api/handlers/getElementDetails/Lambda"
 	"awsx-api/handlers/getElementDetails/NLB"
 	"awsx-api/handlers/getElementDetails/RDS"
+	"awsx-api/handlers/getElementDetails/S3"
 
 	"awsx-api/handlers/getLandingZoneDetails"
 	"awsx-api/log"
@@ -425,6 +426,12 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	}
 	if elementType == "RDS" && query == "error_analysis_panel" {
 		RDS.GetErrorAnalysisData(w, r)
+	}
+	if elementType == "S3" && query == "data_transfer_panel" {
+		S3.GetDatatransferPanel(w, r)
+	}
+	if elementType == "S3" && query == "latency_panel" {
+		S3.GetLatencyDataPanel(w, r)
 	}
 	if elementType == "APIGATEWAY" && query == "uptime_percentage_panel" {
 		ApiGateway.GetUptimePercentagePanel(w, r)
