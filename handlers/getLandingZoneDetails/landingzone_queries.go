@@ -29,6 +29,7 @@ func ExecuteLandingzoneQueries(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	query := r.URL.Query().Get("query")
 	landingZoneId := r.URL.Query().Get("landingZoneId")
+	logGroupName := r.URL.Query().Get("logGroupName")
 	commandParam := model.CommandParam{
 		LandingZoneId: landingZoneId,
 	}
@@ -77,7 +78,7 @@ func ExecuteLandingzoneQueries(w http.ResponseWriter, r *http.Request) {
 	if query == "getRdsList" {
 		instances, err = RDS.ListRdsInstances(clientAuth, nil)
 	}
-	if query == "getS3List" {
+	if query == "" {
 		instances, err = S3.ListS3Instances(clientAuth, nil)
 	}
 	if query == "getVpcList" {
@@ -100,6 +101,27 @@ func ExecuteLandingzoneQueries(w http.ResponseWriter, r *http.Request) {
 		}
 		instances, err = CLOUDWATCH.ListCwAlarms(instanceId, clientAuth, nil)
 	}
+	if query == "getCwLogsStreamList" {
+		logGroupName = r.URL.Query().Get("logGroupName")
+		if logGroupName == "" {
+			http.Error(w, fmt.Sprintf("logGroup name  missing"), http.StatusBadRequest)
+			return
+		}
+		instances, err = CLOUDWATCH.ListCwLogsStream(logGroupName, clientAuth, nil)
+	}
+	if query == "getCwLogsGorupList" {
+
+		instances, err = CLOUDWATCH.ListCwLogsGorup(clientAuth, nil)
+	}
+	if query == "getCwEventList" {
+		instanceId := r.URL.Query().Get("instanceId")
+		if instanceId == "" {
+			http.Error(w, fmt.Sprintf("instance id missing"), http.StatusBadRequest)
+			return
+		}
+		instances, err = CLOUDWATCH.ListCwEvent(instanceId, clientAuth, nil)
+	}
+
 	if err != nil {
 		http.Error(w, fmt.Sprintf("api error: %s", err), http.StatusInternalServerError)
 		return

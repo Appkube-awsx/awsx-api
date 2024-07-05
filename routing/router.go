@@ -2,6 +2,7 @@ package routing
 
 import (
 	"awsx-api/handlers"
+	"awsx-api/handlers/getLandingZoneDetails"
 	"github.com/gorilla/mux"
 	"net/http"
 )
@@ -123,6 +124,13 @@ func NewRoutes() (r *Routes) {
 			"GET",
 			"/awsx-api/getQueryOutput",
 			handlers.ExecuteQuery,
+			true,
+		},
+		{
+			"AwsxCloudWatchQueryApi",
+			"GET",
+			"/awsx-api/execute-query",
+			getLandingZoneDetails.ExecuteLandingzoneQueries,
 			true,
 		},
 		{
