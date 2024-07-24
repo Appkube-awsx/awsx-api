@@ -9,8 +9,6 @@ import (
 	"awsx-api/handlers/getElementDetails/NLB"
 	"awsx-api/handlers/getElementDetails/RDS"
 
-	// "awsx-api/handlers/getElementDetails/S3"
-
 	"awsx-api/handlers/getLandingZoneDetails"
 	"awsx-api/log"
 	"net/http"
@@ -154,30 +152,6 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 	if elementType == "EC2" && query == "mem_usage_free_panel" {
 		EC2.GetMemUsageFreePanel(w, r)
 	}
-	if elementType == "EC2" && query == "cpu_utilization_per_instance_type" {
-		EC2.GetCpuUtilizationPerInstancePanel(w, r)
-	}
-	// if elementType == "EC2" && query == "disk_read_bytes_per_instance" {
-	// 	EC2.GetDiskReadBytesPanel(w, r)
-	// }
-	// if elementType == "EC2" && query == "disk_read_ops_per_instance" {
-	// 	EC2.GetDiskReadOpsPanel(w, r)
-	// }
-	// if elementType == "EC2" && query == "disk_write_ops_per_instance" {
-	// 	EC2.GetDiskWriteOpsPanel(w, r)
-	// }
-	// if elementType == "EC2" && query == "disk_space_utilization_panel" {
-	// 	EC2.GetDiskSpaceUsagePerInstancePanel(w, r)
-	// }
-	// if elementType == "EC2" && query == "disk_write_bytes_per_instance" {
-	// 	EC2.GetDiskWriteBytesPanel(w, r)
-	// }
-	// if elementType == "EC2" && query == "incomming_networktraffic_panel" {
-	// 	EC2.GetIncommingNetworktrafficPerInstanceType(w, r)
-	// }
-	// if elementType == "EC2" && query == "outgoing_networktraffic_panel" {
-	// 	EC2.GetOutgoingNetworktrafficPerInstanceType(w, r)
-	// }
 	if elementType == "EC2" && query == "mem_cached_panel" {
 		EC2.GetMemCachePanel(w, r)
 	}
@@ -215,6 +189,9 @@ func ExecuteQuery(w http.ResponseWriter, r *http.Request) {
 
 	if elementType == "EC2" && query == "net_outbytes_panel" {
 		EC2.GetNetworkOutBytesPanel(w, r)
+	}
+	if elementType == "EC2" && query == "cpu_utilization_per_instance_type" {
+		EC2.GetCpuUtilizationPerInstancePanel(w, r)
 	}
 
 	if elementType == "EC2" && query == "net_outpackets_panel" {
